@@ -60,6 +60,7 @@ function gadget:DrawScreen(vsx,vsy)
 		end
 		local hp, mhp = Spring.GetUnitHealth(p.unit)
 		gl.Text(""..math.floor(100*hp/mhp).."%",vsx*.5,220,20,"c")
+		gl.Color(1,1,1,1)
 	end
 end
 
