@@ -60,14 +60,18 @@ local resources={
 				puff="puff.tga",
 				smoke="smoke.tga",
 				smoke1="smoke1.tga",
+				dirt= "cc/dirt.png",
 				shockwave="shockwave.tga",
 				tankshot="tankshot.tga",
 				chargeparticles="chargeparticles.tga",
+				fireball= "pd/fireball.tga",
 				firesplash="firesplash.tga",
 				fires="firesumthin.tga",
 				mgshot="mgshot.tga",
 				lightning="lightning.tga",
 				burncircle="BurnCircle.tga",
+				
+				
 			},
 		},
 	}
