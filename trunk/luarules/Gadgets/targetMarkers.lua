@@ -206,8 +206,8 @@ function gadget:DrawScreenEffects(vsx,vsy)
 						gl.PushMatrix()
 						gl.Translate(finalX, finalY, 0)
 						gl.BeginEnd(GL.POLYGON, Arrowhead, theta, dist)
-					end						
-					gl.PopMatrix()
+						gl.PopMatrix()
+					end	
 				end
 			end
 		end
