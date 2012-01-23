@@ -1,0 +1,2 @@
+hotspot center
+frame anims/cursor2.png 0.01

@@ -1,0 +1,94 @@
+piece  base, bdoor1, bdoor2, wingtip1, wingtip2, bomb, thrust3, thrust4, thrust1, thrust2, under1, under2, under3;
+
+static-var unlock;
+
+#include "constants.h"
+
+#define SIG_Gun 1
+#define SIG_Unlock 2
+
+lua_UseGun() {	return 0;}
+lua_UseAmmo(ammotype) {	return 0;}
+lua_HasAmmo(ammotype) {	return 0;}
+lua_AddTrail() {return 0; }
+
+lua_MissileLaunch() {
+	return 1;
+}
+
+Create() {
+	turn wingtip1 to y-axis <90> now;
+	turn wingtip2 to y-axis <90> now;
+	call-script lua_AddTrail(wingtip1,10,50,1);
+	call-script lua_AddTrail(wingtip2,10,50,1);
+}
+
+QueryWeapon1(p) {
+	p=base;
+}
+
+QueryWeapon2(p) {
+	p = bomb;
+}
+
+AimWeapon2() {
+	return 1;
+}
+
+QueryWeapon3(p) {
+	p =bomb;
+}
+
+AimWeapon3() {
+	return 1;
+}
+
+Shot2() {
+	call-script lua_MissileLaunch(get TARGET_ID(2));
+	unlock=0;
+	call-script lua_UseAmmo(1);
+}
+
+Shot3() {
+	call-script lua_MissileLaunch(get TARGET_ID(3));
+	unlock=0;
+	call-script lua_UseAmmo(2);
+}
+
+BlockShot2(target,block) {
+	call-script lua_HasAmmo(1);
+	block = (unlock != 1) || (!get LUA1);
+}
+
+BlockShot3(target,block) {
+	call-script lua_HasAmmo(2);
+	block = (unlock != 2) || (!get LUA1);
+}
+
+StartGun() {
+	signal SIG_Gun;
+	set-signal-mask SIG_Gun;
+}
+
+StopGun() {
+	signal SIG_Gun;
+}
+
+UnlockWeapon(num) {
+	signal SIG_Unlock;
+	set-signal-mask SIG_Unlock;
+	if (num==1) {
+		unlock = 1;
+	}
+	else if (num==2) {
+		unlock = 2;
+	}
+	sleep 500;
+	unlock = 0;
+}
+
+Killed() {
+	signal SIG_Gun;
+	unlock=0;
+	emit-sfx 1024 from base;
+}

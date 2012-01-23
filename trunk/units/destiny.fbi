@@ -1,0 +1,93 @@
+[UNITINFO]
+{
+	Name=B-3 Destiny;
+	Unitname=destiny;
+	Description=Strike bomber;
+
+	// Required Tags
+	Category=VTOL BOMBER PLAYER;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=800;
+	idleautoheal=0;
+	mass=9000;
+	power=2000;
+	ObjectName=destiny.s3o;
+
+	// Movement
+	CanMove=1;
+	MaxVelocity=2;
+	MovementClass=TANK;	
+	myGravity=0.000000000000000000000001;
+	//MaxRudder=.01;
+	//MaxAileron=.03;
+	//MaxElevator=.03;
+	//CanFly=1;
+	CruiseAlt=100;
+	hoverattack=1;
+
+	LevelGround=0;
+
+	// Abilities
+	CanStop=1;
+	SelfDestructCountdown=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=gun;
+	WeaponMainDir1=0 0 1;
+	MaxAngleDif1=0;		
+	Weapon2=multirole;
+	WeaponMainDir2=0 0 1;
+	MaxAngleDif2=20;
+	Weapon3=tacnuke;
+	WeaponMainDir3=0 0 1;
+	MaxAngleDif3=15;
+	ExplodeAs=airdeath;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+	iconType=bomber;	
+
+	[SFXTypes]
+	{
+		explosionGenerator0=custom:air_explo;
+	}
+	[customparams] {
+		playable=1;
+		gunammo=0;
+
+		ammo1=8;
+		reload1=10;
+		cone1=20;
+		dist1=650;
+		name1=Multirole;
+
+		ammo2=1;
+		reload2=50;
+		cone2=15;
+		dist2=500;
+		name2=Tacnuke;
+
+		rollrate=100;
+		climbrate=40;
+		rudderrate=10;
+		speed=2.2;
+		minspeed=1.4;
+
+		trailtex=bitmaps/trail.png;
+		trailr=.3;
+		trailg=.3;
+		trailb=.3;
+		trailalpha=1;
+		label=B-3;
+	}
+}

@@ -1,0 +1,26 @@
+piece base, body, turret, guns, gp0, gp1, gp2, gp3;
+
+static-var gp;
+#define SIG_Aim 1
+
+AimWeapon1(h,p) {
+	signal SIG_Aim;
+	set-signal-mask SIG_Aim;
+	turn turret to y-axis h speed <60>;
+	turn guns to x-axis 0 - p speed <40>;
+	wait-for-turn turret around y-axis;
+	wait-for-turn guns around x-axis;
+	return 1;
+}
+
+AimFromWeapon1(p) {
+	p=turret;
+}
+
+QueryWeapon1(p) {
+	p=gp0 + gp;
+}
+
+Shot1() {
+	gp=(gp +1)&3;
+}

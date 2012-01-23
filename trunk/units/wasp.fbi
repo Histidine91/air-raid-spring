@@ -1,0 +1,68 @@
+[UNITINFO]
+{
+	Name=Wasp;
+	Unitname=wasp;
+	Description=Cheap support plane;
+
+	// Required Tags
+	Category=VTOL FIGHTER;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=100;
+	idleautoheal=0;
+	mass=9000;
+	power=400;
+	ObjectName=wasp.s3o;
+
+	// Movement
+	CanMove=1;
+	MaxVelocity=1.5;
+	myGravity=0.000000000000000000000001;
+	MaxRudder=.001;
+	MaxAileron=.08;
+	MaxElevator=.0055;
+	CanFly=1;
+	CruiseAlt=100;
+	turnradius = 400;
+
+	LevelGround=0;
+
+	// Abilities
+	CanStop=1;
+	SelfDestructCountdown=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=lfgun;
+	Weapon2=lfmissile;
+	WeaponMainDir2=0 0 1;
+	MaxAngleDif2=10;
+	ExplodeAs=airdeath;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+	iconType=fighter;
+
+	[SFXTypes]
+	{
+		explosionGenerator0=custom:air_explo;
+	}
+	[customparams] {
+		score=4;
+		label=WASP;
+
+		trailtex=bitmaps/trail.png;
+		trailr=.3;
+		trailg=.3;
+		trailb=.3;
+		trailalpha=1;
+	}
+}

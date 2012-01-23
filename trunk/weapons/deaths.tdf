@@ -1,0 +1,21 @@
+[airdeath]{
+	name=Air Death;
+	areaofeffect=40;
+	alwaysvisible=1;
+	explosiongenerator=custom:null;
+	soundhit=unitexplodebig;
+	[damage]{
+		default=200;
+	}
+}
+
+[grounddeath]{
+	name=Air Death;
+	areaofeffect=40;
+	alwaysvisible=1;
+	explosiongenerator=custom:ground_death;
+	soundhit=unitexplodemedium;
+	[damage]{
+		default=100;
+	}
+}

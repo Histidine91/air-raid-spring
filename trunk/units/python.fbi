@@ -1,0 +1,63 @@
+[UNITINFO]
+{
+	Name=Python;
+	Unitname=python;
+	Description=Attack gunship;
+
+	// Required Tags
+	Category=VTOL FIGHTER;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=100;
+	idleautoheal=0;
+	mass=9000;
+	power=300;
+	ObjectName=Python.s3o;
+
+	// Movement
+	CanMove=1;
+	MaxVelocity=0.5;
+	myGravity=0.000000000000000000000001;
+	CanFly=1;
+	CruiseAlt=50;
+	turnRate=400;
+	hoverAttack=1;
+	UseSmoothMesh=1;
+
+	LevelGround=0;
+
+	// Abilities
+	CanStop=1;
+	SelfDestructCountdown=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=gun_e;
+	WeaponMainDir1=0 0 1;
+	MaxAngleDif1=90;	
+	Weapon2=lfmissile;
+	WeaponMainDir2=0 0 1;
+	MaxAngleDif2=10;
+	ExplodeAs=airdeath;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+	iconType=gunship;		
+
+	[SFXTypes]
+	{
+		explosionGenerator0=custom:air_explo;
+	}
+	[customparams] {
+		score=3;
+		label=PYTHON;
+	}
+}

@@ -1,0 +1,3 @@
+local armordefs={}
+
+return armordefs

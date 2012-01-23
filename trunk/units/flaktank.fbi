@@ -1,0 +1,55 @@
+[UNITINFO]
+{
+	Name=Flak Tank;
+	Unitname=flaktank;
+	Description=Armored mobile air defense;
+
+	// Required Tags
+	Category=GROUND HARD TARGET;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=500;
+	idleautoheal=0;
+	mass=9000;
+	power=600;
+	ObjectName=flaktank.s3o;
+
+	// Movement
+	CanMove=1;
+	MaxVelocity=.1;
+	MovementClass=TANK;
+	Acceleration=.1;
+	Turnrate=800;
+	Turninplace=0;
+
+	LevelGround=0;
+
+	// Abilities
+	CanStop=1;
+	SelfDestructCountdown=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=QuadFlak;
+	ExplodeAs=grounddeath;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		//explosionGenerator0=custom:muzzle_shredder;
+	}
+	[customparams] {
+		score=6;
+		label=FLAK;
+	}
+}

@@ -1,0 +1,67 @@
+[UNITINFO]
+{
+	Name=Hawk;
+	Unitname=hawk;
+	Description=Advanced interceptor plane;
+
+	// Required Tags
+	Category=VTOL FIGHTER;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=200;
+	idleautoheal=0;
+	mass=9000;
+	power=1000;
+	ObjectName=hawk.s3o;
+
+	// Movement
+	CanMove=1;
+	MaxVelocity=1.8;
+	myGravity=0.000000000000000000000001;
+	MaxRudder=.002;
+	MaxAileron=.1;
+	MaxElevator=.02;
+	CanFly=1;
+	CruiseAlt=100;
+	UseSmoothMesh=1;
+
+	LevelGround=0;
+
+	// Abilities
+	CanStop=1;
+	SelfDestructCountdown=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=afmissile;
+	WeaponMainDir1=0 0 1;
+	MaxAngleDif1=20;
+	ExplodeAs=airdeath;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+	iconType=stealthfighter;		
+
+	[SFXTypes]
+	{
+		explosionGenerator0=custom:air_explo;
+	}
+	[customparams] {
+		score=10;
+		label=HAWK;
+
+		trailtex=bitmaps/dualtrail.png;
+		trailr=.3;
+		trailg=.3;
+		trailb=.3;
+		trailalpha=1;
+	}
+}
