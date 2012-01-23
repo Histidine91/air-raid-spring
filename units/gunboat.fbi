@@ -1,0 +1,60 @@
+[UNITINFO]
+{
+	Name=Gunboat;
+	Unitname=gunboat;
+	Description=Light patrol ship;
+
+	// Required Tags
+	Category=SEA HARD TARGET;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=2000;
+	idleautoheal=0;
+	mass=30000;
+	power=3000;
+	ObjectName=gunboat.3do;
+
+	// Movement
+	CanMove=1;
+	MaxVelocity=.1;
+	MovementClass=BOAT;
+	Acceleration=.1;
+	Turnrate=250;
+	Turninplace=0;
+	Floater=1;
+	LevelGround=0;
+
+	// Abilities
+	CanStop=1;
+	SelfDestructCountdown=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=lcannon;
+	Weapon2=lcannon;
+	Weapon3=lfgun2;
+	Weapon4=lfgun2;
+	Weapon5=quadflak;
+	ExplodeAs=grounddeath;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+	IconType=corvette;
+
+	[SFXTypes]
+	{
+		//explosionGenerator0=custom:muzzle_shredder;
+	}
+	[customparams] {
+		score=30;
+		label=GUNBT;
+	}
+}

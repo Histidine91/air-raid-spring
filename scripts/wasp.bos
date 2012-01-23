@@ -1,0 +1,54 @@
+piece base, body, missile1,missile2;
+piece gp0,gp1,msl1,msl2,engine;
+
+static-var gp, msl;
+
+#include "exptype.h"
+
+lua_AddTrail(){
+	return 1;
+}
+
+lua_MissileLaunch() {
+	return 1;
+}
+
+Create() {
+	turn engine to y-axis <90> now;
+	call-script lua_AddTrail(engine,10,80,4);
+}
+
+QueryWeapon1(p) {
+	p=gp0+gp;
+}
+
+QueryWeapon2(p) {
+	p=msl1+msl -1;
+}
+
+Shot1() {
+	gp= !gp;
+}
+
+Shot2() {
+	msl= msl+1;
+	call-script lua_MissileLaunch(get TARGET_ID(2));
+	if (msl==1) {
+		hide missile1;
+	} 
+	else if (msl==2) {
+		hide missile2;
+	}
+}
+
+AimWeapon2() {
+	return 1;
+}
+
+BlockShot2(target,block) {
+	block = msl > 2;
+}
+
+Killed() {
+	emit-sfx 1024 from base;
+}

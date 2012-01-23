@@ -1,0 +1,84 @@
+[UNITINFO]
+{
+	Name=F-41 Hawk-P;
+	Unitname=hawkp;
+	Description=Interceptor;
+
+	// Required Tags
+	Category=VTOL FIGHTER PLAYER;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=320;
+	idleautoheal=0;
+	mass=9000;
+	power=1000;
+	ObjectName=hawk.s3o;
+
+	// Movement
+	CanMove=1;
+	MaxVelocity=2;
+	MovementClass=TANK;	
+	myGravity=0.000000000000000000000001;
+	//MaxRudder=.01;
+	//MaxAileron=.03;
+	//MaxElevator=.03;
+	//CanFly=1;
+	CruiseAlt=100;
+	hoverattack=1;
+
+	LevelGround=0;
+
+	// Abilities
+	CanStop=1;
+	SelfDestructCountdown=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=gun;
+	WeaponMainDir1=0 0 1;
+	MaxAngleDif1=0;	
+	Weapon2=longshot;
+	WeaponMainDir2=0 0 1;
+	MaxAngleDif2=15;
+	ExplodeAs=airdeath;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+	iconType=stealthfighter;		
+
+	[SFXTypes]
+	{
+		explosionGenerator0=custom:air_explo;
+	}
+	[customparams] {
+		playable=1;
+		gunammo=1200;
+
+		ammo1=4;
+		reload1=40;
+		cone1=15;
+		dist1=1500;
+		name1=Longshot;
+
+		rollrate=180;
+		climbrate=70;
+		rudderrate=10;
+		speed=3.3;
+		minspeed=1.2;
+
+		trailtex=bitmaps/trail.png;
+		trailr=.3;
+		trailg=.3;
+		trailb=.3;
+		trailalpha=1;
+		label=HAWK-P;
+	}
+}

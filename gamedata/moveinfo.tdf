@@ -1,0 +1,8 @@
+[class0]{
+	name=Tank;
+	maxwaterdepth=1;
+	maxslope=30;
+	crushstrength=0;
+	footprintx=1;
+	footprintz=1;
+}

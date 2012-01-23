@@ -1,0 +1,4 @@
+Sounds from Evolution RTS by Forboding Angel, CC-SA-NC 3.0 except:
+missile warning.wav
+missilealert.wav
+extralife.wav

@@ -1,0 +1,30 @@
+piece base, body, turret, launcher, gp;
+
+#define SIG_Aim 1
+#include "exptype.h"
+
+lua_MissileLaunch() {
+	return 1;
+}
+
+AimWeapon1(h,p) {
+	signal SIG_Aim;
+	set-signal-mask SIG_Aim;
+	turn turret to y-axis h speed <60>;
+	turn launcher to x-axis 0 - p speed <40>;
+	wait-for-turn turret around y-axis;
+	wait-for-turn launcher around x-axis;
+	return 1;
+}
+
+AimFromWeapon1(p) {
+	p=turret;
+}
+
+QueryWeapon1(p) {
+	p=gp;
+}
+
+Shot1() {
+	call-script lua_MissileLaunch(get TARGET_ID(1));
+}

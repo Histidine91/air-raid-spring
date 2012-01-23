@@ -1,0 +1,50 @@
+[UNITINFO]
+{
+	Name=SAM Launcher;
+	Unitname=sam;
+	Description=Surface to Air Missile Site;
+
+	// Required Tags
+	Category=GROUND SOFT TARGET;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=200;
+	idleautoheal=0;
+	mass=9000;
+	power=800;
+	ObjectName=sam.s3o;
+
+	// Movement
+	CanMove=0;
+
+	LevelGround=0;
+
+	// Abilities
+	CanStop=1;
+	SelfDestructCountdown=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=SAM;
+	ExplodeAs=grounddeath;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		//explosionGenerator0=custom:muzzle_shredder;
+	}
+	[customparams] {
+		score=8;
+		label=SAM;
+	}
+}
