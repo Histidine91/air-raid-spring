@@ -39,7 +39,7 @@ local KEY_Gun = 32	-- spacebar
 local KEY_Missile = 306	-- leftctrl
 local KEY_ChangeTarget = 114	--R
 
-local KEY_SensitivityToggle = KEYSYMS.LSHIFT
+local KEY_SensitivityToggle = KEYSYMS.LALT
 
 local state={
 	pitch=0,
