@@ -113,9 +113,9 @@
 	weapontype=MissileLauncher;
 	turret=1;
 	range=500; //5km
-	weaponvelocity=120;
+	weaponvelocity=180;
 	startvelocity=40;
-	weaponacceleration=30;
+	weaponacceleration=60;
 	flighttime=15;
 	reloadtime=1;
 	avoidfriendly=0;
