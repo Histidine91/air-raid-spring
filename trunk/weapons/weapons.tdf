@@ -133,7 +133,7 @@
 	craterFactor=0;
 	alwaysvisible=1;
 	[damage]{
-		default=10500;
+		default=6000;
 	}
 }
 
