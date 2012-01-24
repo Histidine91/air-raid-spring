@@ -82,7 +82,6 @@ function gadget:UnitCreated(u, ud, team)
 				ammo=ammo,
 				currentweapon=1,
 				currentspeed=0,
-				lastspeed=0,
 			}
 			Spring.MoveCtrl.Enable(u)
 			local x,y,z=Spring.GetUnitPosition(u)
@@ -94,6 +93,9 @@ function gadget:UnitCreated(u, ud, team)
 end
 
 function gadget:UnitDestroyed(u,ud,team)
+	if teamplane[team] then
+		SendToUnsynced("PlaneDestroyed", team)
+	end
 	teamplane[team]=nil
 end
 
@@ -214,7 +216,9 @@ function gadget:GameFrame(f)
 		--	y,-- + math.sin(p.pitch)*planedata[p.ud].speed[p.speed],
 		--	z + math.cos(p.yaw) *(math.cos(p.pitch))*planedata[p.ud].speed[p.speed]
 		--)
-		p.lastspeed = p.currentspeed
+
+		SendToUnsynced("controls_GameFrame")
+		
 		if Spring.GetGroundHeight(x,z) > y then --impacted the ground
 			Spring.SendMessageToTeam(team,"That wasn't so clever, now was it?")
 			Spring.DestroyUnit(p.unit)
@@ -225,10 +229,45 @@ end
 else
 
 --UNSYNCED
-local camDist=2
+local camDist=0
 local camHeight=0
+local jetSoundLength = 14
 
-local wasAlive = false
+local gameFrame = 0
+
+local function ResetCamera()
+	local cam=Spring.GetCameraState()
+	--cam.px = Game.mapSizeX/2
+	--cam.pz = Spring.GetGroundHeight(Game.mapSizeX/2, Game.mapSizeZ/2) + 100
+	--cam.py = Game.mapSizeZ/2
+	cam.rx=0
+	cam.ry=0
+	cam.rz=0
+	cam.vx=0
+	cam.vy=0
+	cam.vz=0
+	Spring.SetCameraState(cam,1)
+	lastUpdate = 0
+end
+
+function PlaneDestroyed(_,team)
+	if team == Spring.GetMyTeamID() then
+		ResetCamera()
+	end
+end
+
+function GameFrame()
+end
+
+function gadget:Initialize()
+	gadgetHandler:AddSyncAction("controls_GameFrame", GameFrame)
+	gadgetHandler:AddSyncAction("PlaneDestroyed", PlaneDestroyed)
+end
+
+function gadget:Shutdown()
+	gadgetHandler:RemoveSyncAction("controls_GameFrame")
+	gadgetHandler:RemoveSyncAction("PlaneDestroyed")
+end
 
 function gadget:Update()
 	local p=SYNCED.teamplane[Spring.GetMyTeamID()]
@@ -241,23 +280,11 @@ function gadget:Update()
 		cam.rx=0-p.pitch
 		cam.ry=p.yaw
 		cam.rz=p.roll
-		cam.mode=0
+		cam.mode=4
 		Spring.SetCameraState(cam,1)
-		wasAlive = true
-	elseif wasAlive then	-- reset camera
-		local cam=Spring.GetCameraState()
-		--cam.px = Game.mapSizeX/2
-		--cam.pz = Spring.GetGroundHeight(Game.mapSizeX/2, Game.mapSizeZ/2) + 100
-		--cam.py = Game.mapSizeZ/2
-		cam.rx=0
-		cam.ry=0
-		cam.rz=0
-		cam.vx=0
-		cam.vy=0
-		cam.vz=0
-		Spring.SetCameraState(cam,1)
-		wasAlive = false
 	end
 end
+
+
 
 end

@@ -18,11 +18,12 @@ if not (Spring.GetModOptions().gamemode == "intercept") then
 	return
 end
 
-local SPAWN_ALT = 100
+local SPAWN_ALT = 150
+local gracePeriod = 5*30	-- gameframes
+local SPAWN_RANGE = 2000
 
 local currentEnemies = {}
 local waveNum = 0
-local gracePeriod = 5*30	-- gameframes
 local nextWave = gracePeriod
 
 local teams
@@ -93,7 +94,7 @@ local function GetRandomEnemyPosition()
 		x, y, z = Spring.GetUnitPosition(target)
 	else
 		-- all players not airborne? spawncamp the noobs
-		Spring.Echo("spawncamping")
+		--Spring.Echo("spawncamping")
 		local team = gaiaTeamID
 		while team == gaiaTeamID do
 			team = teams[math.random(#teams)]
@@ -101,7 +102,7 @@ local function GetRandomEnemyPosition()
 		local startPos = GG.shuffledStartPosition[team]
 		x, y, z = unpack(startPos)
 	end
-	return x+math.random(-1500, 1500), z+math.random(-1500, 1500)
+	return x+math.random(-SPAWN_RANGE, SPAWN_RANGE), z+math.random(-SPAWN_RANGE, SPAWN_RANGE)
 end
 
 local function AttackNearestEnemy(unitID)

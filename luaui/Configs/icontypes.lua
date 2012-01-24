@@ -29,7 +29,7 @@ local icontypes = {
   --plane icons
   scoutplane = {
     bitmap='icons/scoutplane.dds',
-    size=1.7,
+    size=2,
   },
   radarplane = {
     bitmap='icons/radarplane.dds',
@@ -37,15 +37,15 @@ local icontypes = {
   },
   fighter = {
     bitmap='icons/fighter.dds',
-    size=1.5,
+    size=2,
   },
   stealthfighter = {
     bitmap='icons/stealthfighter.dds',
-    size=1.7,
+    size=2,
   },
   bomber = {
     bitmap='icons/bomber.dds',
-    size=1.8,
+    size=2.5,
   },
   gunship = {
     bitmap='icons/gunship.dds',
