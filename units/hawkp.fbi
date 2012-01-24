@@ -65,7 +65,7 @@
 		ammo1=4;
 		reload1=40;
 		cone1=15;
-		dist1=1500;
+		dist1=1250;
 		name1=Longshot;
 
 		rollrate=180;
