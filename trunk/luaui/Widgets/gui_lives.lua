@@ -51,7 +51,7 @@ end
 function widget:Initialize()
   local _, _, spec = Spring.GetPlayerInfo(Spring.GetMyPlayerID())
   if spec then
-	widgetHandler:RemoveWidget()
+	--widgetHandler:RemoveWidget()
   end
 end
 

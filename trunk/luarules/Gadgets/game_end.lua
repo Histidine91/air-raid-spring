@@ -182,12 +182,14 @@ function gadget:Initialize()
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, unitTeamID)
-	if unitTeamID == gaiaTeamID and ignoreGaia ~= 0 then
+	if (unitTeamID == gaiaTeamID and ignoreGaia ~= 0) then
 		-- skip gaia
 		return
 	end
-	local numLives = Spring.GetTeamRulesParam(unitTeamID, "numlives")
-	if numLives and tonumber(numLives) <= 0 then
-		Spring.KillTeam(unitTeamID)
+	if (UnitDefs[unitDefID].customParams.playable) then
+		local numLives = Spring.GetTeamRulesParam(unitTeamID, "numlives")
+		if numLives and tonumber(numLives) <= 0 then
+			Spring.KillTeam(unitTeamID)
+		end
 	end
 end

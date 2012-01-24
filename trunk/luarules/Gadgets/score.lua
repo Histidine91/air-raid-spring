@@ -41,7 +41,7 @@ function gadget:UnitDestroyed(u, ud, team, attacker, aud, ateam)
 		if score[ateam]>=nextBonus[ateam] then
 			if nextBonus[ateam]>=400 then
 				nextBonus[ateam]=nextBonus[ateam]+500
-			elseif nextBonus[ateam]==100 then
+			elseif nextBonus[ateam]==200 then
 				nextBonus[ateam]=400
 			else
 				nextBonus[ateam]=200

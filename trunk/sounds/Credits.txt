@@ -1,3 +1,4 @@
+jet.wav: Scorched 3D
 Sounds from Evolution RTS by Forboding Angel, CC-SA-NC 3.0 except:
 missile warning.wav
 missilealert.wav
