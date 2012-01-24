@@ -102,3 +102,14 @@ for name, ud in pairs(UnitDefs) do
     end
   end
 end 
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--
+-- no smoothmesh
+
+for _, ud in pairs(UnitDefs) do
+    if ud.canfly then
+		ud.usesmoothmesh = false
+	end
+ end
