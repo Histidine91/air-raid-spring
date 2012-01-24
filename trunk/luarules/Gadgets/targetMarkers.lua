@@ -188,11 +188,11 @@ function gadget:DrawScreenEffects(vsx,vsy)
 						end
 						gl.PopMatrix()
 					end
-					-- mark target directions
+					
+					-- mark directions of enemy aircraft out of our line of sight
 					local visible
 					local udef = UnitDefs[Spring.GetUnitDefID(u)]
 					if dist < rangeInfo and (udef.canFly or udef.customParams.playable) and not Spring.IsUnitInView(u) then
-						gl.Color(1,1,0,1)
 						local midx, midy = vsx/2, vsy/2
 						local dx, dy = sx-midx, sy-midy	
 						if sz >= 1 then
@@ -202,11 +202,13 @@ function gadget:DrawScreenEffects(vsx,vsy)
 						local theta = GetAngleFromVector(dx, dy)
 						local radius = vsy/4
 						local finalX, finalY = math.cos(theta)*radius + midx, math.sin(theta)*radius + midy
-						
+
+						gl.Color(1,1,0,1)
 						gl.PushMatrix()
 						gl.Translate(finalX, finalY, 0)
 						gl.BeginEnd(GL.POLYGON, Arrowhead, theta, dist)
 						gl.PopMatrix()
+						gl.Color(0,1,0,1)
 					end	
 				end
 			end
@@ -220,8 +222,8 @@ function gadget:DrawScreenEffects(vsx,vsy)
 			gl.CallList(square)
 			gl.PopMatrix()
 		end
-		gl.Color(1,1,1,1)
 	end
+	gl.Color(1,1,1,1)
 end
 
 local distScale = 2
