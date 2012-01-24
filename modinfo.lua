@@ -2,7 +2,7 @@ return {
   name='Air Raid Plus',
   description='Truck Hunter',
   shortname='AR',
-  version='v1.03+',
+  version='v1.0',
   mutator='1',
   game='',
   shortGame='',
