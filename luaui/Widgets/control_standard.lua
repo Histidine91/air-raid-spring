@@ -55,6 +55,9 @@ function widget:UnitDestroyed(u,ud,team)
 end
 
 function widget:Initialize()
+	if (Spring.GetSpectatingState() or Spring.IsReplay()) then
+		widgetHandler:RemoveWidget()
+	end
 	Spring.AssignMouseCursor("Normal","bitmaps/cursor.png")
 	vsx,vsy=Spring.GetViewGeometry()
 	hasPlane = Spring.GetTeamUnits(Spring.GetMyTeamID())[1]
