@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
 --  file:    game_end.lua
@@ -67,11 +67,14 @@ local killedAllyTeams = {}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-
+local allyTeamsToWin = 1
+if Spring.GetModOptions().gamemode=="raid" or Spring.GetModOptions().gamemode=="intercept" then
+	allyTeamsToWin = 0
+end
 
 function gadget:GameOver()
 	-- remove ourself after successful game over
-	gadgetHandler:RemoveGadget()
+	--gadgetHandler:RemoveGadget()
 end
 
 local function IsCandidateWinner(allyTeamID)
@@ -81,7 +84,7 @@ local function IsCandidateWinner(allyTeamID)
 end
 
 local function CheckSingleAllyVictoryEnd()
-	if aliveAllyTeamCount ~= 0 then	-- FIXME: implement proper system
+	if aliveAllyTeamCount ~= allyTeamsToWin then	-- FIXME: implement proper system
 		return false
 	end
 
@@ -95,48 +98,19 @@ local function CheckSingleAllyVictoryEnd()
 	return {}
 end
 
-local function AreAllyTeamsDoubleAllied( firstAllyTeamID,  secondAllyTeamID )
-	-- we need to check for both directions of alliance
-	return spAreTeamsAllied( firstAllyTeamID,  secondAllyTeamID ) and spAreTeamsAllied( secondAllyTeamID, firstAllyTeamID )
-end
-
-local function CheckSharedAllyVictoryEnd()
-	-- we have to cross check all the alliances
-	local candidateWinners = {}
-	local winnerCountSquared = 0
-	for _,firstAllyTeamID in ipairs(allyTeams) do
-		if IsCandidateWinner(firstAllyTeamID) then
-			for _,secondAllyTeamID in ipairs(allyTeams) do
-				if IsCandidateWinner(secondAllyTeamID) and AreAllyTeamsDoubleAllied( firstAllyTeamID,  secondAllyTeamID ) then
-					-- store both check directions
-					-- since we're gonna check if we're allied against ourself, only secondAllyTeamID needs to be stored
-					candidateWinners[secondAllyTeamID] =  true
-					winnerCountSquared = winnerCountSquared + 1
-				end
-			end
+local function WinAllAllyTeams()
+	local toWin = {}
+	for _,candidateWinner in ipairs(allyTeams) do
+		if IsCandidateWinner(candidateWinner) then
+			toWin[#toWin+1] = candidateWinner
 		end
-	end
-
-	if winnerCountSquared == (aliveAllyTeamCount*aliveAllyTeamCount) then
-		-- all the allyteams alive are bidirectionally allied against eachother, they are all winners
-		local winnersCorrectFormat = {}
-		for winner in pairs(candidateWinners) do
-			winnersCorrectFormat[#winnersCorrectFormat+1] = winner
-		end
-		return winnersCorrectFormat
-	end
-
-	-- couldn't find any winner
-	return false
+	end	
+	Spring.GameOver(toWin)
 end
+GG.WinAllAllyTeams = WinAllAllyTeams
 
 local function CheckGameOver()
-	local winners
-	if sharedDynamicAllianceVictory == 0 then
-		winners = CheckSingleAllyVictoryEnd()
-	else
-		winners = CheckSharedAllyVictoryEnd()
-	end
+	local winners = CheckSingleAllyVictoryEnd()
 
 	if winners then
 		spGameOver(winners)

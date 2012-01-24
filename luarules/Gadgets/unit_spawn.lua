@@ -62,6 +62,7 @@ local customKeys = {}	-- [playerID] = {}
 
 local waitingForPlane = {}
 GG.waitingForPlane = waitingForPlane
+GG.shuffledStartPosition = shuffledStartPosition
 
 -- allow gadget:Save (unsynced) to reach them
 _G.facplops = facplops

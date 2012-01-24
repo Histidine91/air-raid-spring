@@ -1,6 +1,6 @@
 function gadget:GetInfo()
 	return {
-		name = "Spawn Enemies",
+		name = "Raid Spawner",
 		desc = "spawns convoys for the player to shoot at",
 		author = "KDR_11k (David Becker)",
 		date = "2009-09-06",
@@ -10,11 +10,15 @@ function gadget:GetInfo()
 	}
 end
 
-if (gadgetHandler:IsSyncedCode()) and Spring.GetModOptions().nospawns~="1" then
+if (gadgetHandler:IsSyncedCode()) then
 
 --SYNCED
 
 local modOptions = Spring.GetModOptions()
+local gamemode = modOptions.gamemode or "raid"
+if not (gamemode=="raid" or gamemode =="dogfightplus") then
+	return
+end
 
 local rate = (tonumber(modOptions.spawnrate) or 60)*30
 local mult = tonumber(modOptions.spawnmult) or 1
@@ -53,11 +57,13 @@ function gadget:GameFrame(f)
 					if d.isSea then
 						break
 					end
-					local x,y,z=cx+math.random(-60,60),0,cz+math.random(-60,60)
+					local x,z=cx+math.random(-60,60),cz+math.random(-60,60)
+					local y=Spring.GetGroundHeight(x,z)
 					local j=1
-					while (Spring.GetGroundHeight(x,z) < 0) and j < maxTries do
+					while (y < 0) and j < maxTries do
 						x,z=cx+math.random(-60,60),cz+math.random(-60,60)
 						j=j+1
+						y=Spring.GetGroundHeight(x,z)
 					end
 					if j < maxTries then
 						local nu=Spring.CreateUnit(name,x,y,z,math.random(0,3),Spring.GetGaiaTeamID())
