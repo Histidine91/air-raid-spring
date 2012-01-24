@@ -11,7 +11,7 @@
 	MaxDamage=2000;
 	idleautoheal=0;
 	mass=30000;
-	power=3000;
+	power=2500;
 	ObjectName=gunboat.3do;
 
 	// Movement
@@ -35,10 +35,18 @@
 
 	// Weapons
 	Weapon1=lcannon;
+	WeaponMainDir1=0 0 1;
+	MaxAngleDif1=270;		
 	Weapon2=lcannon;
+	WeaponMainDir2=0 0 -1;
+	MaxAngleDif2=270;	
 	Weapon3=lfgun2;
+	WeaponMainDir3=1 0 0;	
+	MaxAngleDif3=270;	
 	Weapon4=lfgun2;
-	Weapon5=quadflak;
+	WeaponMainDir3=1 0 0;	
+	MaxAngleDif3=270;		
+	Weapon5=twinflak;
 	ExplodeAs=grounddeath;
 
 	// Tracks/Flares
@@ -54,7 +62,7 @@
 		//explosionGenerator0=custom:muzzle_shredder;
 	}
 	[customparams] {
-		score=30;
+		score=25;
 		label=GUNBT;
 	}
 }

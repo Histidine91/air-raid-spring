@@ -137,6 +137,35 @@
 	}
 }
 
+[twinflak]{
+	name=20mm Twin Gun;
+	weapontype=LaserCannon;
+	turret=1;
+	range=600; //6km
+	weaponvelocity=210;
+	duration=.01;
+	thickness=.2;
+	RGBcolor=1 .8 .2;
+	sprayangle=300;
+	projectiles=2;
+	reloadtime=5;
+	burst=60;
+	burstrate=.001;
+	avoidfriendly=0;
+	collidefriendly=0;
+	tolerance=3000;
+	impactonly=1;
+	//areaofeffect=8;
+	soundtrigger=1;
+	soundstart=interceptorgun;
+	soundhit=emediumtankfire2;
+	explosiongenerator=custom:gun_explo;
+	alwaysvisible=1;
+	[DAMAGE]{
+			default=3;
+	}
+}
+
 [quadflak]{
 	name=20mm Quad Gun;
 	weapontype=LaserCannon;
@@ -230,7 +259,7 @@
 	thickness=.05;
 	RGBcolor=1 1 .2;
 	sprayangle=100;
-	burst=15;
+	burst=20;
 	burstrate=.05;		
 	projectiles=2;
 	reloadtime=5;
@@ -243,7 +272,7 @@
 	explosiongenerator=custom:gun_explo;
 	//soundhit=lightinterceptorfire;
 	[DAMAGE]{
-		default=20;
+		default=15;
 	}
 }
 

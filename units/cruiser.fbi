@@ -36,14 +36,28 @@
 	// Weapons
 	Weapon1=hcannon;
 	OnlyTargetCategory1=GROUND SEA;
+	WeaponMainDir1=0 0 1;
+	MaxAngleDif1=270;	
 	Weapon2=hcannon;
 	OnlyTargetCategory2=GROUND SEA;
+	WeaponMainDir2=0 0 1;
+	MaxAngleDif2=270;		
 	Weapon3=hcannon;
 	OnlyTargetCategory3=GROUND SEA;	
+	WeaponMainDir3=0 0 -1;
+	MaxAngleDif3=270;		
 	Weapon4=quadflak;
+	WeaponMainDir4=0 0 1;
+	MaxAngleDif4=270;		
 	Weapon5=quadflak;
+	WeaponMainDir5=0 0 -1;
+	MaxAngleDif5=270;			
 	Weapon6=sam;
+	WeaponMainDir6=0 0 1;
+	MaxAngleDif6=270;
 	Weapon7=sam;
+	WeaponMainDir7=0 0 -1;
+	MaxAngleDif7=270;		
 	ExplodeAs=grounddeath;
 
 	// Tracks/Flares
