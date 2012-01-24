@@ -229,7 +229,7 @@ end
 else
 
 --UNSYNCED
-local camDist=0
+local camDist=2
 local camHeight=0
 local jetSoundLength = 14
 
