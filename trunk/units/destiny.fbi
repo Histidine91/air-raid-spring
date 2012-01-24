@@ -77,11 +77,11 @@
 		dist2=500;
 		name2=Tacnuke;
 
-		rollrate=100;
+		rollrate=80;
 		climbrate=40;
-		rudderrate=10;
+		rudderrate=6;
 		speed=2.2;
-		minspeed=1.4;
+		minspeed=0.8;
 
 		trailtex=bitmaps/trail.png;
 		trailr=.3;

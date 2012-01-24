@@ -1,6 +1,6 @@
 local confdata = {}
 confdata.title = 'Z.K.'
-confdata.title_image = LUAUI_DIRNAME .. 'Images/ZK_logo.png'
+confdata.title_image = LUAUI_DIRNAME .. 'Images/selector/f81_icon.png'
 local color = {
 	white = {1,1,1,1},
 	yellow = {1,1,0,1},
@@ -99,9 +99,6 @@ path='Game'
 
 	ShButton( 'Pause/Unpause', 'pause' )
 	ShLabel('') 
-	ShButton( 'Last Message Position', 'lastmsgpos' )
-	ShButton( 'Share Dialog...', 'sharedialog' ) 
-	ShButton( 'Choose Commander Type', (function() spSendCommands{"luaui showstartupinfoselector"} end) ) 
 
 
 path='Game/Screenshots'	
@@ -111,7 +108,7 @@ path='Game/Screenshots'
 --path='Game'
 --	ShButton( 'Constructor Auto Assist', function() spSendCommands{"luaui togglewidget Constructor Auto Assist"} end ) 
 
-
+--[[
 path='Settings/Camera'
 	ShLabel( 'Camera Type') 
 	ShButton( 'Total Annihilation', 'viewta' ) 
@@ -121,6 +118,7 @@ path='Settings/Camera'
 	ShButton( 'Total War', 'viewtw' ) 
 	ShButton( 'Flip the TA Camera', 'viewtaflip' ) 
 	ShButton( 'Toggle advanced COFC camera', 'luaui togglewidget Combo Overhead/Free Camera (experimental)' ) 
+]]--
 
 path='Settings/Reset Settings'
 	ShLabel( 'Reset graphic settings to minimum.')
@@ -233,13 +231,13 @@ path='Settings/Video'
 	ShButton('High Detail Shadows', function() local curShadow=Spring.GetConfigInt("Shadows"); curShadow=math.max(1,curShadow); spSendCommands{"Shadows " .. curShadow .. " 4096"} end )
 
 path='Settings/View'
-
+--[[
 	ShLabel('Spectator View/Selection')
 	ShButton('View Chosen Player', function() spSendCommands{"specfullview 0"} end )
 	ShButton('View All', function() spSendCommands{"specfullview 1"} end )
 	ShButton('Select Any Unit', function() spSendCommands{"specfullview 2"} end )
 	ShButton('View All & Select Any', function() spSendCommands{"specfullview 3"} end )
-
+]]--
 	ShLabel('Other settings')
 	
 	AddOption({
@@ -260,10 +258,10 @@ path='Settings/View'
 		springsetting = 'UnitIconDist',
 		OnChange = function(self) Spring.SendCommands{"disticon " .. self.value} end 
 	} )
-	
+--[[	
 	ShLabel('')
 	ShButton('Toggle DPS Display', function() spSendCommands{"luaui togglewidget Display DPS"} end, 'Shows RPG-style damage' )
-	
+
 path='Settings/View/Effects'
 	ShButton('Night View', function() spSendCommands{'luaui togglewidget Night'} end )
 	ShButton('Smoke Signal Markers', function() spSendCommands{'luaui togglewidget Smoke Signal'} end )				
@@ -273,17 +271,18 @@ path='Settings/View/Map'
 
 	ShButton('VR Grid', function() spSendCommands{'luaui togglewidget External VR Grid'} end )
 	ShButton('Map Extension', function() spSendCommands{'luaui togglewidget Map edge extension'} end )
+]]--
 
-path='Help'
-	AddOption({
-		type='text',
-		name='Tips',
-		value=[[Hold your meta-key (spacebar by default) while clicking on a unit or corpse for more info and options. 
-			You can also space-click on menu elements to see context settings. 
-			]]
-	})
-	ShButton('Tutorial', function() spSendCommands{"luaui togglewidget Nubtron"} end )
-	ShButton('Tip Dispenser', function() spSendCommands{"luaui togglewidget Automatic Tip Dispenser"} end )
+--path='Help'
+--	AddOption({
+--		type='text',
+--		name='Tips',
+--		value=[[Hold your meta-key (spacebar by default) while clicking on a unit or corpse for more info and options. 
+--			You can also space-click on menu elements to see context settings. 
+--			]]
+--	})
+--	ShButton('Tutorial', function() spSendCommands{"luaui togglewidget Nubtron"} end )
+--	ShButton('Tip Dispenser', function() spSendCommands{"luaui togglewidget Automatic Tip Dispenser"} end )
 
 
 

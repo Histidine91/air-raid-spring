@@ -13,4 +13,4 @@ BASE_PLANE_COST = UnitDefNames['f-81'].metalCost or 1000
 
 DEFAULT_UNIT = "f-81"
 
-SPAWN_ALT = 100
+SPAWN_ALT = 150
