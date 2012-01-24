@@ -1,0 +1,62 @@
+---------------------
+AIR RAID
+---------------------
+Sounds are almost all from Evolution RTS, used under CC-BY-SA-NC 3.0
+
+You are assigned to intercept enemy logstics movements in the target area. Destroy enemy trucks and materiel to gain points and go for the high score! Kill enemies in rapid succession to form a chain and receive multiple times the regular points!
+
+Air Raid can be played singleplayer or cooperatively (put all players on one alliance), while the option to play against other players exists it probably isn't very fun yet.
+
+---------------------
+Default controls are:
+Mouse: Roll and pitch control
+Left Mouse button: Fire the main gun
+Middle Mouse Button: Select a new target for the missiles
+Right Mouse Button: Launch the selected missile (if a target is available)
+Mousewheel: Cycle through the missiles
+W and S: Throttle
+A and D: Rudder control
+
+Keyboard controls (requires the keyboard control scheme)
+Arrow keys: Roll and pitch
+Spacebar: Fire the main gun
+R: Select a new target for the missiles
+Left Ctrl: Launch the selected missile (if a target is available)
+Q and E: Cycle through the missiles
+Left Alt: Double sensitivity of roll/pitch controls (hold down)
+
+Extra life (health) at 100, 250 and every 500 points.
+
+------------------
+Aircraft
+------------------
+You will have a choice of three different aircraft. All of them possess a built-in ammunition teleporter that allows replenishing munitions in mid-flight without any need to link up with a supply plane, all weapons and fuel will be "beamed" directly from the base. This allows the aircraft to remain in combat for as long as the pilot deems necessary without being restricted by the available payload.
+
+F-81 Arrowhead: This multirole fighter is a rugged, well balanced design effective against both land and air targets with its cannon and payload of four multirole missiles and two air-to-air missiles.
+
+F-37 Gyrfalcon: An air superiority fighter with a secondary ground attack role, the Gyrfalcon is faster and more agile than the Arrowhead at the expense of armor and cannon ammunition. It trades two of the F-81's multiroles for more air-to-air missiles.
+
+F-41 Hawk-P: A variant of a fighter commonly used by the enemy forces, this interceptor carries four of the unique Longshot missile. It is the fastest but also the least durable of the available aircraft.
+
+------------------
+Weapons
+------------------
+30mm Gatling Gun - A simple gun that fires at a rate of 3600RPM and can strike a target at a range of up to 3500 meters. Sustained fire from the weapon can destroy any target in less than a second but the short range and lack of guidance limit it to a secondary role in most engagements.
+
+Multirole Missile - These missiles are designed to work against both air and ground targets, they carry a significant yield that is effective even against heavy armor and will practically vaporize a plane but their agility is limited so a hit in aerial combat requires a good opportunity. Multirole Missiles can hit targets up to 6000 meters away.
+
+Air to Air Missile - Significantly more agile than Multirole Missiles but sacrificing yield to gain this advantage. AAMs can be launched 9 km away from the target and are much more likely to score a hit in air to air combat. AAMs are usable against ground targets as well but their low yield makes this not advisable against anything other than trucks.
+
+Longshot Missile - A unique missile carried by the F-41 Hawk-P, the Longshot boasts an excellent 12.5 km range with no loss in damage from the Air to Air Missile. It is however somewhat less agile than the AtA missile and use against evading targets is discouraged.
+
+---------------------
+Likely enemy targets:
+---------------------
+Supply Trucks: Easy targets that can be destroyed with any weapon. Great for building your chain multiplier.
+Flak Tanks: Hardened targets, two multirole missiles can crack them but they also unleash a barrage of bullets your way that you should avoid.
+SAM Launchers: Fire missiles at you that deal quite some damage if you fail to dodge them.
+Python Gunship: Slow moving and easy to hit with missiles, but will rip you apart with its gatling gun if given the chance. The Python also carries missiles.
+Wasp Fighter: An old and weak plane, carries a limited number of moderately effective missiles and has to rely on its gun otherwise. The Wasp lacks maneuverability and is very common.
+Hawk Fighter: A modern combat jet that launches dangerous missiles at you and is highly maneuverable. Try not to engage them if you aren't certain that you can get a hit in quickly.
+Gunboat: A small combat vessel armed with machine guns and cannon. Its high armor makes it difficult to take down.
+Cruiser: This rare ship is extremely well-armed and armored, packing both flak and surface-to-air missiles. Best to steer clear of this one.
