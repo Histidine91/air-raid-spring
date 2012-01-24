@@ -23,7 +23,7 @@ function gadget:Initialize()
 	for _,team in ipairs(Spring.GetTeamList()) do
 		score[team]=0
 		chain[team]={mult=1,expire=0}
-		nextBonus[team]=50
+		nextBonus[team]=100
 	end
 	_G.score=score
 	_G.chain=chain
@@ -39,12 +39,12 @@ function gadget:UnitDestroyed(u, ud, team, attacker, aud, ateam)
 		local value=chain[ateam].mult * tonumber(UnitDefs[ud].customParams.score or 0)
 		score[ateam] = score[ateam] + value
 		if score[ateam]>=nextBonus[ateam] then
-			if nextBonus[ateam]>=400 then
-				nextBonus[ateam]=nextBonus[ateam]+400
-			elseif nextBonus[ateam]==150 then
-				nextBonus[ateam]=400
+			if nextBonus[ateam]>=500 then
+				nextBonus[ateam]=nextBonus[ateam]+500
+			elseif nextBonus[ateam]==250 then
+				nextBonus[ateam]=500
 			else
-				nextBonus[ateam]=150
+				nextBonus[ateam]=250
 			end
 			local _,mhp = Spring.GetUnitHealth(GG.teamplane[ateam].unit)
 			--Spring.SetUnitHealth(GG.teamplane[ateam].unit,{health=mhp})
