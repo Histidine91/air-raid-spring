@@ -1,0 +1,37 @@
+---------------------
+Air Raid Plus v1.0
+---------------------
+ - Fixed for Spring 85.0
+ - Added two new aircraft
+ - Implemented respawns
+ - Added a throttle function
+ - Doubled size of ground targets
+ - Added a keyboard control scheme
+ - Fixed controls being wrong after an Immelmann/split-S
+ - There are now four game modes: Raid (classic), Dogfight (PvP), Dogfight Plus (includes the neutral enemies of Raid), and Intercept (10-wave survival air-to-air combat)
+ - Feature removal is now a modoption (default off)
+ - HUD: Added a range indicator, nearby (offscreen) aircraft indicator, altimeter, speed indicator
+ - Added a few new enemies
+ - Added map icons
+ 
+---------------------
+Air Raid v1.3
+---------------------
+ - Changed the missile effects a little
+ - Reduced MRM maneuverability, increased AAM's, should make AAMs more important in air combat.
+ - Controls moved into a widget, also includes two other widgets (inverted Y axis and pointer control). Potentially reduces network traffic as well.
+ - Enemy airplanes will now do attack runs on the player instead of clumping around him, should allow both sides to get more attacks in.
+ - Missiles no longer cause craters so you won't have FLAKs buried in craters anymore.
+
+---------------------
+Air Raid v1.2
+---------------------
+?
+---------------------
+Air Raid v1.1
+---------------------
+Attempt to fix crashbug
+---------------------
+Air Raid v1.0
+---------------------
+Initial version.
