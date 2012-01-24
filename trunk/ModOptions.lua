@@ -1,10 +1,56 @@
+--  Custom Options Definition Table format
+--  NOTES:
+--  - using an enumerated table lets you specify the options order
+
+--
+--  These keywords must be lowercase for LuaParser to read them.
+--
+--  key:      the string used in the script.txt
+--  name:     the displayed name
+--  desc:     the description (could be used as a tooltip)
+--  type:     the option type ('list','string','number','bool')
+--  def:      the default value
+--  min:      minimum value for number options
+--  max:      maximum value for number options
+--  step:     quantization step, aligned to the def value
+--  maxlen:   the maximum string length for string options
+--  items:    array of item strings for list options
+--  section:  so lobbies can order options in categories/panels
+--  scope:    'all', 'player', 'team', 'allyteam'      <<< not supported yet >>>
+--
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 local options= {
 	{
-		key = "nospawns",
-		name = "Disable spawns",
-		desc = "Disables the enemy spawning if you want to have a little PvP action",
-		type = "bool",
-		def = false
+		key    = 'gamemode',
+		name   = 'Game Mode',
+		desc   = 'Change the game mode.',
+		type   = 'list',
+		def    = 'raid',
+		items  = {
+			{
+				key  = 'raid',
+				name = 'Raid',
+				desc = 'Fly around attacking anything you encounter. The game ends when all teams run out of planes.',
+			},
+			{
+				key  = 'dogfight',
+				name = 'Dogfight',
+				desc = 'Team deathmatch.',
+			},
+			{
+				key  = 'dogfightplus',
+				name = 'Dogfight Plus',
+				desc = "Team deathmatch with Raid's neutral spawns.",
+			},
+			{
+				key  = 'intercept',
+				name = 'Intercept',
+				desc = "Survive ten waves of air-to-air action.",
+			},				
+		},
 	},
     {
 		key    = 'numlives',
@@ -17,9 +63,9 @@ local options= {
 		step   = 1,
 	},
 	{
-		key    = 'sandbox',
-		name   = 'Sandbox Spawner',
-		desc   = 'Options for sandbox spawning',
+		key    = 'raid',
+		name   = 'Raid Spawner',
+		desc   = 'Options for Raid mode spawning',
 		type   = 'section',
 	},	
     {
@@ -31,7 +77,7 @@ local options= {
 		min    = 15,
 		max    = 180,
 		step   = 15,
-		section	= "sandbox",
+		section	= "raid",
 	}, 
     {
 		key    = 'spawnmult',
@@ -42,7 +88,7 @@ local options= {
 		min    = 1,
 		max    = 10,
 		step   = 0.1,
-		section	= "sandbox",
+		section	= "raid",
 	}, 	
 	{
 		key    = 'experimental',
@@ -54,6 +100,7 @@ local options= {
 		key = "enabledestiny",
 		name = "Enable Destiny",
 		desc = "Enables the B-3 Destiny strike bomber (not balanced!)",
+		section = "experimental",
 		type = "bool",
 		def = false
 	},	
