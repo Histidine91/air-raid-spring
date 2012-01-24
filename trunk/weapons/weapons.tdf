@@ -84,7 +84,7 @@
 	name=Longshot Missile;
 	weapontype=MissileLauncher;
 	turret=1;
-	range=1500; //15km
+	range=1250; //12.5km
 	weaponvelocity=240;
 	startvelocity=120;
 	weaponacceleration=40;
