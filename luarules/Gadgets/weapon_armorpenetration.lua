@@ -33,7 +33,7 @@ end
 
 function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponID,
                             attackerID, attackerDefID, attackerTeam)
-	if not (weaponID and unitDefID) then
+	if not (weaponID and unitDefID and unitArmor[unitDefID] and weaponAP[weaponID]) then
 		return damage
 	end
 	if unitArmor[unitDefID] > weaponAP[weaponID] then
