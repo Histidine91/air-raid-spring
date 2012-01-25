@@ -219,7 +219,7 @@ EmitWakes()
 StartMoving()
 {
 	signal SIG_MOVE;
-	start-script EmitWakes();
+	//start-script EmitWakes();
 	bMoving = TRUE;
 }
 
