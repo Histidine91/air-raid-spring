@@ -87,7 +87,7 @@ function gadget:UnitCreated(u, ud, team)
 			local x,y,z=Spring.GetUnitPosition(u)
 			Spring.MoveCtrl.SetPosition(u,x,y+30,z)
 		else
-			Spring.Echo("ERROR: Non-playable plane assigned to player team!")
+			--Spring.Echo("ERROR: Non-playable plane assigned to player team!")
 		end
 	end
 end

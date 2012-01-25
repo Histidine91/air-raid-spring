@@ -8,7 +8,7 @@
 	Category=SEA HARD TARGET;
 	FootprintX=1;
 	FootprintZ=1;
-	MaxDamage=2000;
+	MaxDamage=1400;
 	idleautoheal=0;
 	mass=30000;
 	power=2500;
@@ -64,5 +64,6 @@
 	[customparams] {
 		score=25;
 		label=GUNBT;
+		armor=30;
 	}
 }

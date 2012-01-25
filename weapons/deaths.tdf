@@ -19,3 +19,14 @@
 		default=100;
 	}
 }
+
+[shipdeath]{
+	name=Ship Death;
+	areaofeffect=120;
+	alwaysvisible=1;
+	explosiongenerator=custom:bomb_hit_40;
+	soundhit=unitexplodemedium;
+	[damage]{
+		default=250;
+	}
+}

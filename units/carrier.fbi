@@ -1,0 +1,75 @@
+[UNITINFO]
+{
+	Name=Aircraft Carrier;
+	Unitname=carrier;
+	Description=Command ship, supports air wing;
+
+	// Required Tags
+	Category=SEA HARD TARGET;
+	FootprintX=1;
+	FootprintZ=2;
+	MaxDamage=7500;
+	idleautoheal=0;
+	mass=180000;
+	power=20000;
+	ObjectName=cvn.s3o;
+
+	// Movement
+	CanMove=1;
+	MaxVelocity=.1;
+	MovementClass=BIGBOAT;
+	Acceleration=.1;
+	Turnrate=25;
+	Turninplace=0;
+	Floater=1;
+	LevelGround=0;
+
+	// Abilities
+	CanStop=1;
+	SelfDestructCountdown=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=lfgun2;
+	Weapon2=lfmissile;
+	Weapon2SlaveTo=1;
+	Weapon3=lfgun2;
+	Weapon4=lfmissile;
+	Weapon4SlaveTo=3;
+	Weapon5=lfgun2;
+	Weapon6=lfmissile;
+	Weapon6SlaveTo=5;
+	Weapon7=lfgun2;
+	Weapon8=lfmissile;
+	Weapon8SlaveTo=7;	
+	Weapon9=lfgun2;
+	Weapon10=lfmissile;
+	Weapon10SlaveTo=9;
+	Weapon11=lfgun2;
+	Weapon12=lfmissile;
+	Weapon12SlaveTo=11;		
+	ExplodeAs=shipdeath;
+	SelfDestructAs=shipdeath;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+	IconType=carrier;
+	Script=carrier.lua;
+
+	[SFXTypes]
+	{
+		//explosionGenerator0=custom:muzzle_shredder;
+	}
+	[customparams] {
+		score=200;
+		label=CARRIER;
+	}
+}

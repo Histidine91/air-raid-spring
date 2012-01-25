@@ -8,7 +8,7 @@
 	Category=SEA HARD TARGET;
 	FootprintX=1;
 	FootprintZ=2;
-	MaxDamage=10000;
+	MaxDamage=8000;
 	idleautoheal=0;
 	mass=180000;
 	power=15000;
@@ -74,6 +74,7 @@
 	}
 	[customparams] {
 		score=150;
-		label=CRUSR;
+		label=CRUISER;
+		armor=65;
 	}
 }
