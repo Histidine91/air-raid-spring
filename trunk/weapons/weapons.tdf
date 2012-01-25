@@ -21,6 +21,9 @@
 	[DAMAGE]{
 		default=30;
 	}
+	[customparams] {
+		ap=20;
+	}	
 }
 
 [airtoair]{
@@ -50,6 +53,9 @@
 	[damage]{
 		default=120;
 	}
+	[customparams] {
+		ap=10;
+	}		
 }
 [multirole]{
 	name=Multirole Missile;
@@ -78,6 +84,9 @@
 	[damage]{
 		default=300;
 	}
+	[customparams] {
+		ap=65;
+	}	
 }
 
 [longshot]{
@@ -106,6 +115,9 @@
 	[damage]{
 		default=120;
 	}
+	[customparams] {
+		ap=10;
+	}		
 }
 
 [tacnuke]{
@@ -135,6 +147,9 @@
 	[damage]{
 		default=6000;
 	}
+	[customparams] {
+		ap=60;
+	}		
 }
 
 [twinflak]{
@@ -164,6 +179,9 @@
 	[DAMAGE]{
 			default=3;
 	}
+	[customparams] {
+		ap=15;
+	}		
 }
 
 [quadflak]{
@@ -274,6 +292,9 @@
 	[DAMAGE]{
 		default=15;
 	}
+	[customparams] {
+		ap=15;
+	}		
 }
 
 [lfmissile]{
@@ -303,6 +324,9 @@
 	[damage]{
 		default=85;
 	}
+	[customparams] {
+		ap=10;
+	}		
 }
 [sam]{
 	name=Surface to Air missile;
@@ -331,6 +355,9 @@
 	[damage]{
 		default=90;
 	}
+	[customparams] {
+		ap=10;
+	}		
 }
 [afmissile]{
 	name=Advanced Missile;
@@ -359,6 +386,9 @@
 	[damage]{
 		default=120;
 	}
+	[customparams] {
+		ap=10;
+	}		
 }
 
 [lcannon]{
@@ -372,7 +402,6 @@
 	reloadtime=1;
 	avoidfriendly=0;
 	tolerance=3500;
-	impactonly=1;
 	soundtrigger=1;
 	areaofeffect=5;
 	explosiongenerator=custom:gun_explo;
@@ -385,6 +414,9 @@
 	[DAMAGE]{
 		default=150;
 	}
+	[customparams] {
+		ap=50;
+	}		
 }
 
 [hcannon]{
@@ -398,10 +430,9 @@
 	reloadtime=5;
 	avoidfriendly=0;
 	tolerance=3500;
-	impactonly=1;
 	soundtrigger=1;
 	areaofeffect=24;
-	explosiongenerator=custom:gun_explo;
+	explosiongenerator=custom:ground_death;
 	soundstart=unitexplodemedium;
 	soundhit=unitexplodemedium;
     separation=.3;
@@ -411,4 +442,7 @@
 	[DAMAGE]{
 		default=1500;
 	}
+	[customparams] {
+		ap=80;
+	}		
 }

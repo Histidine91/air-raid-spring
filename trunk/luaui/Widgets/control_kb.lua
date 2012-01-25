@@ -58,7 +58,7 @@ function ChangeControls()
 end
 
 function widget:UnitCreated(u,ud,team)
-	if team==Spring.GetMyTeamID() then
+	if (team==Spring.GetMyTeamID() and UnitDefs[ud].customParams.playable) then
 		Spring.WarpMouse(vsx/2,vsy/2)
 		hasPlane = u
 	end
@@ -76,7 +76,13 @@ function widget:Initialize()
 	end
 	Spring.AssignMouseCursor("Normal","bitmaps/cursor.png")
 	vsx,vsy=Spring.GetViewGeometry()
-	hasPlane = Spring.GetTeamUnits(Spring.GetMyTeamID())[1]
+	
+	local myTeam = Spring.GetMyTeamID()
+	local units = Spring.GetTeamUnits(myTeam)
+	for i=1, #units do
+		widget:UnitCreated(units[i], Spring.GetUnitDefID(units[i]),myTeam)
+	end
+	
 	if WG.ChangeControls then
 		WG.ChangeControls()
 	end

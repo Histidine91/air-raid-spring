@@ -16,7 +16,15 @@ if (gadgetHandler:IsSyncedCode()) then
 
 function gadget:UnitCreated(u)
 	Spring.SetUnitAlwaysVisible(u,true)
-	Spring.SetUnitNoSelect(u,true)
+	--Spring.SetUnitNoSelect(u,true)
+end
+
+function gadget:AllowCommand(u, ud)
+	local cp = UnitDefs[ud].customParams
+	if cp.playable then
+		return false
+	end
+	return true
 end
 
 else
