@@ -65,7 +65,7 @@ function gadget:DrawScreen(vsx,vsy)
 		gl.Color(0,1,0,1)
 		gl.BeginEnd(GL.LINE_LOOP,Rectangle, vsx*throttleX, vsy*throttleY, vsx*throttleX + throttleWidth, vsy*(throttleY + throttleHeight))
 		gl.Text("SPD  "..math.floor(speed*Game.gameSpeed*scaleMult*mpsToKnots).." KTS",vsx*throttleX,vsy*throttleY-32, textsize, "l")
-		gl.Text("ALT  "..alt*scaleMult*0.5 .." m" ,vsx*throttleX,vsy*throttleY-64, textsize, "l")
+		gl.Text("ALT  "..alt*scaleMult .." m" ,vsx*throttleX,vsy*throttleY-64, textsize, "l")
 		gl.Color(1,1,1,1)
 	end
 end

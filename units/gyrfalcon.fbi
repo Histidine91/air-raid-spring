@@ -81,7 +81,7 @@
 		climbrate=80;
 		rudderrate=12;
 		speed=3;
-		minspeed=1;
+		minspeed=1.3;
 
 		trailtex=bitmaps/trail.png;
 		trailr=.3;
