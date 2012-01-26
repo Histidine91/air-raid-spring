@@ -2,7 +2,7 @@
 {
 	Name=Gunboat;
 	Unitname=gunboat;
-	Description=Light patrol ship;
+	Description=Light combat ship;
 
 	// Required Tags
 	Category=SEA HARD TARGET;

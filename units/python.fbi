@@ -8,10 +8,10 @@
 	Category=VTOL FIGHTER;
 	FootprintX=1;
 	FootprintZ=1;
-	MaxDamage=100;
+	MaxDamage=160;
 	idleautoheal=0;
 	mass=9000;
-	power=300;
+	power=400;
 	ObjectName=Python.s3o;
 
 	// Movement
@@ -57,7 +57,7 @@
 		explosionGenerator0=custom:air_explo;
 	}
 	[customparams] {
-		score=3;
+		score=4;
 		label=PYTHON;
 	}
 }

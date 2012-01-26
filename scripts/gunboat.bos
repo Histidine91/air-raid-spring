@@ -87,7 +87,7 @@ EmitWakes()
 StartMoving()
 {
 	signal SIG_MOVE;
-	start-script EmitWakes();
+	//start-script EmitWakes();
 /*	if(!bMoving)
 	{
 		play-sound("tankstart", 4);

@@ -399,11 +399,11 @@
 	range=700; //7 km
 	weaponvelocity=270;
 	RGBcolor=1 1 .2;
-	reloadtime=1;
+	reloadtime=2;
 	avoidfriendly=0;
 	tolerance=3500;
 	soundtrigger=1;
-	areaofeffect=5;
+	areaofeffect=6;
 	explosiongenerator=custom:gun_explo;
 	soundstart=emediumtankfire2;
 	soundhit=emediumtankfire2;
@@ -432,7 +432,7 @@
 	tolerance=3500;
 	soundtrigger=1;
 	areaofeffect=24;
-	explosiongenerator=custom:ground_death;
+	explosiongenerator=custom:bomb_hit_40;
 	soundstart=unitexplodemedium;
 	soundhit=unitexplodemedium;
     separation=.3;
