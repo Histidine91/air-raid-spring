@@ -31,7 +31,8 @@ local counts={
 	wasp={start=-.4,increase=.1,random=2,limit=10},
 	sam={start=-1,increase=.2,random=1,limit=15},
 	hawk={start=.05,increase=0,random=1,limit=2},
-	python={start=0,increase=.1,random=1,limit=20},
+	condor={start=0.3,increase=.2,random=1,limit=20},	
+	python={start=0,increase=.1,random=1,limit=10},
 	gunboat={start=-1,increase=.1,random=.5,limit=5, isSea=true},
 	cruiser={start=-4,increase=.05,random=.2,limit=2, isSea=true},
 }

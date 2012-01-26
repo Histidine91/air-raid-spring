@@ -30,7 +30,7 @@ function gadget:Initialize()
 end
 
 function gadget:UnitDestroyed(u, ud, team, attacker, aud, ateam)
-	if ateam and GG.teamplane[ateam] and attacker == GG.teamplane[ateam].unit then
+	if ateam and GG.teamplane[ateam] and attacker == GG.teamplane[ateam].unit and (not Spring.AreTeamsAllied(team, ateam)) then
 		if chain[ateam].expire < Spring.GetGameFrame() then
 			chain[ateam].mult=0
 		end

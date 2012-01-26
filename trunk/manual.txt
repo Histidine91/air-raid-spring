@@ -55,6 +55,7 @@ Likely enemy targets:
 Supply Trucks: Easy targets that can be destroyed with any weapon. Great for building your chain multiplier.
 Flak Tanks: Hardened targets, two multirole missiles can crack them but they also unleash a barrage of bullets your way that you should avoid.
 SAM Launchers: Fire missiles at you that deal quite some damage if you fail to dodge them.
+Condor Transport: Essentially a flying truck for the most part, moderately armored but only armed with a machine gun.
 Python Gunship: Slow moving and easy to hit with missiles, but will rip you apart with its gatling gun if given the chance. The Python also carries the same missiles as the Wasp.
 Wasp Fighter: An old and weak plane, carries a limited number of moderately effective missiles and has to rely on its gun otherwise. The Wasp lacks maneuverability and is very common.
 Hawk Fighter: A modern combat jet that launches dangerous missiles at you and is highly maneuverable. Try not to engage them if you aren't certain that you can get a hit in quickly.

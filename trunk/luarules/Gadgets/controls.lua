@@ -93,10 +93,10 @@ function gadget:UnitCreated(u, ud, team)
 end
 
 function gadget:UnitDestroyed(u,ud,team)
-	if teamplane[team] then
+	if teamplane[team] and teamplane[team].unit == u then
 		SendToUnsynced("PlaneDestroyed", team)
+		teamplane[team]=nil
 	end
-	teamplane[team]=nil
 end
 
 function gadget:RecvLuaMsg(msg,player)

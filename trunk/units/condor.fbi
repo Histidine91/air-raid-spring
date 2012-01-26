@@ -1,26 +1,26 @@
 [UNITINFO]
 {
-	Name=Python;
-	Unitname=python;
-	Description=Attack gunship;
+	Name=Condor;
+	Unitname=condor;
+	Description=Transport VTOL;
 
 	// Required Tags
-	Category=VTOL GUNSHIP;
+	Category=VTOL TRANSPORT;
 	FootprintX=1;
 	FootprintZ=1;
-	MaxDamage=160;
+	MaxDamage=200;
 	idleautoheal=0;
 	mass=9000;
 	power=400;
-	ObjectName=python.s3o;
+	ObjectName=condor.s3o;
 
 	// Movement
 	CanMove=1;
-	MaxVelocity=0.5;
+	MaxVelocity=0.35;
 	myGravity=0.000000000000000000000001;
 	CanFly=1;
 	CruiseAlt=50;
-	turnRate=400;
+	turnRate=275;
 	hoverAttack=1;
 
 	LevelGround=0;
@@ -35,12 +35,9 @@
 	SeismicSignature=0;
 
 	// Weapons
-	Weapon1=gun_e;
+	Weapon1=lfgun2;
 	WeaponMainDir1=0 0 1;
 	MaxAngleDif1=90;	
-	Weapon2=lfmissile;
-	WeaponMainDir2=0 0 1;
-	MaxAngleDif2=10;
 	ExplodeAs=airdeath;
 
 	// Tracks/Flares
@@ -49,14 +46,14 @@
 
 	// Misc
 	SmoothAnim=0;
-	iconType=gunship;		
+	iconType=airtransport;		
 
 	[SFXTypes]
 	{
 		explosionGenerator0=custom:air_explo;
 	}
 	[customparams] {
-		score=4;
-		label=PYTHON;
+		score=2;
+		label=CONDOR;
 	}
 }

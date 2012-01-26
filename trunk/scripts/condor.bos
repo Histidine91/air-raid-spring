@@ -1,14 +1,8 @@
-piece base, gen1, gen2, gen3, gun, fp1, under, rack1, rack2, m1, m2;
-
-static-var msln, mslp;
+piece  base, link, ramp, gen1, gen2, gun, barrel, fp1, under1, under2, under3;
 
 #include "constants.h"
 
 lua_AddTrail(){
-	return 1;
-}
-
-lua_MissileLaunch() {
 	return 1;
 }
 
@@ -18,7 +12,7 @@ RestoreAfterDelay()
 	set-signal-mask 16;
 	sleep 8000;
 	turn gun to y-axis <0.000000> speed <60>;
-	turn gun to x-axis <0.000000> speed <60>;
+	turn barrel to x-axis <0.000000> speed <60>;
 }
 
 Create() {
@@ -30,10 +24,6 @@ QueryWeapon1(p) {
 	p=fp1;
 }
 
-QueryWeapon2(p) {
-	p=m1+mslp;
-}
-
 Shot1() {
 }
 
@@ -41,23 +31,9 @@ AimWeapon1(heading, pitch)
 {
 	start-script RestoreAfterDelay();
 	turn gun to y-axis heading speed <180>;
-	turn gun to x-axis 0 - pitch speed <180>;
+	turn barrel to x-axis 0 - pitch speed <180>;
 	wait-for-turn gun around y-axis;
 	return (1);
-}
-
-Shot2() {
-	msln= msln+1;
-	mslp = !mslp;
-	call-script lua_MissileLaunch(get TARGET_ID(2));
-}
-
-AimWeapon2() {
-	return 1;
-}
-
-BlockShot2(target,block) {
-	block = msln > 8;
 }
 
 Killed() {
