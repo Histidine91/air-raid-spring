@@ -16,14 +16,14 @@
 
 	// Movement
 	CanMove=1;
-	MaxVelocity=1.5;
+	MaxVelocity=1.6;
 	myGravity=0.000000000000000000000001;
 	MaxRudder=.001;
 	MaxAileron=.08;
 	MaxElevator=.0055;
 	CanFly=1;
 	CruiseAlt=100;
-	turnradius = 400;
+	turnradius = 320;
 
 	LevelGround=0;
 
