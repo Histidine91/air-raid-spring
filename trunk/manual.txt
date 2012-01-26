@@ -25,7 +25,7 @@ Left Ctrl: Launch the selected missile (if a target is available)
 Q and E: Cycle through the missiles
 Left Alt: Double sensitivity of roll/pitch controls (hold down)
 
-Extra life at 100, 250 and every 500 points.
+Extra life at 200, 500 and every 1000 points.
 
 ------------------
 Aircraft
