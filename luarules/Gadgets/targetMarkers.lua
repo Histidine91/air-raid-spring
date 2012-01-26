@@ -150,10 +150,11 @@ function gadget:DrawScreenEffects(vsx,vsy)
 	local p = SYNCED.teamplane[team]
 	if p then
 		-- draw target boxes and information
-		gl.Color(0,1,0,1)
+		--gl.Color(0,1,0,1)
 		local cx,cy,cz=Spring.GetUnitPosition(p.unit)
 		for _,u in ipairs(Spring.GetUnitsInSphere(cx,cy,cz,targetCutoff)) do
-			if Spring.GetUnitTeam(u) ~= team then
+			local uteam = Spring.GetUnitTeam(u)
+			if u ~= p.unit then
 				local dist = Spring.GetUnitSeparation(p.unit,u)
 				if dist < targetCutoff then
 					local x,y,z = Spring.GetUnitPosition(u)
@@ -162,7 +163,14 @@ function gadget:DrawScreenEffects(vsx,vsy)
 					--	Spring.Echo(sx,sy,sz)
 					--	echoFreq = 0
 					--end
+					local mark = true
 					if sz<1 then	-- in front of us
+						if Spring.AreTeamsAllied(team, uteam) then
+							gl.Color(0.1,0.25,1,1)
+							mark = false
+						else
+							gl.Color(0,1,0,1)
+						end
 						gl.PushMatrix()
 						gl.Translate(sx,sy,0)
 						gl.CallList(diamond)
@@ -190,26 +198,27 @@ function gadget:DrawScreenEffects(vsx,vsy)
 					end
 					
 					-- mark directions of enemy aircraft out of our line of sight
-					local visible
-					local udef = UnitDefs[Spring.GetUnitDefID(u)]
-					if dist < rangeInfo and (udef.canFly or udef.customParams.playable) and not Spring.IsUnitInView(u) then
-						local midx, midy = vsx/2, vsy/2
-						local dx, dy = sx-midx, sy-midy	
-						if sz >= 1 then
-							dx = midx-sx
-							dy = midy-sy	-- note that this is the opposite of what is expected (and required for a target in front)
+					if mark then
+						local udef = UnitDefs[Spring.GetUnitDefID(u)]
+						if dist < rangeInfo and (udef.canFly or udef.customParams.playable) and not Spring.IsUnitInView(u) then
+							local midx, midy = vsx/2, vsy/2
+							local dx, dy = sx-midx, sy-midy	
+							if sz >= 1 then
+								dx = midx-sx
+								dy = midy-sy	-- note that this is the opposite of what is expected (and required for a target in front)
+							end
+							local theta = GetAngleFromVector(dx, dy)
+							local radius = vsy/4
+							local finalX, finalY = math.cos(theta)*radius + midx, math.sin(theta)*radius + midy
+	
+							gl.Color(1,1,0,1)
+							gl.PushMatrix()
+							gl.Translate(finalX, finalY, 0)
+							gl.BeginEnd(GL.POLYGON, Arrowhead, theta, dist)
+							gl.PopMatrix()
+							gl.Color(0,1,0,1)
 						end
-						local theta = GetAngleFromVector(dx, dy)
-						local radius = vsy/4
-						local finalX, finalY = math.cos(theta)*radius + midx, math.sin(theta)*radius + midy
-
-						gl.Color(1,1,0,1)
-						gl.PushMatrix()
-						gl.Translate(finalX, finalY, 0)
-						gl.BeginEnd(GL.POLYGON, Arrowhead, theta, dist)
-						gl.PopMatrix()
-						gl.Color(0,1,0,1)
-					end	
+					end
 				end
 			end
 		end
