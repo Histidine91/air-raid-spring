@@ -41,6 +41,7 @@ end
 local SIG_MOVE = 1
 local SIG_RESTORE = 2
 
+local unitDefID = Spring.GetUnitDefID(unitID)
 ----------------------------------------------------------
 ----------------------------------------------------------
 
@@ -96,6 +97,7 @@ end
 
 function script.Shot(num)
 	if num%2 == 0 then
+		GG.MissileLaunch(unitID, unitDefID, Spring.GetUnitTeam(unitID), GetUnitValue(COB.TARGET_ID, num))
 		gun_num[num] = gun_num[num] + 1
 		if gun_num[num] == 2 then gun_num[num] = 1 end
 	end

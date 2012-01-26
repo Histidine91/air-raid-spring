@@ -10,7 +10,7 @@
 }
 
 [grounddeath]{
-	name=Air Death;
+	name=Ground Death;
 	areaofeffect=40;
 	alwaysvisible=1;
 	explosiongenerator=custom:ground_death;
@@ -24,7 +24,7 @@
 	name=Ship Death;
 	areaofeffect=120;
 	alwaysvisible=1;
-	explosiongenerator=custom:bomb_hit_40;
+	//explosiongenerator=custom:bomb_hit_40;
 	soundhit=unitexplodemedium;
 	[damage]{
 		default=250;

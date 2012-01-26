@@ -25,6 +25,7 @@ end
 function MissileLaunch(u, ud, team, target)
 	toTrack[u]=target
 end
+GG.MissileLaunch = MissileLaunch
 
 function gadget:ProjectileCreated(p,owner)
 	if toTrack[owner] then
