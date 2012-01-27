@@ -58,8 +58,6 @@ end
 function widget:DrawScreen()
 	local teamID = Spring.GetMyTeamID()
 	local numLives = Spring.GetTeamRulesParam(teamID, "numlives") or 0
-	gl.Clear(GL.DEPTH_BUFFER_BIT)
-	
 	DrawIcons(numLives, vsx, vsy)
 end
 

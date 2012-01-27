@@ -11,6 +11,6 @@ function widget:GetInfo()
 end
 
 function widget:Initialize()
-	Spring.SendCommands({"resbar 0", "info 0", "showhealthbars 0", "disticon 100000"})
+	Spring.SendCommands({"resbar 0", "info 0", "showhealthbars 0", "disticon 10000"})
 	widgetHandler:RemoveWidget()
 end
