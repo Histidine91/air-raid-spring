@@ -1,4 +1,7 @@
 jet.wav: Scorched 3D
+
+bomb_drop: Kanoba
+
 Sounds from Evolution RTS by Forboding Angel, CC-SA-NC 3.0 except:
 missile warning.wav
 missilealert.wav

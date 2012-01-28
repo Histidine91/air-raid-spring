@@ -20,7 +20,7 @@
 	myGravity=0.000000000000000000000001;
 	MaxRudder=.001;
 	MaxAileron=.08;
-	MaxElevator=.0055;
+	MaxElevator=.02;
 	CanFly=1;
 	CruiseAlt=100;
 	turnradius = 320;

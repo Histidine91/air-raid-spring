@@ -181,6 +181,7 @@ function widget:KeyPress(key)
 	elseif key==KEY_NextWeapon then
 		state.buttons[B_NextWeapon]=1
 	elseif key==KEY_PrevWeapon then
+		Spring.Echo("Previous weapon (widget)")
 		state.buttons[B_PrevWeapon]=1
 	elseif key==KEY_SensitivityToggle then
 		sensitivityState = 2

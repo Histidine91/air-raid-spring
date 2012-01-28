@@ -125,6 +125,7 @@ function gadget:RecvLuaMsg(msg,player)
 				end
 			end
 			if interpret[5+B_PrevWeapon]==1 then
+				Spring.Echo("Previous weapon (gadget)")
 				teamplane[team].currentweapon = teamplane[team].currentweapon -1
 				if teamplane[team].currentweapon < 1 then
 					teamplane[team].currentweapon = #teamplane[team].ammo
@@ -204,12 +205,12 @@ function gadget:GameFrame(f)
 			speed = planedata[p.ud].minSpeed
 		end
 		p.currentspeed = speed
-		--Spring.MoveCtrl.SetRelativeVelocity(p.unit,0,0,speed)
-		Spring.MoveCtrl.SetVelocity(p.unit,
-			math.sin(p.yaw) *(math.cos(p.pitch))*speed,
-			-math.sin(p.pitch)*speed,
-			math.cos(p.yaw) *(math.cos(p.pitch))*speed
-		)
+		Spring.MoveCtrl.SetRelativeVelocity(p.unit,0,0,speed)
+		--Spring.MoveCtrl.SetVelocity(p.unit,
+		--	math.sin(p.yaw) *(math.cos(p.pitch))*speed,
+		--	-math.sin(p.pitch)*speed,
+		--	math.cos(p.yaw) *(math.cos(p.pitch))*speed
+		--)
 		local x,y,z=Spring.GetUnitPosition(p.unit)
 		--Spring.MoveCtrl.SetPosition(p.unit,
 		--	x + math.sin(p.yaw) *(math.cos(p.pitch))*planedata[p.ud].speed[p.speed],
