@@ -1,29 +1,29 @@
 [UNITINFO]
 {
-	Name=Hawk;
-	Unitname=hawk;
-	Description=Advanced interceptor plane;
+	Name=Aurora;
+	Unitname=aurora;
+	Description=High speed spy plane;
 
 	// Required Tags
-	Category=VTOL FIGHTER;
+	Category=VTOL BOMBER UNARMED;
 	FootprintX=1;
 	FootprintZ=1;
-	MaxDamage=200;
+	MaxDamage=260;
 	idleautoheal=0;
 	mass=9000;
-	power=1000;
-	ObjectName=hawk.s3o;
+	power=1200;
+	ObjectName=aurora.s3o;
 
 	// Movement
 	CanMove=1;
-	MaxVelocity=2;
+	MaxVelocity=3.4;
 	myGravity=0.000000000000000000000001;
-	MaxRudder=.002;
-	MaxAileron=.1;
-	MaxElevator=.04;
+	MaxRudder=.001;
+	MaxAileron=.08;
+	MaxElevator=.02;
 	CanFly=1;
-	CruiseAlt=100;
-	TurnRadius=400;
+	CruiseAlt=150;
+	turnradius = 240;
 
 	LevelGround=0;
 
@@ -37,9 +37,6 @@
 	SeismicSignature=0;
 
 	// Weapons
-	Weapon1=afmissile;
-	WeaponMainDir1=0 0 1;
-	MaxAngleDif1=20;
 	ExplodeAs=airdeath;
 
 	// Tracks/Flares
@@ -48,17 +45,17 @@
 
 	// Misc
 	SmoothAnim=0;
-	iconType=stealthfighter;		
+	iconType=bomber;		
 
 	[SFXTypes]
 	{
 		explosionGenerator0=custom:air_explo;
 	}
 	[customparams] {
-		score=10;
-		label=HAWK;
+		score=12;
+		label=AURORA;
 
-		trailtex=bitmaps/dualtrail.png;
+		trailtex=bitmaps/trail.png;
 		trailr=.3;
 		trailg=.3;
 		trailb=.3;

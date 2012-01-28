@@ -3,7 +3,7 @@ piece m1,m2,m3,m4,engine1;
 
 static-var m;
 
-#include "exptype.h"
+#include "constants.h"
 
 lua_AddTrail(){
 	return 1;

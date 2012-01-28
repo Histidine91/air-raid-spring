@@ -1,29 +1,29 @@
 [UNITINFO]
 {
-	Name=Hawk;
-	Unitname=hawk;
-	Description=Advanced interceptor plane;
+	Name=B-3 Destiny;
+	Unitname=destinye;
+	Description=Strike bomber;
 
 	// Required Tags
-	Category=VTOL FIGHTER;
+	Category=VTOL BOMBER;
 	FootprintX=1;
 	FootprintZ=1;
-	MaxDamage=200;
+	MaxDamage=800;
 	idleautoheal=0;
 	mass=9000;
-	power=1000;
-	ObjectName=hawk.s3o;
+	power=2000;
+	ObjectName=destiny.s3o;
 
 	// Movement
 	CanMove=1;
-	MaxVelocity=2;
+	MaxVelocity=1.25;
 	myGravity=0.000000000000000000000001;
-	MaxRudder=.002;
-	MaxAileron=.1;
-	MaxElevator=.04;
+	MaxRudder=.0007;
+	MaxAileron=.056;
+	MaxElevator=.014;
 	CanFly=1;
 	CruiseAlt=100;
-	TurnRadius=400;
+	turnradius = 240;
 
 	LevelGround=0;
 
@@ -37,9 +37,7 @@
 	SeismicSignature=0;
 
 	// Weapons
-	Weapon1=afmissile;
-	WeaponMainDir1=0 0 1;
-	MaxAngleDif1=20;
+	Weapon1=multibombsplus;
 	ExplodeAs=airdeath;
 
 	// Tracks/Flares
@@ -48,20 +46,18 @@
 
 	// Misc
 	SmoothAnim=0;
-	iconType=stealthfighter;		
+	iconType=bomber;
 
 	[SFXTypes]
 	{
 		explosionGenerator0=custom:air_explo;
 	}
 	[customparams] {
-		score=10;
-		label=HAWK;
-
-		trailtex=bitmaps/dualtrail.png;
+		trailtex=bitmaps/trail.png;
 		trailr=.3;
 		trailg=.3;
 		trailb=.3;
 		trailalpha=1;
+		label=B-3;
 	}
 }

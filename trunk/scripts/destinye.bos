@@ -1,0 +1,23 @@
+piece  base, bdoor1, bdoor2, wingtip1, wingtip2, bomb, thrust3, thrust4, thrust1, thrust2, under1, under2, under3;
+
+static-var unlock;
+
+#include "constants.h"
+
+
+lua_AddTrail() {return 0; }
+
+Create() {
+	turn wingtip1 to y-axis <90> now;
+	turn wingtip2 to y-axis <90> now;
+	call-script lua_AddTrail(wingtip1,10,50,1);
+	call-script lua_AddTrail(wingtip2,10,50,1);
+}
+
+QueryWeapon1(p) {
+	p=bomb;
+}
+
+Killed() {
+	emit-sfx 1024 from base;
+}
