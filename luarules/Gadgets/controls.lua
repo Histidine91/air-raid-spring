@@ -108,7 +108,7 @@ function gadget:RecvLuaMsg(msg,player)
 		local p = teamplane[team]
 		if msg:sub(1,8) == "control:" then
 			local data = msg:sub(9,#msg)
-			local interpret = VFS.UnpackS8(data,1,7)
+			local interpret = VFS.UnpackS8(data,1,8)
 			p.controlpitch=interpret[1]/127
 			p.controlroll=interpret[2]/127
 			p.controlyaw=interpret[3]/127
@@ -128,7 +128,6 @@ function gadget:RecvLuaMsg(msg,player)
 				end
 			end
 			if interpret[5+B_PrevWeapon]==1 then
-				Spring.Echo("Previous weapon (gadget)")
 				teamplane[team].currentweapon = teamplane[team].currentweapon -1
 				if teamplane[team].currentweapon < 1 then
 					teamplane[team].currentweapon = #teamplane[team].ammo
