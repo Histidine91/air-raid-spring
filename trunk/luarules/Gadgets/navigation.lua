@@ -33,7 +33,7 @@ local throttleY = 0.25
 
 local textsize = 16
 
-local scaleMult = 10	--elmos -> meter
+local scaleMult = 5	--elmos -> meter
 local mpsToKnots = 3600/1000/1.8
 
 function Rectangle(x1,y1,x2,y2)
@@ -57,14 +57,15 @@ function gadget:DrawScreen(vsx,vsy)
 		--	gl.Text(math.floor(d.ammo), vsx - rightdist, bottomdist + i*entrydist, textsize, "r")
 		--	gl.Text(d.name, vsx - rightdist - namedist, bottomdist + i*entrydist, textsize, "r")
 		--end
-		local speed = math.max(p.currentspeed)
+		local wantedSpeed = p.wantedspeed
+		local trueSpeed = p.currentspeed
 		local x,y,z = Spring.GetUnitPosition(p.unit)
 		local alt = math.floor(y - math.max(Spring.GetGroundHeight(x,z),0))
 		gl.Color(0,.5,0,.4)
-		gl.Rect(vsx*throttleX, vsy*throttleY, vsx*throttleX + throttleWidth, vsy*(throttleY + throttleHeight*speed/planedata[p.ud].speed))
+		gl.Rect(vsx*throttleX, vsy*throttleY, vsx*throttleX + throttleWidth, vsy*(throttleY + throttleHeight*wantedSpeed/planedata[p.ud].speed))
 		gl.Color(0,1,0,1)
 		gl.BeginEnd(GL.LINE_LOOP,Rectangle, vsx*throttleX, vsy*throttleY, vsx*throttleX + throttleWidth, vsy*(throttleY + throttleHeight))
-		gl.Text("SPD  "..math.floor(speed*Game.gameSpeed*scaleMult*mpsToKnots).." KTS",vsx*throttleX,vsy*throttleY-32, textsize, "l")
+		gl.Text("SPD  "..math.floor(trueSpeed*Game.gameSpeed*scaleMult*mpsToKnots).." KTS",vsx*throttleX,vsy*throttleY-32, textsize, "l")
 		gl.Text("ALT  "..alt*scaleMult .." m" ,vsx*throttleX,vsy*throttleY-64, textsize, "l")
 		gl.Color(1,1,1,1)
 	end

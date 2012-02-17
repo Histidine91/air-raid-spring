@@ -22,16 +22,20 @@ end
 else
 
 --UNSYNCED
+local scaleMult = 5	--elmos -> meter
 
 local dsize=36
 local ssize=30;
-local targetCutoff=1500;
-local rangeInfo=1000;
+local targetCutoff=2500;
+local nameRange=1500;
+local rangeInfoRange=2000;
 local gunRange=350;
 local reticleSize=10;
 local arrowSize=10;
 
-local minidiamond,diamond, square, reticle
+local baseDistance = 500^0.5
+
+local minidiamond, diamond, square, reticle
 
 local function GetQuadrant(x, y)
 	if x > 0 then
@@ -108,31 +112,31 @@ function ConeEnd(dist,angle)
 	end
 end
 
-function Diamond()
-	gl.Vertex(0,dsize,0)
-	gl.Vertex(dsize,0,0)
-	gl.Vertex(0,-dsize,0)
-	gl.Vertex(-dsize,0,0)
+function Diamond(size)
+	gl.Vertex(0,dsize*size,0)
+	gl.Vertex(dsize*size,0,0)
+	gl.Vertex(0,-dsize*size,0)
+	gl.Vertex(-dsize*size,0,0)
 end
 
-function MiniDiamond()
-	gl.Vertex(0,dsize/4,0)
-	gl.Vertex(dsize/4,0,0)
-	gl.Vertex(0,-dsize/4,0)
-	gl.Vertex(-dsize/4,0,0)
+function MiniDiamond(size)
+	gl.Vertex(0,dsize*size/4,0)
+	gl.Vertex(dsize*size/4,0,0)
+	gl.Vertex(0,-dsize*size/4,0)
+	gl.Vertex(-dsize*size/4,0,0)
 end
 
-function Square()
-	gl.Vertex(ssize,ssize,0)
-	gl.Vertex(-ssize,ssize,0)
-	gl.Vertex(-ssize,-ssize,0)
-	gl.Vertex(ssize,-ssize,0)
+function Square(size)
+	gl.Vertex(ssize*size,ssize*size,0)
+	gl.Vertex(-ssize*size,ssize*size,0)
+	gl.Vertex(-ssize*size,-ssize*size,0)
+	gl.Vertex(ssize*size,-ssize*size,0)
 end
 
 function gadget:Initialize()
-	diamond=gl.CreateList(gl.BeginEnd,GL.LINE_LOOP,Diamond)
-	minidiamond=gl.CreateList(gl.BeginEnd,GL.LINE_LOOP,MiniDiamond)
-	square=gl.CreateList(gl.BeginEnd,GL.LINE_LOOP,Square)
+	--diamond=gl.CreateList(gl.BeginEnd,GL.LINE_LOOP,Diamond)
+	--minidiamond=gl.CreateList(gl.BeginEnd,GL.LINE_LOOP,MiniDiamond)
+	--square=gl.CreateList(gl.BeginEnd,GL.LINE_LOOP,Square)
 	reticle=gl.CreateList(gl.BeginEnd,GL.LINES, Reticle)
 end
 
@@ -156,6 +160,7 @@ function gadget:DrawScreenEffects(vsx,vsy)
 			local uteam = Spring.GetUnitTeam(u)
 			if u ~= p.unit then
 				local dist = Spring.GetUnitSeparation(p.unit,u)
+				local size = (baseDistance/(dist^0.5)) or 1
 				if dist < targetCutoff then
 					local x,y,z = Spring.GetUnitPosition(u)
 					local sx,sy,sz=Spring.WorldToScreenCoords(x,y,z)
@@ -163,36 +168,48 @@ function gadget:DrawScreenEffects(vsx,vsy)
 					--	Spring.Echo(sx,sy,sz)
 					--	echoFreq = 0
 					--end
-					local mark = true
+					local mark = true	-- add indicator arrows if offscreen
 					if sz<1 then	-- in front of us
+						-- team coloration
 						if Spring.AreTeamsAllied(team, uteam) then
 							gl.Color(0.1,0.25,1,1)
 							mark = false
 						else
 							gl.Color(0,1,0,1)
 						end
+						
 						gl.PushMatrix()
 						gl.Translate(sx,sy,0)
-						gl.CallList(diamond)
+						
+						-- target square + "in gun range" marker
+						--gl.CallList(diamond)
+						gl.BeginEnd(GL.LINE_LOOP,Square,size)
 						if dist < gunRange then
-							gl.CallList(minidiamond)
+							--gl.CallList(minidiamond)
+							gl.BeginEnd(GL.LINE_LOOP,MiniDiamond,size)
 						end
-						if dist < rangeInfo then
+						
+						-- range display
+						if (dist < rangeInfoRange) or (p.target ~= -1 and p.target == u) then
 							local str
-							if dist > 200 then
-								str = ("%.1f"):format(dist/100).." km"
+							if dist > 400 then
+								str = ("%.1f"):format(dist/(1000/scaleMult)).." km"
 							else
-								str = math.ceil(dist*10).." m"
+								str = math.ceil(dist*scaleMult).." m"
 							end
-							gl.Text(str, ssize/2, -ssize/2, 14)
+							gl.Text(str, ssize*size, -ssize*size, 14)
 						end
+						
+						-- health display
 						local hp,mhp= Spring.GetUnitHealth(u)
 						if hp < mhp then
 							gl.Text(math.floor(100*hp/mhp).."%",0,0,14,"c")
 						end
+						
+						--name display
 						local ud = Spring.GetUnitDefID(u)
-						if UnitDefs[ud].customParams.label then
-							gl.Text(UnitDefs[ud].customParams.label,0,dsize,17,"c")
+						if dist < nameRange and UnitDefs[ud].customParams.label then
+							gl.Text(UnitDefs[ud].customParams.label,0,ssize*size,16,"c")
 						end
 						gl.PopMatrix()
 					end
@@ -200,7 +217,7 @@ function gadget:DrawScreenEffects(vsx,vsy)
 					-- mark directions of enemy aircraft out of our line of sight
 					if mark then
 						local udef = UnitDefs[Spring.GetUnitDefID(u)]
-						if dist < rangeInfo and (udef.canFly or udef.customParams.playable) and not Spring.IsUnitInView(u) then
+						if dist < nameRange and (udef.canFly or udef.customParams.playable) and not Spring.IsUnitInView(u) then
 							local midx, midy = vsx/2, vsy/2
 							local dx, dy = sx-midx, sy-midy	
 							if sz >= 1 then
@@ -224,11 +241,14 @@ function gadget:DrawScreenEffects(vsx,vsy)
 		end
 		if p.target ~= -1 and Spring.ValidUnitID(p.target) then
 			gl.Color(1,0,0,1)
+			local dist = Spring.GetUnitSeparation(p.target,p.unit)
+			local size = (baseDistance/(dist^0.5)) or 1			
 			local x,y,z = Spring.GetUnitPosition(p.target)
 			local sx,sy=Spring.WorldToScreenCoords(x,y,z)
 			gl.PushMatrix()
 			gl.Translate(sx,sy,0)
-			gl.CallList(square)
+			--gl.CallList(square)
+			gl.BeginEnd(GL.LINE_LOOP,Diamond,size)
 			gl.PopMatrix()
 		end
 	end

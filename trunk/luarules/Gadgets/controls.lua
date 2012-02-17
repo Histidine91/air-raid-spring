@@ -20,6 +20,7 @@ local pi = math.pi
 if (gadgetHandler:IsSyncedCode()) then
 
 --SYNCED
+local inertiaFactor = 0.96
 
 local planedata={}
 local teamplane={}
@@ -82,6 +83,8 @@ function gadget:UnitCreated(u, ud, team)
 				ammo=ammo,
 				currentweapon=1,
 				currentspeed=0,
+				wantedspeed=0,
+				velocity={0,0,0},
 			}
 			Spring.MoveCtrl.Enable(u)
 			local x,y,z=Spring.GetUnitPosition(u)
@@ -204,13 +207,30 @@ function gadget:GameFrame(f)
 		if speed < planedata[p.ud].minSpeed then
 			speed = planedata[p.ud].minSpeed
 		end
-		p.currentspeed = speed
-		Spring.MoveCtrl.SetRelativeVelocity(p.unit,0,0,speed)
-		--Spring.MoveCtrl.SetVelocity(p.unit,
-		--	math.sin(p.yaw) *(math.cos(p.pitch))*speed,
-		--	-math.sin(p.pitch)*speed,
-		--	math.cos(p.yaw) *(math.cos(p.pitch))*speed
-		--)
+		p.wantedspeed = speed
+		
+		-- calculate velocity
+		--Spring.MoveCtrl.SetRelativeVelocity(p.unit,0,0,speed)
+		local vx = math.sin(p.yaw) *(math.cos(p.pitch))*speed
+		local vy = -math.sin(p.pitch)*speed
+		local vz = math.cos(p.yaw) *(math.cos(p.pitch))*speed
+		
+		local gravity = -0.5*math.abs(vy/speed)	-- "gravity" here is really gravity + lift; lift is assumed to be linearly proportional to (1-|sin|)		
+		vy = vy + gravity			-- and yes gravity is a velocity rather than an acceleration as it should be
+		
+		local vx1, vy1, vz1 = unpack(p.velocity)
+		
+		vx = vx*(1-inertiaFactor) + vx1*inertiaFactor
+		vy = vy*(1-inertiaFactor) + vy1*inertiaFactor
+		vz = vz*(1-inertiaFactor) + vz1*inertiaFactor
+		
+		p.velocity = {vx, vy, vz}
+		
+		Spring.MoveCtrl.SetVelocity(p.unit, vx, vy, vz)
+		
+		local trueSpeed = math.sqrt(vx^2 + vy^2 + vz^2)
+		p.currentspeed = trueSpeed
+		
 		local x,y,z=Spring.GetUnitPosition(p.unit)
 		--Spring.MoveCtrl.SetPosition(p.unit,
 		--	x + math.sin(p.yaw) *(math.cos(p.pitch))*planedata[p.ud].speed[p.speed],
@@ -220,7 +240,8 @@ function gadget:GameFrame(f)
 
 		SendToUnsynced("controls_GameFrame")
 		
-		if Spring.GetGroundHeight(x,z) > y then --impacted the ground
+		local height = Spring.GetGroundHeight(x,z)
+		if y < height or y < 0 then --impacted the ground
 			Spring.SendMessageToTeam(team,"That wasn't so clever, now was it?")
 			Spring.DestroyUnit(p.unit)
 		end
