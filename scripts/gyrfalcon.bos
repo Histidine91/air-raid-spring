@@ -45,14 +45,14 @@ AimWeapon3() {
 
 Shot2() {
 	mrm= !mrm;
-	call-script lua_MissileLaunch(get TARGET_ID(2));
+	call-script lua_MissileLaunch(get TARGET_ID(2), 2);
 	unlock=0;
 	call-script lua_UseAmmo(1);
 }
 
 Shot3() {
 	mrm= !mrm;
-	call-script lua_MissileLaunch(get TARGET_ID(3));
+	call-script lua_MissileLaunch(get TARGET_ID(3), 3);
 	unlock=0;
 	call-script lua_UseAmmo(2);
 }

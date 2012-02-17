@@ -2,7 +2,7 @@
 	name=30mm Vulcan;
 	weapontype=LaserCannon;
 	turret=1;
-	range=350; //3.5km
+	range=350; //1.75km
 	weaponvelocity=210;
 	duration=.06;
 	thickness=.05;
@@ -30,7 +30,7 @@
 	name=Air to Air missile;
 	weapontype=MissileLauncher;
 	turret=1;
-	range=900; //9km
+	range=900; //4.5km
 	weaponvelocity=280;
 	startvelocity=50;
 	weaponacceleration=100;
@@ -61,7 +61,7 @@
 	name=Multirole Missile;
 	weapontype=MissileLauncher;
 	turret=1;
-	range=600; //6km
+	range=600; //3km
 	weaponvelocity=180;
 	startvelocity=40;
 	weaponacceleration=90;
@@ -93,10 +93,10 @@
 	name=Longshot Missile;
 	weapontype=MissileLauncher;
 	turret=1;
-	range=1250; //12.5km
-	weaponvelocity=240;
+	range=1600; //8km
+	weaponvelocity=360;
 	startvelocity=120;
-	weaponacceleration=40;
+	weaponacceleration=60;
 	flighttime=10;
 	reloadtime=1;
 	avoidfriendly=0;
@@ -113,10 +113,11 @@
 	burnblow=1;
 	alwaysvisible=1;
 	[damage]{
-		default=120;
+		default=200;
 	}
 	[customparams] {
-		ap=10;
+		ap=20;
+		semiactive=1;
 	}		
 }
 
@@ -124,7 +125,7 @@
 	name=Tactical Nuclear Missile;
 	weapontype=MissileLauncher;
 	turret=1;
-	range=500; //5km
+	range=500; //2.5km
 	weaponvelocity=180;
 	startvelocity=40;
 	weaponacceleration=60;
@@ -156,7 +157,7 @@
 	name=20mm Twin Gun;
 	weapontype=LaserCannon;
 	turret=1;
-	range=600; //6km
+	range=600; //3km
 	weaponvelocity=210;
 	duration=.01;
 	thickness=.2;
@@ -188,7 +189,7 @@
 	name=20mm Quad Gun;
 	weapontype=LaserCannon;
 	turret=1;
-	range=600; //6km
+	range=600; //3km
 	weaponvelocity=210;
 	duration=.01;
 	thickness=.2;
@@ -216,7 +217,7 @@
 	name=Light Machinegun;
 	weapontype=LaserCannon;
 	//turret=1;
-	range=350; //3.5km
+	range=350; //1.75km
 	weaponvelocity=210;
 	duration=.03;
 	thickness=.1;
@@ -243,7 +244,7 @@
 	name=Light Machinegun;
 	weapontype=LaserCannon;
 	turret=1;
-	range=350; //3.5km
+	range=350; //1.75km
 	weaponvelocity=210;
 	duration=.03;
 	thickness=.1;
@@ -271,7 +272,7 @@
 	name=20mm Vulcan;
 	weapontype=LaserCannon;
 	turret=1;
-	range=350; //3.5km
+	range=350; //1.75km
 	weaponvelocity=210;
 	duration=.06;
 	thickness=.05;
@@ -301,7 +302,7 @@
 	name=Light Missile;
 	weapontype=MissileLauncher;
 	turret=1;
-	range=700; //7km
+	range=700; //3.5km
 	weaponvelocity=180;
 	startvelocity=120;
 	weaponacceleration=40;
@@ -332,7 +333,7 @@
 	name=Surface to Air missile;
 	weapontype=MissileLauncher;
 	turret=1;
-	range=800; //8km
+	range=800; //4km
 	//trajectoryheight=.8;
 	weaponvelocity=280;
 	startvelocity=100;
@@ -363,7 +364,7 @@
 	name=Advanced Missile;
 	weapontype=MissileLauncher;
 	turret=1;
-	range=700; //7km
+	range=700; //3.5km
 	weaponvelocity=180;
 	startvelocity=120;
 	weaponacceleration=40;
@@ -396,7 +397,7 @@
 	weapontype=Cannon;
 	accuracy=10;
 	turret=1;
-	range=700; //7 km
+	range=900; //4.5 km
 	weaponvelocity=270;
 	RGBcolor=1 1 .2;
 	reloadtime=2;
@@ -424,7 +425,7 @@
 	weapontype=Cannon;
 	accuracy=30;
 	turret=1;
-	range=1500; //15 km
+	range=2400; //12 km
 	weaponvelocity=270;
 	RGBcolor=1 1 .2;
 	reloadtime=5;

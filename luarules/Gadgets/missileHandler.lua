@@ -1,6 +1,6 @@
 function gadget:GetInfo()
 	return {
-		name = "Missile Indicator",
+		name = "Missile Handler",
 		desc = "tracks and marks incoming missiles",
 		author = "KDR_11k (David Becker)",
 		date = "2009-09-08",
@@ -14,6 +14,9 @@ if (gadgetHandler:IsSyncedCode()) then
 
 --SYNCED
 local toTrack={}
+local semiactiveLaunch = {}
+local semiactiveMissiles = {}
+
 local gaia = Spring.GetGaiaTeamID()
 
 for i=1,#WeaponDefs do
@@ -22,8 +25,17 @@ for i=1,#WeaponDefs do
 	end
 end
 
-function MissileLaunch(u, ud, team, target)
+function MissileLaunch(u, ud, team, target, weaponNum)
 	toTrack[u]=target
+	
+	if not weaponNum then
+		return
+	end
+	local weaponID = UnitDefs[ud].weapons[weaponNum].weaponDef or -1
+	local wd = WeaponDefs[weaponID]
+	if wd and wd.customParams and wd.customParams.semiactive then
+		semiactiveLaunch[u] = weaponNum
+	end
 end
 GG.MissileLaunch = MissileLaunch
 
@@ -33,16 +45,35 @@ function gadget:ProjectileCreated(p,owner)
 		--if Spring.GetUnitTeam(owner) ~= gaia then
 		--	GG.MissilePhysics(p)
 		--end
+		if semiactiveLaunch[owner] then
+			semiactiveMissiles[p] = {owner = owner, target = toTrack[owner], num = semiactiveLaunch[owner]}
+		end
+		
 		toTrack[owner]=nil
+		semiactiveLaunch[owner]=nil
 	end
 end
 
 function gadget:ProjectileDestroyed(p)
 	SendToUnsynced("ProjDestroyed",p)
+	semiactiveMissiles[p] = nil
 end
 
 function gadget:Initialize()
 	gadgetHandler:RegisterGlobal("MissileLaunch",MissileLaunch)
+end
+
+function gadget:GameFrame()
+	for projID, data in pairs(semiactiveMissiles) do
+		local owner = data.owner
+		local target
+		if owner then
+			target = Spring.GetUnitCOBValue(owner,83,data.num)
+		end
+		if (not owner) or target ~= data.target then	-- lost lock or changed target
+			Spring.SetProjectileCollision(projID)
+		end
+	end
 end
 
 else
