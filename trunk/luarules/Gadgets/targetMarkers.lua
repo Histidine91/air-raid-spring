@@ -197,7 +197,7 @@ function gadget:DrawScreenEffects(vsx,vsy)
 							else
 								str = math.ceil(dist*scaleMult).." m"
 							end
-							gl.Text(str, ssize*size, -ssize*size, 14)
+							gl.Text(str, ssize*size + 1, -ssize*size, 14)
 						end
 						
 						-- health display
@@ -209,7 +209,7 @@ function gadget:DrawScreenEffects(vsx,vsy)
 						--name display
 						local ud = Spring.GetUnitDefID(u)
 						if dist < nameRange and UnitDefs[ud].customParams.label then
-							gl.Text(UnitDefs[ud].customParams.label,0,ssize*size,16,"c")
+							gl.Text(UnitDefs[ud].customParams.label,0,ssize*size + 1,16,"c")
 						end
 						gl.PopMatrix()
 					end

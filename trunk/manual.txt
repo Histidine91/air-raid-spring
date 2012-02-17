@@ -47,7 +47,7 @@ Multirole Missile - These missiles are designed to work against both air and gro
 
 Air to Air Missile - Significantly more agile than Multirole Missiles but sacrificing yield to gain this advantage. AAMs can be launched 4.5 km away from the target and are much more likely to score a hit in air to air combat. AAMs are usable against ground targets as well but their low yield makes this inadvisable against anything other than trucks.
 
-Longshot Missile - A unique missile carried by the F-41 Hawk-P, the Longshot boasts an excellent 6.25 km range with no loss in damage from the Air to Air Missile. It is however somewhat less agile than the AtA missile and use against laterally moving targets is discouraged.
+Longshot Missile - A unique missile carried by the F-41 Hawk-P, the Longshot boasts an unparalleled 8 km range and 66% more damage than the Air to Air missile. However, its semi-active guidance system requires the launching aircraft to maintain its lock on the target; the missile will self-destruct if this lock is lost at any point.
 
 ---------------------
 Likely enemy targets:

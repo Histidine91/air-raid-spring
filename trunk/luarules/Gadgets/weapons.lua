@@ -1,3 +1,6 @@
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 function gadget:GetInfo()
 	return {
 		name = "Weapons",
@@ -10,12 +13,77 @@ function gadget:GetInfo()
 	}
 end
 
-if (gadgetHandler:IsSyncedCode()) then
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--	HOW IT WORKS:
+--	Each missile/bomb/gunpod has a corresponding unitdef.
+--	At plane creation, the weapon "units" are created and glued to the unit,
+--	Imperator style.
+--		Weapon units are hold fire.
+--	When fire order is given at a target, pass the target to the weapon unit.
+--	Weapon unit is given an attack order to the target.
+--	Upon weapon release, weapon unit notifies gadget.
+--	Weapon unit is made invisible until reloading is complete.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
+local weapons = {
+	multirole = {
+		name = "Multirole",
+		reload = 10,
+		cone = 10,
+		range = 650,
+		unit = "wep_multirole"
+	},
+	airToAir = {
+		name = "Air to Air",
+		reload = 30,
+		cone = 20,
+		range = 900,
+		weaponDef = "airtoair", 
+	},		
+}
+
+local weaponPacks = {
+	multirole = {
+		{ type = "multirole", ammo = 2,},
+		{ type = "airToAir", ammo = 4,},		
+	},
+}
+
+local planeData = {
+	["f-81"] = {
+		points = {},
+		allowedPacks = {"multirole"},
+	},
+	gyrfalcon = {
+		points = {},
+		allowedPacks = {"multirole"},
+	},
+	hawkp = {
+		points = {},
+		allowedPacks = {"multirole"},
+	},
+}
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+if (gadgetHandler:IsSyncedCode()) then
 --SYNCED
 
 local planedata
 local teamplane
+
+local planeWeapons = {}
+
+
+local function CreateWeaponUnits()
+	local packName = "multirole"	-- TBD
+	for i=1,#weaponPacks[packName] do
+	
+	end
+end
 
 function HasAmmo(u, ud, team, wep)
 	return teamplane[team].ammo[wep].ammo
@@ -32,6 +100,8 @@ function UseGun(u, ud, team, amount)
 	return teamplane[team].gunammo
 end
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 function gadget:Initialize()
 	gadgetHandler:RegisterGlobal("HasAmmo",HasAmmo)
 	gadgetHandler:RegisterGlobal("UseAmmo",UseAmmo)
@@ -40,6 +110,21 @@ function gadget:Initialize()
 	teamplane=GG.teamplane
 end
 
+function gadget:UnitCreated(unitID, unitDefID, team)
+	local plane = teamplane[team] and teamplane[team].unit
+	if unitID == plane then
+		planeWeapons[unitID] = {}
+	end
+end
+
+
+function gadget:UnitDestroyed(unitID, unitDefID, team)
+	local plane = teamplane[team] and teamplane[team].unit
+	if unitID == plane then
+		planeWeapons[unitID] = {}
+		CreateWeaponUnits(unitID)
+	end
+end
 
 function gadget:GameFrame(f)
 	for team,p in pairs(teamplane) do
@@ -49,7 +134,6 @@ function gadget:GameFrame(f)
 		end
 	end
 end
-
 
 else
 
