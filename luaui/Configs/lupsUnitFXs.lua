@@ -19,16 +19,17 @@ effectUnitDefs = {
 	--{class='AirJet', options={color={0.1,0.4,0.6}, width=0.4, length=5, piece="thrust2"}},
   },   
   hawk = {
-    {class='Ribbon', options={width=0.4, size=12, piece="engine1"}},
+    {class='Ribbon', options={width=0.2, size=12, piece="wingtip1"}},
+    {class='Ribbon', options={width=0.2, size=12, piece="wingtip2"}},
 	--{class='AirJet', options={color={0.1,0.4,0.6}, width=0.2, length=2, piece="engine1", onActive=true,}},
   },
   hawkp = {
     --{class='Ribbon', options={width=0.4, size=12, piece="engine1"}},
-	--{class='AirJet', options={color={0.1,0.4,0.6}, width=0.2, length=2, piece="engine1"}},
+    --{class='AirJet', options={color={0.1,0.4,0.6}, width=0.2, length=2, piece="engine1"}}, 
   },  
   wasp = {
-    {class='Ribbon', options={width=0.4, size=12, piece="engine"}},
-	{class='AirJet', options={color={0.8,0.2,0.2}, width=0.2, length=2, piece="engine", onActive=true,}},
+    --{class='Ribbon', options={width=0.4, size=12, piece="engine"}},
+    --{class='AirJet', options={color={0.8,0.2,0.2}, width=0.2, length=2, piece="engine", onActive=true,}},
   },
   python = {
     {class='Ribbon', options={width=0.2, size=12, piece="gen1"}},
@@ -50,7 +51,7 @@ effectUnitDefs = {
 	{class='AirJet', options={color={0.1,0.4,0.6}, width=0.4, length=5, piece="thrust3", onActive=true,}},
 	{class='AirJet', options={color={0.1,0.4,0.6}, width=0.4, length=5, piece="thrust4", onActive=true,}},
 	{class='StaticParticles', options=MergeTable(blinkyLightRed, {piece="wingtip1"}) },
-	{class='StaticParticles', options=MergeTable(blinkyLightGreen, {piece="wingtip2"}) },	
+	{class='StaticParticles', options=MergeTable(blinkyLightGreen, {piece="wingtip2"}) },
   },
   aurora = {
 	{class='AirJet', options={color={0.8,0.2,0.2}, width=0.4, length=6, piece="exhaustl1", onActive=true,}},
@@ -58,10 +59,11 @@ effectUnitDefs = {
 	{class='AirJet', options={color={0.8,0.2,0.2}, width=0.4, length=6, piece="exhaustr1", onActive=true,}},
 	{class='AirJet', options={color={0.8,0.2,0.2}, width=0.4, length=6, piece="exhaustr2", onActive=true,}},
 	{class='StaticParticles', options=MergeTable(blinkyLightRed, {piece="wingtip1"}) },
-	{class='StaticParticles', options=MergeTable(blinkyLightGreen, {piece="wingtip2"}) },	
-  },  
+	{class='StaticParticles', options=MergeTable(blinkyLightGreen, {piece="wingtip2"}) },
+  },
   
- }
+}
+effectUnitDefs.aurorab = effectUnitDefs.aurora
 
 -- load presets from unitdefs
 for i=1,#UnitDefs do
