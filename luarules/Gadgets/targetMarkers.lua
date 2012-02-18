@@ -27,8 +27,9 @@ local scaleMult = 5	--elmos -> meter
 local dsize=36
 local ssize=30;
 local targetCutoff=2500;
-local nameRange=1500;
 local rangeInfoRange=2000;
+local nameRange=1500;
+local trackRange=800;
 local gunRange=350;
 local reticleSize=10;
 local arrowSize=10;
@@ -112,6 +113,11 @@ function ConeEnd(dist,angle)
 	end
 end
 
+function LaserSight(dist)
+		gl.Vertex(0,0,10)
+		gl.Vertex(0,0,dist)
+end
+
 function Diamond(size)
 	gl.Vertex(0,dsize*size,0)
 	gl.Vertex(dsize*size,0,0)
@@ -158,9 +164,11 @@ function gadget:DrawScreenEffects(vsx,vsy)
 		local cx,cy,cz=Spring.GetUnitPosition(p.unit)
 		for _,u in ipairs(Spring.GetUnitsInSphere(cx,cy,cz,targetCutoff)) do
 			local uteam = Spring.GetUnitTeam(u)
-			if u ~= p.unit then
+			local ud = Spring.GetUnitDefID(u)
+			if u ~= p.unit and not UnitDefs[ud].customParams.isweapon then
 				local dist = Spring.GetUnitSeparation(p.unit,u)
 				local size = (baseDistance/(dist^0.5)) or 1
+				local isTarget = (p.target ~= -1 and p.target == u)
 				if dist < targetCutoff then
 					local x,y,z = Spring.GetUnitPosition(u)
 					local sx,sy,sz=Spring.WorldToScreenCoords(x,y,z)
@@ -168,12 +176,12 @@ function gadget:DrawScreenEffects(vsx,vsy)
 					--	Spring.Echo(sx,sy,sz)
 					--	echoFreq = 0
 					--end
-					local mark = true	-- add indicator arrows if offscreen
+					local isAllied = false
 					if sz<1 then	-- in front of us
 						-- team coloration
 						if Spring.AreTeamsAllied(team, uteam) then
 							gl.Color(0.1,0.25,1,1)
-							mark = false
+							isAllied = true
 						else
 							gl.Color(0,1,0,1)
 						end
@@ -190,7 +198,7 @@ function gadget:DrawScreenEffects(vsx,vsy)
 						end
 						
 						-- range display
-						if (dist < rangeInfoRange) or (p.target ~= -1 and p.target == u) then
+						if ((dist < rangeInfoRange) or isTarget) and not isAllied then
 							local str
 							if dist > 400 then
 								str = ("%.1f"):format(dist/(1000/scaleMult)).." km"
@@ -207,17 +215,16 @@ function gadget:DrawScreenEffects(vsx,vsy)
 						end
 						
 						--name display
-						local ud = Spring.GetUnitDefID(u)
-						if dist < nameRange and UnitDefs[ud].customParams.label then
+						if ((dist < nameRange) or isTarget) and UnitDefs[ud].customParams.label then
 							gl.Text(UnitDefs[ud].customParams.label,0,ssize*size + 1,16,"c")
 						end
 						gl.PopMatrix()
 					end
 					
 					-- mark directions of enemy aircraft out of our line of sight
-					if mark then
-						local udef = UnitDefs[Spring.GetUnitDefID(u)]
-						if dist < nameRange and (udef.canFly or udef.customParams.playable) and not Spring.IsUnitInView(u) then
+					if not isAllied then
+						local udef = UnitDefs[ud]
+						if dist < trackRange and (udef.canFly or udef.customParams.playable) and not Spring.IsUnitInView(u) then
 							local midx, midy = vsx/2, vsy/2
 							local dx, dy = sx-midx, sy-midy	
 							if sz >= 1 then
@@ -269,6 +276,9 @@ function gadget:DrawWorld()
 			gl.Color(1,0,0,1)
 		end
 		gl.BeginEnd(GL.LINES,ConeEnd,SYNCED.planedata[p.ud].ammo[p.currentweapon].range,SYNCED.planedata[p.ud].ammo[p.currentweapon].cone)
+
+		--gl.Color(1,0,0,0.5)
+		--gl.BeginEnd(GL.LINES,LaserSight,gunRange)
 		gl.PopMatrix()
 		
 		gl.Color(1,1,1,1)

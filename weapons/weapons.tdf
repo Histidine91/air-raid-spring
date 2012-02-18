@@ -1,5 +1,5 @@
 [gun]{
-	name=30mm Vulcan;
+	name=25mm Vulcan;
 	weapontype=LaserCannon;
 	turret=1;
 	range=350; //1.75km
@@ -8,8 +8,8 @@
 	thickness=.05;
 	RGBcolor=1 1 .2;
 	sprayangle=100;
-	projectiles=4;
-	reloadtime=.01;
+	projectiles=2;	// NOTE: controlled by script
+	reloadtime=.03;
 	canattackground=false;
 	avoidfriendly=0;
 	tolerance=0;
@@ -19,7 +19,7 @@
 	explosiongenerator=custom:gun_explo;
 	//soundhit=lightinterceptorfire;
 	[DAMAGE]{
-		default=30;
+		default=22;
 	}
 	[customparams] {
 		ap=20;
@@ -113,7 +113,7 @@
 	burnblow=1;
 	alwaysvisible=1;
 	[damage]{
-		default=200;
+		default=205;
 	}
 	[customparams] {
 		ap=20;
@@ -291,7 +291,7 @@
 	explosiongenerator=custom:gun_explo;
 	//soundhit=lightinterceptorfire;
 	[DAMAGE]{
-		default=15;
+		default=16;
 	}
 	[customparams] {
 		ap=15;
