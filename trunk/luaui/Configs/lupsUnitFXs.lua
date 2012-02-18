@@ -43,7 +43,7 @@ effectUnitDefs = {
 	--{class='AirJet', options={color={0.1,0.4,0.6}, width=0.4, length=5, piece="thrust3"}},
 	--{class='AirJet', options={color={0.1,0.4,0.6}, width=0.4, length=5, piece="thrust4"}},
 	{class='StaticParticles', options=MergeTable(blinkyLightRed, {piece="wingtip1"}) },
-	{class='StaticParticles', options=MergeTable(blinkyLightGreen, {piece="wingtip2"}) },	
+	{class='StaticParticles', options=MergeTable(blinkyLightGreen, {piece="wingtip2"}) },
   },
   destinye = {
 	{class='AirJet', options={color={0.1,0.4,0.6}, width=0.4, length=5, piece="thrust1", onActive=true,}},

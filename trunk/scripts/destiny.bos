@@ -17,10 +17,10 @@ lua_MissileLaunch() {
 }
 
 Create() {
-	turn wingtip1 to y-axis <90> now;
-	turn wingtip2 to y-axis <90> now;
-	call-script lua_AddTrail(wingtip1,10,50,1);
-	call-script lua_AddTrail(wingtip2,10,50,1);
+	//turn wingtip1 to y-axis <90> now;
+	//turn wingtip2 to y-axis <90> now;
+	//call-script lua_AddTrail(wingtip1,10,50,1);
+	//call-script lua_AddTrail(wingtip2,10,50,1);
 }
 
 QueryWeapon1(p) {
