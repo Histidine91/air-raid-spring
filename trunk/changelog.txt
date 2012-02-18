@@ -9,6 +9,7 @@ Air Raid Plus v1.0
  - Added a keyboard control scheme
  - Fixed controls being wrong after an Immelmann/split-S
  - There are now four game modes: Raid (classic), Dogfight (PvP), Dogfight Plus (includes the neutral enemies of Raid), and Intercept (10-wave survival air-to-air combat)
+ - Nerfed cannnon a bit (still shreds pretty much anything with a good burst)
  - Feature removal is now a modoption (default off)
  - HUD: Added a range indicator, nearby (offscreen) aircraft indicator, altimeter, speed indicator
  - Added a few new enemies
