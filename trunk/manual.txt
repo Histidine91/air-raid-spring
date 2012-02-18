@@ -41,7 +41,7 @@ F-41 Hawk-P: A variant of a fighter commonly used by the enemy forces, this inte
 ------------------
 Weapons
 ------------------
-30mm Gatling Gun - A simple gun that fires at a rate of 3600RPM and can strike a target at a range of up to 1750 meters. Sustained fire from the weapon can destroy almost any target in less than a second but the short range and lack of guidance limit it to a secondary role in most engagements.
+25mm Vulcan - A simple gun that fires at a rate of 3600RPM and can strike a target at a range of up to 1750 meters. Sustained fire from the weapon can destroy almost any target in less than a second but the short range and lack of guidance limit it to a secondary role in most engagements.
 
 Multirole Missile - These missiles are designed to work against both air and ground targets, they carry a significant yield that is effective even against heavy armor and will practically vaporize a plane but their agility is limited so a hit in aerial combat requires a good opportunity. Multirole Missiles can hit targets up to 3000 meters away.
 

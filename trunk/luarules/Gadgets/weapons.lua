@@ -27,63 +27,15 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local weapons = {
-	multirole = {
-		name = "Multirole",
-		reload = 10,
-		cone = 10,
-		range = 650,
-		unit = "wep_multirole"
-	},
-	airToAir = {
-		name = "Air to Air",
-		reload = 30,
-		cone = 20,
-		range = 900,
-		weaponDef = "airtoair", 
-	},		
-}
-
-local weaponPacks = {
-	multirole = {
-		{ type = "multirole", ammo = 2,},
-		{ type = "airToAir", ammo = 4,},		
-	},
-}
-
-local planeData = {
-	["f-81"] = {
-		points = {},
-		allowedPacks = {"multirole"},
-	},
-	gyrfalcon = {
-		points = {},
-		allowedPacks = {"multirole"},
-	},
-	hawkp = {
-		points = {},
-		allowedPacks = {"multirole"},
-	},
-}
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
 if (gadgetHandler:IsSyncedCode()) then
+--------------------------------------------------------------------------------
 --SYNCED
+--------------------------------------------------------------------------------
 
 local planedata
 local teamplane
 
 local planeWeapons = {}
-
-
-local function CreateWeaponUnits()
-	local packName = "multirole"	-- TBD
-	for i=1,#weaponPacks[packName] do
-	
-	end
-end
 
 function HasAmmo(u, ud, team, wep)
 	return teamplane[team].ammo[wep].ammo
@@ -110,21 +62,6 @@ function gadget:Initialize()
 	teamplane=GG.teamplane
 end
 
-function gadget:UnitCreated(unitID, unitDefID, team)
-	local plane = teamplane[team] and teamplane[team].unit
-	if unitID == plane then
-		planeWeapons[unitID] = {}
-	end
-end
-
-
-function gadget:UnitDestroyed(unitID, unitDefID, team)
-	local plane = teamplane[team] and teamplane[team].unit
-	if unitID == plane then
-		planeWeapons[unitID] = {}
-		CreateWeaponUnits(unitID)
-	end
-end
 
 function gadget:GameFrame(f)
 	for team,p in pairs(teamplane) do

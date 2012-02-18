@@ -89,6 +89,7 @@ function gadget:UnitCreated(u, ud, team)
 			Spring.MoveCtrl.Enable(u)
 			local x,y,z=Spring.GetUnitPosition(u)
 			Spring.MoveCtrl.SetPosition(u,x,y+30,z)
+			SendToUnsynced("PlaneCreated", u, team)
 		else
 			--Spring.Echo("ERROR: Non-playable plane assigned to player team!")
 		end
@@ -97,7 +98,7 @@ end
 
 function gadget:UnitDestroyed(u,ud,team)
 	if teamplane[team] and teamplane[team].unit == u then
-		SendToUnsynced("PlaneDestroyed", team)
+		SendToUnsynced("PlaneDestroyed", u, team)
 		teamplane[team]=nil
 	end
 end
@@ -250,8 +251,9 @@ end
 else
 
 --UNSYNCED
-local camDist=2
-local camHeight=0
+local baseDelta = 1.2
+local camDist=5
+local camHeight=1
 local jetSoundLength = 14
 
 local gameFrame = 0
@@ -267,13 +269,24 @@ local function ResetCamera()
 	cam.vx=0
 	cam.vy=0
 	cam.vz=0
-	Spring.SetCameraState(cam,1)
+	Spring.SetCameraState(cam,0.2)
 	lastUpdate = 0
 end
 
-function PlaneDestroyed(_,team)
+function PlaneDestroyed(_,unitID, team)
 	if team == Spring.GetMyTeamID() then
 		ResetCamera()
+		if (Script.LuaUI('PlaneDestroyed')) then
+			Script.LuaUI.PlaneDestroyed(unitID, team)
+		end
+	end
+end
+
+function PlaneCreated(_,unitID, team)
+	if team == Spring.GetMyTeamID() then
+		if (Script.LuaUI('PlaneCreated')) then
+			Script.LuaUI.PlaneCreated(unitID, team)
+		end
 	end
 end
 
@@ -282,11 +295,13 @@ end
 
 function gadget:Initialize()
 	gadgetHandler:AddSyncAction("controls_GameFrame", GameFrame)
+	gadgetHandler:AddSyncAction("PlaneCreated", PlaneCreated)
 	gadgetHandler:AddSyncAction("PlaneDestroyed", PlaneDestroyed)
 end
 
 function gadget:Shutdown()
 	gadgetHandler:RemoveSyncAction("controls_GameFrame")
+	gadgetHandler:RemoveSyncAction("PlaneCreated")
 	gadgetHandler:RemoveSyncAction("PlaneDestroyed")
 end
 
@@ -294,6 +309,7 @@ function gadget:Update()
 	local p=SYNCED.teamplane[Spring.GetMyTeamID()]
 	if p then
 		local cam=Spring.GetCameraState()
+		local oldcam = cam
 		local x,y,z=Spring.GetUnitPosition(p.unit)
 		cam.px = x - math.sin(p.yaw) *(math.cos(p.pitch))*camDist
 		cam.pz = z - math.cos(p.yaw) *(math.cos(p.pitch))*camDist
@@ -302,7 +318,10 @@ function gadget:Update()
 		cam.ry=p.yaw
 		cam.rz=p.roll
 		cam.mode=4
-		Spring.SetCameraState(cam,1)
+		
+		local delta = ((cam.px - oldcam.px)^2 + (cam.py - oldcam.py)^2 + (cam.pz - oldcam.pz)^2)^0.5
+		if delta <= 0 then delta = 1 end
+		Spring.SetCameraState(cam,baseDelta/delta)
 	end
 end
 

@@ -50,7 +50,7 @@ local optionData = {
 		selector = "F-81 Arrowhead",
 		tooltip =	"Multirole fighter with good performance.\n"..
 					"Armament:\n"..
-					"\t"..color.red.."30mm Vulcan\008 x 1500\n"..
+					"\t"..color.red.."25mm Vulcan\008 x 1500\n"..
 					"\t"..color.blue.."Air-to-Air Missile\008 x 2\n"..
 					"\t"..color.orange.."Multirole Missile\008 x 4",
 		button = function()
@@ -66,7 +66,7 @@ local optionData = {
 		selector ="F-37 Gyrfalcon",
 		tooltip =	"Air superiority fighter with superior mobility but light armor."..
 					"\nArmament:\n"..
-					"\t"..color.red.."30mm Vulcan\008 x 1200\n"..
+					"\t"..color.red.."25mm Vulcan\008 x 1200\n"..
 					"\t"..color.blue.."Air-to-Air Missile\008 x 4\n"..
 					"\t"..color.orange.."Multirole Missile\008 x 2",
 		button = function() 
@@ -82,7 +82,7 @@ local optionData = {
 		selector = "F-41 Hawk-P",
 		tooltip =	"Fast interceptor retrofitted with guns."..
 					"\nArmament:\n"..
-					"\t"..color.red.."30mm Vulcan\008 x 1200\n"..
+					"\t"..color.red.."25mm Vulcan\008 x 1200\n"..
 					"\t"..color.teal.."Longshot Missile\008 x 4",
 		button = function() 
 			Spring.SendLuaRulesMsg("plane:hawkp")
