@@ -63,7 +63,11 @@ function gadget:Initialize()
 	gadgetHandler:RegisterGlobal("MissileLaunch",MissileLaunch)
 end
 
-function gadget:GameFrame()
+function gadget:Shutdown()
+	gadgetHandler:DeregisterGlobal("MissileLaunch")
+end
+
+function gadget:GameFrame(f)
 	for projID, data in pairs(semiactiveMissiles) do
 		local owner = data.owner
 		local target

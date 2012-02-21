@@ -1,0 +1,63 @@
+[UNITINFO]
+{
+	Name=Cluster Bomb;
+	Unitname=wep_clusterbomb;
+	Description=;
+
+	// Required Tags
+	power=1;
+	mass=30;
+	Category=WEAPON;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=10;
+	idleTime=0;
+	idleAutoHeal=0;
+	ObjectName=gpbomb.s3o;
+	Side=ALL;
+	collisionVolumeScales=0, 0, 0;
+
+	// Movement
+	canFly=1;
+	cruiseAlt=80;
+	BrakeRate=1.5;
+	Acceleration=.38;
+	MaxRudder=.03;
+	MaxAileron=.06;
+	MaxElevator=.09;
+	TurnRadius=150;
+	maxAcc=.28;
+	CanMove=1;
+	MaxVelocity=9;
+	collide=0;
+	canCrash=0;
+	//hoverAttack=1;
+	turnRate=1200;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Abilities
+	CanAttack=1;
+	CanStop=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+
+	// Weapons
+	Weapon1=clusterbomb_sub;
+
+	// Misc
+	SmoothAnim=0;
+	Script=wep_clusterbomb.lua;
+
+	[customParams] {
+		isweapon=1;
+	}
+}
