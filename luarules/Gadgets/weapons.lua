@@ -36,21 +36,25 @@ local planedata
 local teamplane
 
 local planeWeapons = {}
+GG.Weapon = {}
 
 function HasAmmo(u, ud, team, wep)
 	return teamplane[team].ammo[wep].ammo
 end
+GG.Weapon.HasAmmo = HasAmmo
 
 function UseAmmo(u, ud, team, wep)
 	teamplane[team].ammo[wep].ammo = math.max(0,teamplane[team].ammo[wep].ammo - 1)
 	return 1
 end
+GG.Weapon.UseAmmo = UseAmmo
 
 function UseGun(u, ud, team, amount)
 	teamplane[team].gunammo = math.max(0,teamplane[team].gunammo -amount)
 	SendToUnsynced("GunShot",team)
 	return teamplane[team].gunammo
 end
+GG.Weapon.UseGun = UseGun
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
