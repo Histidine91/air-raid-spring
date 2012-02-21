@@ -24,7 +24,7 @@ local deadzone=.05
 local THROTTLE_INCREMENT = 0.05
 
 function ChangeControls()
-	widgetHandler:RemoveWidget("Controls (default)")
+	Spring.SendCommands("luaui disablewidget Controls (default)")
 end
 
 function widget:Initialize()

@@ -39,9 +39,8 @@ local pitch_increment = 0.45
 local roll_increment = 0.025
 
 function ChangeControls()
-	widgetHandler:RemoveWidget("Controls (keyboard)")
+	Spring.SendCommands("luaui disablewidget Controls (keyboard)")
 end
-
 
 function widget:Initialize()
         vsx,vsy=Spring.GetViewGeometry()
