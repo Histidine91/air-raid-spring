@@ -47,9 +47,22 @@ function widget:UnitCreated(u,ud,team)
 	end
 end
 
+local function ResetState()
+	state = {
+		pitch=0,
+		yaw=0,
+		roll=0,
+		throttle=0.5,
+		buttons={[0]=0,[1]=0,[2]=0,[3]=0},
+		target=nil,
+	}
+	WG.controlstate = state
+end
+
 function widget:UnitDestroyed(u,ud,team)
 	if u == WG.hasPlane then
 		WG.hasPlane=nil
+		ResetState()
 	end
 end
 
