@@ -34,6 +34,7 @@ if (gadgetHandler:IsSyncedCode()) then
 local function AddTrail(u,ud,team,piece,width,ttl,rate)
 	SendToUnsynced("Add",u,ud,team,piece,width,ttl,rate)
 end
+GG.AddTrail = AddTrail
 
 local function RemoveTrail(u, ud, team, piece)
 	SendToUnsynced("Remove",u,ud,team,spGetUnitScriptPiece(u,piece))

@@ -85,6 +85,8 @@ function gadget:UnitCreated(u, ud, team)
 				currentspeed=0,
 				wantedspeed=0,
 				velocity={0,0,0},
+				
+				env = Spring.UnitScript.GetScriptEnv(u)
 			}
 			Spring.MoveCtrl.Enable(u)
 			local x,y,z=Spring.GetUnitPosition(u)
@@ -115,12 +117,24 @@ function gadget:RecvLuaMsg(msg,player)
 			p.controlyaw=interpret[3]/127
 			p.throttle=interpret[4]/100
 			if interpret[5+B_Gun]==1 then
-				Spring.CallCOBScript(p.unit,"StartGun",0)
+				if p.env then
+					Spring.UnitScript.CallAsUnit(p.unit, p.env.StartGun)
+				else
+					Spring.CallCOBScript(p.unit,"StartGun",0)
+				end
 			elseif interpret[5+B_Gun]==-1 then
-				Spring.CallCOBScript(p.unit,"StopGun",0)
+				if p.env then
+					Spring.UnitScript.CallAsUnit(p.unit, p.env.StopGun)
+				else
+					Spring.CallCOBScript(p.unit,"StopGun",0)
+				end
 			end
 			if interpret[5+B_Missile]==1 then
-				Spring.CallCOBScript(p.unit,"UnlockWeapon",0,p.currentweapon)
+				if p.env then
+					Spring.UnitScript.CallAsUnit(p.unit, p.env.UnlockWeapon,p.currentweapon)
+				else
+					Spring.CallCOBScript(p.unit,"UnlockWeapon",0,p.currentweapon)
+				end
 			end
 			if interpret[5+B_NextWeapon]==1 then
 				teamplane[team].currentweapon = teamplane[team].currentweapon +1
