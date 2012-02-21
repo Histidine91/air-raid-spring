@@ -21,6 +21,10 @@ local vsx=0
 local vsy=0
 local deadzone=.05
 
+function ChangeControls()
+	Spring.SendCommands("luaui disablewidget Controls (pointer-based)")
+end
+
 function widget:Initialize()
 	vsx,vsy=Spring.GetViewGeometry()
 	if WG.ChangeControls then
