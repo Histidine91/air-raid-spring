@@ -1,5 +1,6 @@
 startUnits = {
 	['f-81'] = "f-81",
+	['f-81_2'] = "f-81_2",
 	gyrfalcon = "gyrfalcon",
 	hawkp = "hawkp",
 	destiny = "destiny",

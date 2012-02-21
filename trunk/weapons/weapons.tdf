@@ -404,7 +404,7 @@
 	avoidfriendly=0;
 	tolerance=3500;
 	soundtrigger=1;
-	areaofeffect=6;
+	areaofeffect=16;
 	explosiongenerator=custom:gun_explo;
 	soundstart=emediumtankfire2;
 	soundhit=emediumtankfire2;
@@ -416,7 +416,7 @@
 		default=150;
 	}
 	[customparams] {
-		ap=50;
+		ap=40;
 	}		
 }
 
@@ -432,7 +432,7 @@
 	avoidfriendly=0;
 	tolerance=3500;
 	soundtrigger=1;
-	areaofeffect=24;
+	areaofeffect=48;
 	explosiongenerator=custom:bomb_hit_40;
 	soundstart=unitexplodemedium;
 	soundhit=unitexplodemedium;

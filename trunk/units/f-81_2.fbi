@@ -1,0 +1,93 @@
+[UNITINFO]
+{
+	Name=F-81 Arrowhead;
+	Unitname=f-81_2;
+	Description=Multirole Fighter;
+
+	// Required Tags
+	Category=VTOL FIGHTER PLAYER;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=400;
+	idleautoheal=0;
+	mass=9000;
+	power=1000;
+	ObjectName=f-81.s3o;
+
+	// Movement
+	CanMove=1;
+	MaxVelocity=2;
+	MovementClass=TANK;	
+	myGravity=0.000000000000000000000001;
+	//MaxRudder=.01;
+	//MaxAileron=.03;
+	//MaxElevator=.03;
+	//CanFly=1;
+	CruiseAlt=100;
+	hoverattack=1;
+
+	LevelGround=0;
+
+	// Abilities
+	CanStop=1;
+	SelfDestructCountdown=1;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=0;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=gun;
+	WeaponMainDir1=0 0 1;
+	MaxAngleDif1=0;	
+	Weapon2=fuelairbomb;
+	Weapon3=airtoair;
+	WeaponMainDir3=0 0 1;
+	MaxAngleDif3=20;
+	ExplodeAs=airdeath;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+	//Script=f-81_2.lua;	
+	iconType=stealthfighter;
+
+	[SFXTypes]
+	{
+		explosionGenerator0=custom:air_explo;
+	}
+	[customparams] {
+		playable=1;
+		gunammo=1500;
+
+		ammo1=2;
+		reload1=30;
+		cone1=64;
+		dist1=300;
+		name1=Fuel-Air;
+                isbomb1=1;
+
+		ammo2=2;
+		reload2=30;
+		cone2=20;
+		dist2=900;
+		name2=Air to Air;
+
+		rollrate=180;
+		climbrate=70;
+		rudderrate=10;
+		speed=2.75;
+		minspeed=1.2;
+
+		trailtex=bitmaps/trail.png;
+		trailr=.3;
+		trailg=.3;
+		trailb=.3;
+		trailalpha=1;
+		label=F-81;
+	}
+}

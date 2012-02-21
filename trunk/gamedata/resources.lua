@@ -71,7 +71,7 @@ local resources={
 				lightning="lightning.tga",
 				burncircle="BurnCircle.tga",
 				
-				
+				orangesmoke3= "gpl/smoke_orange.png",
 			},
 		},
 	}

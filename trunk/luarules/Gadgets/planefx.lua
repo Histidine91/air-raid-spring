@@ -21,7 +21,7 @@ if (gadgetHandler:IsSyncedCode()) then
 --------------------------------------------------------------------------------
 local fxNames = {
 	["f-81"] = {
-		--engine = "missiletrailred",
+		engine = "missiletrailred",
 	},
 }
 
@@ -57,7 +57,7 @@ function gadget:GameFrame(n)
 			for pieceName, ceg in pairs(fxMap[p.ud]) do
 				local pieceNum = pieceMap[p.unit][pieceName]
 				local x,y,z,dx,dy,dz = Spring.GetUnitPiecePosDir(p.unit, pieceNum)		
-				Spring.SpawnCEG("custom:"..ceg, x,y,z,dx,dy,dz,20,powerThisFrame)
+				Spring.SpawnCEG(ceg, x,y,z,dx,dy,dz,20,powerThisFrame)
 			end
 			
 			power[team] = powerThisFrame

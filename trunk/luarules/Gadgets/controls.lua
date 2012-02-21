@@ -38,6 +38,7 @@ function gadget:Initialize()
 					cone=c["cone"..i]/360*pi,
 					range=tonumber(c["dist"..i]),
 					name=c["name"..i],
+                                        isbomb=c["isbomb"..i],
 				}
 				i=i+1
 			end
@@ -85,6 +86,8 @@ function gadget:UnitCreated(u, ud, team)
 				currentspeed=0,
 				wantedspeed=0,
 				velocity={0,0,0},
+                                target=nil, -- set by targetmarker gadget for some reason
+                                wantedtarget=nil,
 				
 				env = Spring.UnitScript.GetScriptEnv(u)
 			}
@@ -103,6 +106,11 @@ function gadget:UnitDestroyed(u,ud,team)
 		SendToUnsynced("PlaneDestroyed", u, team)
 		teamplane[team]=nil
 	end
+        for team,data in pairs(teamplane) do
+            if data.wantedtarget == u then
+                data.wantedtarget = nil
+            end
+        end
 end
 
 function gadget:RecvLuaMsg(msg,player)
@@ -130,11 +138,13 @@ function gadget:RecvLuaMsg(msg,player)
 				end
 			end
 			if interpret[5+B_Missile]==1 then
-				if p.env then
-					Spring.UnitScript.CallAsUnit(p.unit, p.env.UnlockWeapon,p.currentweapon)
-				else
-					Spring.CallCOBScript(p.unit,"UnlockWeapon",0,p.currentweapon)
-				end
+                                if p.wantedtarget == p.target then
+                                    if p.env then
+                                            Spring.UnitScript.CallAsUnit(p.unit, p.env.UnlockWeapon,p.currentweapon)
+                                    else
+                                            Spring.CallCOBScript(p.unit,"UnlockWeapon",0,p.currentweapon)
+                                    end
+                                end
 			end
 			if interpret[5+B_NextWeapon]==1 then
 				teamplane[team].currentweapon = teamplane[team].currentweapon +1
@@ -150,6 +160,7 @@ function gadget:RecvLuaMsg(msg,player)
 			end
 			if #data>8 then
 				local target = VFS.UnpackU32(data:sub(9,#data))
+                                teamplane[team].wantedtarget = target
 				Spring.GetUnitCOBValue(teamplane[team].unit, 106,teamplane[team].currentweapon+1,target)
 			end
 
@@ -265,7 +276,7 @@ end
 else
 
 --UNSYNCED
-local baseDelta = 1.2
+local baseDelta = 1.05
 local camDist=5
 local camHeight=1
 local jetSoundLength = 14
