@@ -43,10 +43,10 @@
 	MaxAngleDif1=0;		
 	Weapon2=multirole;
 	WeaponMainDir2=0 0 1;
-	MaxAngleDif2=20;
+	MaxAngleDif2=30;
 	Weapon3=tacnuke;
 	WeaponMainDir3=0 0 1;
-	MaxAngleDif3=15;
+	MaxAngleDif3=30;
 	ExplodeAs=airdeath;
 
 	// Tracks/Flares
@@ -67,15 +67,17 @@
 
 		ammo1=8;
 		reload1=10;
-		cone1=20;
-		dist1=650;
+		cone1=30;
+		dist1=600;
 		name1=Multirole;
 
 		ammo2=1;
 		reload2=50;
-		cone2=15;
-		dist2=500;
+		cone2=30;	//300;
+		dist2=700;
 		name2=Tacnuke;
+		//isbomb2=1;
+		//dumbfire2=1;
 
 		rollrate=80;
 		climbrate=40;

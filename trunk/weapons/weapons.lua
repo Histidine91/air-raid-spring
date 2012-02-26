@@ -151,5 +151,32 @@ return {
                 soundHitVolume          = 5,
 		soundStart              = [[bomb_drop]],
 		weaponType              = [[AircraftBomb]],
-	},        
+	},
+	tacnuke = {
+		name                    = [[Tactical Nuclear Bomb]],
+		areaOfEffect            = 300,
+		commandfire             = false,
+		craterBoost             = 0,
+		craterMult              = 0,
+		
+		customParams        	  = {
+			ap	= "60",
+		},
+		
+		damage                  = {
+			default = 7500,
+		},
+		
+		dropped                 = true,
+		edgeEffectiveness       = 0.75,
+		explosionGenerator      = [[custom:nuke_150]],
+		manualBombSettings      = true,
+		model                   = [[tacnuke.s3o]],
+		range                   = 100,
+		reloadtime              = 4,
+		soundHit                = [[bombhit]],
+                soundHitVolume          = 5,
+		soundStart              = [[bomb_drop]],
+		weaponType              = [[AircraftBomb]],
+	},            
 }

@@ -154,14 +154,14 @@
 	}		
 }
 
-[tacnuke]{
+[tacnukem]{
 	name=Tactical Nuclear Missile;
 	weapontype=MissileLauncher;
 	turret=1;
-	range=500; //2.5km
-	weaponvelocity=180;
+	range=700; //3.5km
+	weaponvelocity=240;
 	startvelocity=40;
-	weaponacceleration=60;
+	weaponacceleration=80;
 	flighttime=15;
 	reloadtime=1;
 	avoidfriendly=0;
@@ -179,7 +179,7 @@
 	craterFactor=0;
 	alwaysvisible=1;
 	[damage]{
-		default=6000;
+		default=7500;
 	}
 	[customparams] {
 		ap=60;
