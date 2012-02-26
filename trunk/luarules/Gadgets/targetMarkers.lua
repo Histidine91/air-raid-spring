@@ -43,6 +43,12 @@ local baseDistance = 500^0.5
 
 local minidiamond, diamond, square, reticle
 
+local colors = {
+	blue = {0, 0, 1, 1},
+	green = {0, 1, 0, 1},
+	red = {1, 0, 0, 1},
+}
+
 local function GetQuadrant(x, y)
 	if x > 0 then
 		return y > 0 and 1 or 4
@@ -179,6 +185,7 @@ function gadget:DrawScreenEffects(vsx,vsy)
 				local size = (baseDistance/(dist^0.5)) or 1
 				local isTarget = (p.target ~= -1 and p.target == u)
 				local isWantedTarget = (p.wantedtarget == u)
+				local color = colors.green
 				if dist < targetCutoff then
 					local x,y,z = Spring.GetUnitPosition(u)
 					local sx,sy,sz=Spring.WorldToScreenCoords(x,y,z)
@@ -190,25 +197,23 @@ function gadget:DrawScreenEffects(vsx,vsy)
 					if sz<1 then	-- in front of us
 						-- team coloration
 						if Spring.AreTeamsAllied(team, uteam) then
-							gl.Color(0.1,0.25,1,1)
+							color = colors.blue
 							isAllied = true
-						else
-							gl.Color(0,1,0,1)
 						end
-						
+						gl.Color(color)
 						gl.PushMatrix()
 						gl.Translate(sx,sy,0)
 						
 						-- target square
 						--gl.CallList(diamond)
 						if isTarget and isWantedTarget then
-							gl.Color(1,0,0,1)
+							gl.Color(colors.red)
 						end
 						gl.BeginEnd(GL.LINE_LOOP,Square,size)
-						gl.Color(0,1,0,1)
+						gl.Color(color)
 						
 						-- "in gun range" marker
-						if dist < gunRange then
+						if (dist < gunRange) and not isAllied then
 							--gl.CallList(minidiamond)
 							gl.BeginEnd(GL.LINE_LOOP,MiniDiamond,size)
 						end

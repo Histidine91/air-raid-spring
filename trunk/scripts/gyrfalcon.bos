@@ -27,19 +27,12 @@ QueryWeapon1(p) {
 	p=gun;
 }
 
+
 QueryWeapon2(p) {
 	p = m1 + mrm;
 }
 
 AimWeapon2() {
-	return 1;
-}
-
-QueryWeapon3(p) {
-	p = m1 + aam;
-}
-
-AimWeapon3() {
 	return 1;
 }
 
@@ -50,6 +43,20 @@ Shot2() {
 	call-script lua_UseAmmo(1);
 }
 
+BlockShot2(target,block) {
+	call-script lua_HasAmmo(1);
+	block = (unlock != 1) || (!get LUA1);
+}
+
+
+QueryWeapon3(p) {
+	p = m1 + aam;
+}
+
+AimWeapon3() {
+	return 1;
+}
+
 Shot3() {
 	mrm= !mrm;
 	call-script lua_MissileLaunch(get TARGET_ID(3), 3);
@@ -57,15 +64,31 @@ Shot3() {
 	call-script lua_UseAmmo(2);
 }
 
-BlockShot2(target,block) {
-	call-script lua_HasAmmo(1);
-	block = (unlock != 1) || (!get LUA1);
-}
-
 BlockShot3(target,block) {
 	call-script lua_HasAmmo(2);
 	block = (unlock != 2) || (!get LUA1);
 }
+
+QueryWeapon4(p) {
+	p = m1 + aam;
+}
+
+AimWeapon4() {
+	return 1;
+}
+
+Shot4() {
+	mrm= !mrm;
+	call-script lua_MissileLaunch(get TARGET_ID(4), 4);
+	unlock=0;
+	call-script lua_UseAmmo(3);
+}
+
+BlockShot4(target,block) {
+	call-script lua_HasAmmo(3);
+	block = (unlock != 3) || (!get LUA1);
+}
+
 
 StartGun() {
 	signal SIG_Gun;
@@ -94,6 +117,9 @@ UnlockWeapon(num) {
 	else if (num==2) {
 		unlock = 2;
 	}
+	else if (num==3) {
+		unlock = 3;
+	}	
 	sleep 500;
 	unlock = 0;
 }
