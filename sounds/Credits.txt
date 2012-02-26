@@ -1,6 +1,8 @@
-jet.wav: Scorched 3D
+jet.wav, cannon_fire5: Scorched 3D (GPL)
 
 bomb_drop: Kanoba
+
+cannon_fire4: Golgotha
 
 Sounds from Evolution RTS by Forboding Angel, CC-SA-NC 3.0 except:
 missile warning.wav
