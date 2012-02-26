@@ -35,7 +35,7 @@
 	startvelocity=50;
 	weaponacceleration=100;
 	flighttime=6;
-	reloadtime=2;
+	reloadtime=1;
 	avoidfriendly=0;
 	tolerance=200;
 	areaofeffect=30;
@@ -57,6 +57,7 @@
 		ap=10;
 	}		
 }
+
 [multirole]{
 	name=Multirole Missile;
 	weapontype=MissileLauncher;
@@ -118,6 +119,38 @@
 	[customparams] {
 		ap=20;
 		semiactive=1;
+	}		
+}
+
+[allaspect]{
+	name=All-Aspect Missile;
+	weapontype=MissileLauncher;
+	turret=1;
+	range=500; //2.5km
+	weaponvelocity=280;
+	startvelocity=50;
+	weaponacceleration=150;
+	flighttime=3;
+	reloadtime=1;
+	avoidfriendly=0;
+	tolerance=200;
+	areaofeffect=30;
+	tracks=1;
+	turnrate=9600;
+	fixedlauncher=1;
+	model=afm.s3o;
+	cegTag=trail_missile_late;
+	soundstart=rocket1;
+	soundhit=bombhit;
+	explosiongenerator=custom:blast_explo;
+	alwaysvisible=1;
+	impulseFactor=0;
+	craterFactor=0;
+	[damage]{
+		default=120;
+	}
+	[customparams] {
+		ap=10;
 	}		
 }
 
@@ -213,6 +246,7 @@
 			default=3;
 	}
 }
+
 [lfgun]{
 	name=Light Machinegun;
 	weapontype=LaserCannon;
@@ -392,6 +426,34 @@
 	}		
 }
 
+[40mm]{
+	name=40mm Gun;
+	weapontype=LaserCannon;
+	turret=1;
+	range=500; //2.5km
+	weaponvelocity=225;
+	duration=.06;
+	thickness=.05;
+	RGBcolor=1 1 .2;
+	accuracy=10;
+	reloadtime=1;
+	canattackground=false;
+	avoidfriendly=0;
+	tolerance=0;
+	//impactonly=1;
+	areaofeffect=12;
+	alwaysvisible=1;
+	explosiongenerator=custom:gun_explo;
+	soundstart=cannon_fire4;
+	soundstartvolume=1.5;	
+	[DAMAGE]{
+		default=55;
+	}
+	[customparams] {
+		ap=30;
+	}	
+}
+
 [lcannon]{
 	name=75mm Cannon;
 	weapontype=Cannon;
@@ -406,7 +468,7 @@
 	soundtrigger=1;
 	areaofeffect=16;
 	explosiongenerator=custom:gun_explo;
-	soundstart=emediumtankfire2;
+	soundstart=cannon_fire5;
 	soundhit=emediumtankfire2;
     separation=.15;
     size=.15;
