@@ -17,6 +17,8 @@ if (VFS.FileExists("mission.lua")) then
 	return
 end
 
+include("Configs/plane_selector.lua")
+
 local debug	= false --generates debug message
 local Echo	= Spring.Echo
 
@@ -25,17 +27,19 @@ local Window
 local screen0
 local Image
 local Button
+local StackPanel
 
 local vsx, vsy = 1280, 1024
+local posterx, postery, buttonSpace
+local windowCreated = false
+
 local modoptions = Spring.GetModOptions()
-local selectorShown = false
+
 local mainWindow
 local buttonWindow
 local button
 local buttonImg
-local optionData = include("Configs/plane_selector.lua")
 
-local noComm = false
 ---------------------------------------------
 local function PlaySound(filename, ...)
 	local path = filename..".WAV"
@@ -85,21 +89,117 @@ end
 
 function Close(selectionMade)
 	--Spring_SendCommands("say: a:I chose " .. option.button})
-	screen0:RemoveChild(mainWindow)
 	screen0:AddChild(buttonWindow)
 end
 
+local function CreateLoadoutSelection(option)
+	screen0:RemoveChild(mainWindow)
+	local window, image, stack
+	window = Window:New{
+		parent = screen0,
+		resizable = false,
+		draggable = false,
+		clientWidth  = posterx + 400,
+		clientHeight = postery + buttonspace +12 ,--there is a title (caption below), height is not just poster+buttons
+		x = (vsx - posterx - 400)/2,
+		y = ((vsy - postery - buttonspace)/2),
+		caption = "LOADOUT SELECTION",
+	}
+	image = Image:New{
+		parent = window,
+		file = option.img,--lookup Configs/startup_info_selector.lua to get optiondata
+		file2 = option.img2,
+		tooltip = option.tooltip,
+		width = posterx,
+		height = postery,
+		x = 0,
+		padding = {1,1,1,1},
+		y = 9
+	}
+	stack =  StackPanel:New{
+		parent = window,
+		autosize = true,
+		resizeItems = false;
+		orientation   = "vertical";
+		height = postery,
+		width = 396,
+		x = posterx + 4,
+		y = 9,
+		padding = {0, 0, 0, 0},
+		itemMargin  = {0, 0, 0, 0},
+	}
+	for name, unit in pairs(option.packs) do
+		local pack = weaponPacks[name]
+		local button = Button:New {
+			parent = stack,
+			caption = pack.name,
+			tooltip = pack.tooltip, --added comm name under cursor on tooltip too, like for posters
+			width = "100%",
+			height = 40,
+			padding = {1,1,1,1},
+			OnMouseUp = {function()
+					Spring.SendLuaRulesMsg("plane:"..unit)
+					Close()
+					window:Dispose()
+				end
+			},
+		}
+		if pack.image then
+			local buttonImage = Image:New{
+				parent = button,
+				file = pack.image,
+				width = 32,
+				height = 32,
+				x = 0,
+				padding = {1,1,1,1},
+				y = 0,	
+			}
+		end
+	end
+	local backButton = Button:New{
+		parent = window,
+		caption = "Back",
+		tooltip = "Return to aircraft selection",
+		width = (posterx+400)*0.75,
+		height = 30,
+		x = ((posterx+400)*0.25)/2,
+		y = postery+12,
+		--OnMouseUp = {Close}
+		OnClick = {function()
+				ShowWindow()
+				window:Dispose()
+			end
+		}
+	}	
+	local closeButton = Button:New{
+		parent = window,
+		caption = "CLOSE",
+		tooltip = "CLOSE\nNo selection made",
+		width = (posterx+400)*0.75,
+		height = 30,
+		x = ((posterx+400)*0.25)/2,
+		y = postery + (buttonspace)/2+14,
+		--OnMouseUp = {Close}
+		OnClick = {function()
+				Close()
+				window:Dispose()
+			end
+		}
+	}	
+end
 
 local function CreateWindow()
+	windowCreated = true
+	vsx, vsy = widgetHandler:GetViewSizes()
 	-- count options
 	local active = 0
 	for name,option in pairs(optionData) do
-		if option:enabled() then
+		if option.enabled then
 			active = active + 1
 		end
 	end
 
-	local posterx, postery, buttonspace = posterSize(active)
+	posterx, postery, buttonspace = posterSize(active)
 
 	-- create window
 	mainWindow = Window:New{
@@ -109,42 +209,38 @@ local function CreateWindow()
 		clientHeight = postery + buttonspace +12 ,--there is a title (caption below), height is not just poster+buttons
 		x = (vsx - posterx*active)/2,
 		y = ((vsy - postery - buttonspace)/2),
-		caption = "AICRAFT SELECTION",
+		caption = "AIRCRAFT SELECTION",
 	}
 	
 	-- add posters
 	local i = 0
 	for name,option in pairs(optionData) do
-		if option:enabled() then
+		if option.enabled then
 			local image = Image:New{
 				parent = mainWindow,
-				file = option.poster,--lookup Configs/startup_info_selector.lua to get optiondata
-				file2 = option.poster2,
+				file = option.img,
+				file2 = option.img2,
 				tooltip = option.tooltip,
-				caption = option.selector,
+				caption = option.name,
 				width = posterx,
 				height = postery,
 				x = (i*posterx),
 				padding = {1,1,1,1},
-				OnClick = {option.button},
-				--OnMouseUp = {option.button},
+				OnClick = {function() CreateLoadoutSelection(option) end},
 				y = 9 
-				}
+			}
 			local buttonWidth = posterx*2/3
-				if (option.button ~= nil) then 
-					local button = Button:New {
-						parent = mainWindow,
-						x = i*posterx + (posterx - buttonWidth)/2, --placement of comms names' buttons @ the middle of each poster
-						y = postery+12,
-						caption = option.selector,
-						tooltip = option.tooltip, --added comm name under cursor on tooltip too, like for posters
-						width = buttonWidth,
-						height = 30,
-						padding={1,1,1,1},
-					--OnMouseUp = {option.button},
-						OnClick = {option.button},-- used onclick in case people change their mind, mouseup register the option you were when pressed on, even if you moved somewhere else while still hold mouse button. onclick register it only if you're still on it (even if you moved to another part of the comm button).
-						}
-				end 
+				local button = Button:New {
+					parent = mainWindow,
+					x = i*posterx + (posterx - buttonWidth)/2, --placement of comms names' buttons @ the middle of each poster
+					y = postery+12,
+					caption = option.name,
+					tooltip = option.tooltip,
+					width = buttonWidth,
+					height = 30,
+					padding={1,1,1,1},
+					OnMouseUp = {function() CreateLoadoutSelection(option) end},
+				}
 			i = i + 1
 		end
 	end
@@ -158,11 +254,17 @@ local function CreateWindow()
 		x = (posterx*active - cbWidth)/2,
 		y = postery + (buttonspace)/2+14,
 		--OnMouseUp = {Close}
-		OnClick = {function() Close(false) end}
+		OnClick = {function()
+			screen0:RemoveChild(mainWindow)
+			Close(false)
+		end}
 	}
 end
 
 function ShowWindow()
+	if not windowCreated then
+		CreateWindow()
+	end
 	screen0:AddChild(mainWindow)
 	screen0:RemoveChild(buttonWindow)
 end
@@ -181,12 +283,11 @@ function widget:Initialize()
 	screen0 = Chili.Screen0
 	Image = Chili.Image
 	Button = Chili.Button
+	StackPanel = Chili.StackPanel
 
 	vsx, vsy = widgetHandler:GetViewSizes()
 	if vsx == 1 then vsx = 1024 end
 	if vsy == 1 then vsy = 768 end
-	
-	CreateWindow()
 	
 	buttonWindow = Window:New{
 		resizable = false,

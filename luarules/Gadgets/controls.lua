@@ -39,6 +39,7 @@ function gadget:Initialize()
 					range=tonumber(c["dist"..i]),
 					name=c["name"..i],
                                         isbomb=c["isbomb"..i],
+                                        dumbfire=c["dumbfire"..i],
 				}
 				i=i+1
 			end
@@ -138,7 +139,7 @@ function gadget:RecvLuaMsg(msg,player)
 				end
 			end
 			if interpret[5+B_Missile]==1 then
-                                if p.wantedtarget == p.target then
+                                if (p.wantedtarget == p.target or planedata[p.ud].ammo[p.currentweapon] and planedata[p.ud].ammo[p.currentweapon].dumbfire)  then
                                     if p.env then
                                             Spring.UnitScript.CallAsUnit(p.unit, p.env.UnlockWeapon,p.currentweapon)
                                     else

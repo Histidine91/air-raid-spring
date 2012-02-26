@@ -10,10 +10,65 @@ end
 local color = {
 	red = "\255\255\32\32",
 	orange = "\255\255\96\0",
-	purple = "\255\255\0\255",
+	green = "\255\0\255\0",
+	purple = "\255\192\64\255",
 	teal = "\255\0\192\192",
 	blue = "\255\0\128\255",
 }
+
+weaponPacks = {
+	JointStrike1 = {
+		name = "Joint Strike I",
+		image = nil,
+		tooltip = 	"A strong loadout capable of engaging both air and ground threats."..
+				"\nArmament:"..
+				"\n\t"..color.blue.."Air-to-Air Missile\008 x 2"..
+				"\n\t"..color.orange.."Multirole Missile\008 x 4",
+	},
+	GroundSupport1 = {
+		name = "Close Support I",
+		image = nil,
+		tooltip = 	"This loadout sacrifices air-to-air capabilities for ground attack power. The Fuel Air Bomb is devastating against large formations."..
+				"\nArmament:"..
+				"\n\t"..color.blue.."Air-to-Air Missile\008 x 2"..
+				"\n\t"..color.red.."Fuel Air Bomb\008 x 2",
+	},
+	AirDomination1 = {
+		name = "Air Domination I",
+		image = nil,
+		tooltip = 	"A loadout that focuses on air-to-air capability while retaining some ground combat ability."..
+				"\nArmament:"..
+				"\n\t"..color.blue.."Air-to-Air Missile\008 x 4"..
+				"\n\t"..color.orange.."Multirole Missile\008 x 2",
+	},
+	LongRangeInterception1 = {
+		name = "Long Range Interception I",
+		image = nil,
+		tooltip = 	"The loadout of choice for long range kill ability."..
+				"\nArmament:"..
+				"\n\t"..color.blue.."Longshot Missile\008 x 4",
+	},
+	Dogfight1 = {
+		name = "Dogfight I",
+		image = nil,
+		tooltip = 	"This loadout is ideal for close in knife fights with highly maneuverable bandits."..
+				"\nArmament:"..
+				"\n\t"..color.blue.."Air-to-Air Missile\008 x 2"..
+				"\n\t"..color.purple.."All Aspect Missile\008 x 2"..
+				"\n\t"..color.orange.."Multirole Missile\008 x 2",
+	},
+	
+	NuclearStrike1 = {
+		name = "Nuclear Strike I",
+		image = nil,
+		tooltip = 	"The preferred way to start world wars (it's the only way to be sure)."..
+				"\nArmament:"..
+				"\n\t"..color.orange.."Multirole Missile\008 x 6"..
+				"\n\t"..color.red.."Tactical Nuclear Missile\008 x 1",
+	},	
+}
+
+
 
 --[[
 local weaponColors = {
@@ -42,67 +97,54 @@ local MakeWeaponString(unitDefName)
 end
 ]]--
 
-local optionData = {
+optionData = {
 	f81 = {
-		enabled = function() return true end,
-		poster = "LuaUI/Images/selector/f81.png",
-		poster2 = "LuaUI/Images/selector/background.png",
-		selector = "F-81 Arrowhead",
-		tooltip =	"Multirole fighter with good performance.\n"..
-					"Armament:\n"..
-					"\t"..color.red.."25mm Vulcan\008 x 1500\n"..
-					"\t"..color.blue.."Air-to-Air Missile\008 x 2\n"..
-					"\t"..color.orange.."Multirole Missile\008 x 4",
-		button = function()
-			Spring.SendLuaRulesMsg("plane:f-81")
-			Close(true)
-		end
+		enabled = true,
+		img = "LuaUI/Images/selector/f81.png",
+		img2 = "LuaUI/Images/selector/background.png",
+		name = "F-81 Arrowhead",
+		tooltip =	"Multirole fighter with good performance."..
+				"\nCannon: 25mm Vulcan x 1500"..
+				"\nLoadouts:"..
+				"\n\t"..color.green.."Joint Strike I\008"..
+				"\n\t"..color.orange.."Ground Support I\008",
+		packs = {JointStrike1 = "f-81", GroundSupport1 = "f-81_2"},
 	},
 
 	gyrfalcon = {
-		enabled = function() return true end,
-		poster = "LuaUI/Images/selector/gyrfalcon.png",
-		poster2 = "LuaUI/Images/selector/background.png",
-		selector ="F-37 Gyrfalcon",
+		enabled = true,
+		img = "LuaUI/Images/selector/gyrfalcon.png",
+		img2 = "LuaUI/Images/selector/background.png",
+		name = "F-37 Gyrfalcon",
 		tooltip =	"Air superiority fighter with superior mobility but light armor."..
-					"\nArmament:\n"..
-					"\t"..color.red.."25mm Vulcan\008 x 1200\n"..
-					"\t"..color.blue.."Air-to-Air Missile\008 x 4\n"..
-					"\t"..color.orange.."Multirole Missile\008 x 2",
-		button = function() 
-			Spring.SendLuaRulesMsg("plane:gyrfalcon")
-			Close(true)
-		end 
+					"\nCannon: 25mm Vulcan x 1200"..
+					"\nLoadouts:"..
+					"\n\t"..color.teal.."Air Domination I\008"..
+					"\n\t"..color.blue.."Dogfight I\008",
+		packs = {AirDomination1 = "gyrfalcon", Dogfight1 = "gyrfalcon_2"},
 	},
 	
 	hawk = {
-		enabled = function() return true end,
-		poster = "LuaUI/Images/selector/hawk.png",
-		poster2 = "LuaUI/Images/selector/background.png",
-		selector = "F-41 Hawk-P",
+		enabled = true,
+		img = "LuaUI/Images/selector/hawk.png",
+		img2 = "LuaUI/Images/selector/background.png",
+		name = "F-41 Hawk-P",
 		tooltip =	"Fast interceptor retrofitted with guns."..
-					"\nArmament:\n"..
-					"\t"..color.red.."25mm Vulcan\008 x 1200\n"..
-					"\t"..color.teal.."Longshot Missile\008 x 4",
-		button = function() 
-			Spring.SendLuaRulesMsg("plane:hawkp")
-			Close(true)
-		end 
+					"\nCannon: 25mm Vulcan x 1200"..
+					"\nLoadouts:"..
+					"\n\t"..color.purple.."Long Range Interception I\008",
+		packs = {LongRangeInterception1 = "hawkp"},
 	},
 	
 	destiny = {
-		enabled = function() return (Spring.GetModOptions().enabledestiny == "1") end,
-		poster = "LuaUI/Images/selector/destiny.png",
-		poster2 = "LuaUI/Images/selector/background.png",
-		selector = "B-3 Destiny",
+		enabled = (Spring.GetModOptions().enabledestiny == "1"),
+		img = "LuaUI/Images/selector/destiny.png",
+		img2 = "LuaUI/Images/selector/background.png",
+		name = "B-3 Destiny",
 		tooltip =	"Heavy bomber with nuclear strike capability."..
-					"\nArmament:\n"..
-					"\t"..color.orange.."Multirole Missile\008 x 8\n"..
-					"\t"..color.red.."Tactical Nuke\008 x 1",
-		button = function() 
-			Spring.SendLuaRulesMsg("plane:destiny")
-			Close(true)
-		end 
+					"\nLoadouts:"..
+					"\n\t"..color.red.."Nuclear Strike I\008",
+		packs = {NuclearStrike1 = "destiny"},
 	},		
 }
 
@@ -159,9 +201,8 @@ end
 
 local function CommSelectTemplate(num, seriesName, comm1Name)
 	local option = {
-		enabled = function() return true end,
-		poster = chassisImages[UnitDefNames[comm1Name].customParams.statsname],
-		poster2 = "LuaUI/Images/startup_info_selector/customcomm"..num..".png",
+		img = chassisImages[UnitDefNames[comm1Name].customParams.statsname],
+		img2 = "LuaUI/Images/startup_info_selector/customcomm"..num..".png",
 		selector = seriesName,
 		tooltip = "Select comm config number "..num.." ("..seriesName..")"..WriteTooltip(seriesName),
 		button = function()
