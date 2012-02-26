@@ -63,7 +63,7 @@ weaponPacks = {
 		image = nil,
 		tooltip = 	"The preferred way to start world wars (it's the only way to be sure)."..
 				"\nArmament:"..
-				"\n\t"..color.orange.."Multirole Missile\008 x 6"..
+				"\n\t"..color.orange.."Multirole Missile\008 x 8"..
 				"\n\t"..color.red.."Tactical Nuclear Missile\008 x 1",
 	},	
 }

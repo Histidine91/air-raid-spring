@@ -15,7 +15,6 @@ lua_AddTrail() {return 0; }
 
 lua_MissileLaunch() { return 1;}
 lua_BombDrop() { return 1;}
-lua_ClusterBomb() { return 1;}
 
 Create() {
 	turn trail1 to y-axis <90> now;
@@ -84,7 +83,6 @@ Bomb() {
 	call-script lua_HasAmmo(1);
 	if (!get LUA1) return 0;
 	mrm= (mrm +1) & 3;
-	//call-script lua_ClusterBomb();
 
 	
 	//var i;
