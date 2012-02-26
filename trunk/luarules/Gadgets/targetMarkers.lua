@@ -31,23 +31,28 @@ local scaleMult = 5	--elmos -> meter
 
 local dsize=36
 local ssize=30;
+local csize=20;
 local targetCutoff=MAX_TARGET_RANGE;
 local rangeInfoRange=2000;
 local nameRange=1500;
 local trackRange=800;
 local gunRange=350;
+local gunVelocity = WeaponDefNames.gun.projectileSpeed or 210
 local reticleSize=10;
 local arrowSize=10;
 
 local baseDistance = 500^0.5
 
-local minidiamond, diamond, square, reticle
+local minidiamond, diamond, square, circle, reticle
 
 local colors = {
 	blue = {0, 0, 1, 1},
 	green = {0, 1, 0, 1},
 	red = {1, 0, 0, 1},
 }
+
+local pi = math.pi
+local gamespeed = Game.gameSpeed
 
 local function GetQuadrant(x, y)
 	if x > 0 then
@@ -63,13 +68,43 @@ local function GetAngleFromVector(x, y)
 	local quadrant = GetQuadrant(x, y)
 	local theta = math.atan(math.abs(y)/math.abs(x))
 	if quadrant == 2 then
-		theta = math.pi - theta
+		theta = pi - theta
 	elseif quadrant == 3 then
-		theta = math.pi + theta
+		theta = pi + theta
 	elseif quadrant == 4 then
-		theta = 2*math.pi - theta
+		theta = 2*pi - theta
 	end
 	return theta
+end
+
+local function CalculateDisplacement(p0, v, a, t)
+	return p0 + v*t + 0.5*a*(t^2)
+end
+
+local function CalculatePosition(x0, y0, z0, vx, vy, vz, ax, ay, az, t)
+	local x = CalculateDisplacement(x0, vx, ax, t)
+	local y = CalculateDisplacement(y0, vy, ay, t)
+	local z = CalculateDisplacement(z0, vz, az, t)
+	return x,y,z
+end
+
+local function CalculateGunImpact(target, targetDefID, targetPos, dist)
+	local timeToImpact = dist/gunVelocity
+	local x0, y0, z0 = unpack(targetPos)
+	local vx, vy, vz
+	if UnitDefs[targetDefID].customParams.playable then
+		local team = Spring.GetUnitTeam(target)
+		vx, vy, vz = SYNCED.teamplane[team].velocity
+		--vx, vy, vz = vx*gamespeed, vy*gamespeed, vz*gamespeed
+	else
+		vx,vy,vz = Spring.GetUnitVelocity(target)
+	end
+	--vx, vy, vz = vx*gamespeed, vy*gamespeed, vz*gamespeed
+	
+	local x = CalculateDisplacement(x0, vx, 0, timeToImpact)
+	local y = CalculateDisplacement(y0, vy, 0, timeToImpact)
+	local z = CalculateDisplacement(z0, vz, 0, timeToImpact)
+	return x, y, z
 end
 
 function Reticle()
@@ -149,6 +184,13 @@ function Square(size)
 	gl.Vertex(ssize*size,-ssize*size,0)
 end
 
+function Circle()
+	for i=0,17 do
+		local angle = 2*pi*i/18
+		gl.Vertex(math.sin(angle)*csize, math.cos(angle)*csize, 0)
+	end
+end
+
 function Line(x1,y1,z1,x2,y2,z2)
 	gl.Vertex(x1, y1, z1)
 	gl.Vertex(x2, y2, z2)
@@ -159,12 +201,13 @@ function gadget:Initialize()
 	--minidiamond=gl.CreateList(gl.BeginEnd,GL.LINE_LOOP,MiniDiamond)
 	--square=gl.CreateList(gl.BeginEnd,GL.LINE_LOOP,Square)
 	reticle=gl.CreateList(gl.BeginEnd,GL.LINES, Reticle)
+	circle=gl.CreateList(gl.BeginEnd, GL.LINE_LOOP, Circle)
 end
 
 function gadget:Shutdown()
-	gl.DeleteList(diamond)
-	gl.DeleteList(minidiamond)
-	gl.DeleteList(square)
+	--gl.DeleteList(diamond)
+	--gl.DeleteList(minidiamond)
+	--gl.DeleteList(square)
 	gl.DeleteList(reticle)
 end
 
@@ -212,10 +255,25 @@ function gadget:DrawScreenEffects(vsx,vsy)
 						gl.BeginEnd(GL.LINE_LOOP,Square,size)
 						gl.Color(color)
 						
-						-- "in gun range" marker
+						-- "in gun range" marker, target predictor
 						if (dist < gunRange) and not isAllied then
 							--gl.CallList(minidiamond)
 							gl.BeginEnd(GL.LINE_LOOP,MiniDiamond,size)
+							if isWantedTarget then
+								local wx, wy, wz = CalculateGunImpact(u, ud, {x, y, z}, dist)
+								local psx, psy, psz = Spring.WorldToScreenCoords(wx, wy, wz)
+								gl.PushMatrix()
+								gl.Color(0,0.5,1,1)
+								gl.Smoothing(nil, true, nil)
+								gl.LineWidth(2)
+								gl.Translate(-sx,-sy,0)
+								gl.Translate(psx, psy, 0)
+								gl.CallList(circle)
+								gl.Color(color)
+								gl.LineWidth(1)
+								gl.Smoothing(nil, false, nil)
+								gl.PopMatrix()
+							end
 						end
 						
 						-- range display
@@ -298,18 +356,7 @@ local function DrawBombTarget(p, radius)
 	-- trace the bomb path out, figure out where it intersects the ground
 	local gravity = Game.gravity
 		
-	local vx, vy, vz = p.velocity[1]*30*2, p.velocity[2]*30*2, p.velocity[3]*30*2
-	
-	local function CalculateDisplacement(p0, v, a, t)
-		return p0 + v*t + 0.5*a*(t^2)
-	end
-	
-	local function CalculatePosition(x0, y0, z0, vx, vy, vz, ax, ay, az, t)
-		local x = CalculateDisplacement(x0, vx, ax, t)
-		local y = CalculateDisplacement(y0, vy, ay, t)
-		local z = CalculateDisplacement(z0, vz, az, t)
-		return x,y,z
-	end
+	local vx, vy, vz = p.velocity[1]*gamespeed*2, p.velocity[2]*gamespeed*2, p.velocity[3]*gamespeed*2
 	
 	--test where bomb will be every 0.1 seconds
 	for i=0,10,0.1 do
@@ -330,7 +377,6 @@ local function DrawBombTarget(p, radius)
 	gl.PopMatrix()
 end
 
-local distScale = 2
 function gadget:DrawWorld()
 	local team = Spring.GetMyTeamID()
 	local p = SYNCED.teamplane[team]
@@ -352,7 +398,7 @@ function gadget:DrawWorld()
 		gl.PopMatrix()
 		
 		if wData.isbomb then
-			DrawBombTarget(p, wData.cone*360/math.pi)
+			DrawBombTarget(p, wData.cone*360/pi)
 		end	
 		--gl.Color(1,0,0,0.5)
 		--gl.BeginEnd(GL.LINES,LaserSight,gunRange)
