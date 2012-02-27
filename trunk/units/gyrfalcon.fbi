@@ -72,7 +72,7 @@
 		name1=Multirole;
 
 		ammo2=4;
-		reload2=30;
+		reload2=20;
 		cone2=20;
 		dist2=900;
 		name2=Air to Air;

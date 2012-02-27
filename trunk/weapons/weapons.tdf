@@ -169,7 +169,7 @@
 	areaofeffect=300;
 	tracks=0;
 	fixedlauncher=1;
-	turnrate=300;
+	turnrate=450;
 	soundstart=rocket1;
 	soundhit=bombhit;
 	model=tacnuke.s3o;
