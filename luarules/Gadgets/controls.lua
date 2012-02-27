@@ -95,7 +95,11 @@ function gadget:UnitCreated(u, ud, team)
 			Spring.MoveCtrl.Enable(u)
 			local x,y,z=Spring.GetUnitPosition(u)
 			Spring.MoveCtrl.SetPosition(u,x,y+30,z)
+                        
 			SendToUnsynced("PlaneCreated", u, team)
+                        Spring.SetTeamRulesParam(team, "teamplane", u)
+                        
+                        --Spring.SetUnitNoDraw(u, true)
 		else
 			--Spring.Echo("ERROR: Non-playable plane assigned to player team!")
 		end
@@ -106,6 +110,7 @@ function gadget:UnitDestroyed(u,ud,team)
 	if teamplane[team] and teamplane[team].unit == u then
 		SendToUnsynced("PlaneDestroyed", u, team)
 		teamplane[team]=nil
+                Spring.SetTeamRulesParam(team, "teamplane", -1)
 	end
         for team,data in pairs(teamplane) do
             if data.wantedtarget == u then
@@ -284,6 +289,7 @@ local jetSoundLength = 14
 
 local gameFrame = 0
 
+--[[
 local function ResetCamera()
 	local cam=Spring.GetCameraState()
 	--cam.px = Game.mapSizeX/2
@@ -298,10 +304,24 @@ local function ResetCamera()
 	Spring.SetCameraState(cam,0.2)
 	lastUpdate = 0
 end
+]]--
+
+-- need this because SYNCED.tables are merely proxies, not real tables
+local function MakeRealTable(proxy)
+	local ret = {}
+	for i,v in spairs(proxy) do
+                if type(v) == "table" then
+                    ret[i] = MakeRealTable(v)
+                else
+                    ret[i] = v
+                end
+	end
+	return ret
+end
 
 function PlaneDestroyed(_,unitID, team)
 	if team == Spring.GetMyTeamID() then
-		ResetCamera()
+		--ResetCamera()
 		if (Script.LuaUI('PlaneDestroyed')) then
 			Script.LuaUI.PlaneDestroyed(unitID, team)
 		end
@@ -317,6 +337,11 @@ function PlaneCreated(_,unitID, team)
 end
 
 function GameFrame()
+        local p=SYNCED.teamplane[Spring.GetMyTeamID()]
+	if p and (Script.LuaUI('TeamPlaneStatusUpdate')) then
+            local args = MakeRealTable(p)
+            Script.LuaUI.TeamPlaneStatusUpdate(args)
+        end
 end
 
 function gadget:Initialize()
@@ -331,6 +356,7 @@ function gadget:Shutdown()
 	gadgetHandler:RemoveSyncAction("PlaneDestroyed")
 end
 
+--[[
 function gadget:Update()
 	local p=SYNCED.teamplane[Spring.GetMyTeamID()]
 	if p then
@@ -352,5 +378,21 @@ function gadget:Update()
 end
 
 
+function gadget:DrawWorld()
+	local p=SYNCED.teamplane[Spring.GetMyTeamID()]
+	if p then
+                local x,y,z=Spring.GetUnitViewPosition(p.unit)
+                gl.PushMatrix()
+                gl.Translate(x, y, z)
+                gl.Culling(GL.FRONT)
+                gl.DepthTest(GL.EQUAL)
+                gl.Unit(p.unit)
+		--gl.UnitShape(p.ud, p.team)
+                gl.DepthTest(false)
+                gl.Culling(false)
+                gl.PopMatrix()
+	end
+end
+]]
 
 end
