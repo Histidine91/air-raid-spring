@@ -38,7 +38,7 @@ function widget:Shutdown()
 end
 
 function widget:IsAbove(x,y)
-	if WG.hasPlane then
+	if WG.teamplane then
 		local dx = x - vsx/2
 		local dy = y - vsy/2
 		if dx==0 then
@@ -61,7 +61,7 @@ function widget:IsAbove(x,y)
 end
 
 function widget:MousePress(x,y,button)
-	if WG.hasPlane then
+	if WG.teamplane then
 		if button ~=2 then
 			--Spring.SendLuaRulesMsg("down:"..button)
 			if button == 1 then
@@ -78,7 +78,7 @@ function widget:MousePress(x,y,button)
 					local ux,uy,uz=Spring.GetUnitPosition(u)
 					local sx,sy=Spring.WorldToScreenCoords(ux,uy,uz)
 					local dist = (sx-x)*(sx-x) + (sy-y)*(sy-y)
-					local dist2 = Spring.GetUnitSeparation(WG.hasPlane,u)
+					local dist2 = Spring.GetUnitSeparation(WG.teamplane,u)
 					if dist < maxdist and dist2 < MAX_TARGET_RANGE then
 						maxdist=dist
 						target=u
@@ -96,7 +96,7 @@ function widget:MousePress(x,y,button)
 end
 
 function widget:MouseRelease(x,y,button)
-	if WG.hasPlane then
+	if WG.teamplane then
 		--Spring.SendLuaRulesMsg("up:"..button)
 		if button == 1 then
 			WG.controlstate.buttons[B_Gun]=-1
@@ -109,7 +109,7 @@ function widget:MouseRelease(x,y,button)
 end
 
 function widget:MouseWheel(_,dir)
-	if not WG.hasPlane then
+	if not WG.teamplane then
 		return false
 	end
 	if dir==-1 then

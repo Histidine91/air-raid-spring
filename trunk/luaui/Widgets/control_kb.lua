@@ -55,7 +55,7 @@ function widget:Shutdown()
 end
 
 function widget:MousePress(x,y,button)
-	if WG.hasPlane then
+	if WG.teamplane then
 		local maxdist=40000 --200^2
 		local target=nil
 		for _,u in ipairs(Spring.GetVisibleUnits()) do
@@ -63,8 +63,8 @@ function widget:MousePress(x,y,button)
 			if team~=Spring.GetMyTeamID() then
 				local ux,uy,uz=Spring.GetUnitPosition(u)
 				local sx,sy=Spring.WorldToScreenCoords(ux,uy,uz)
-				local dist = (sx-x)*(sx-x) + (sy-y)*(sy-y)
-                                local dist2 = Spring.GetUnitSeparation(WG.hasPlane,u)
+				local dist = (sx-x)^2 + (sy-y)^2
+                                local dist2 = Spring.GetUnitSeparation(WG.teamplane,u)
 				if dist < maxdist and dist2 < MAX_TARGET_RANGE then
 					maxdist=dist
 					target=u
@@ -88,7 +88,7 @@ local sensitivityState=1
 
 function widget:KeyPress(key)
 	--Spring.Echo(key)
-	if not WG.hasPlane then
+	if not WG.teamplane then
 		return false
 	end
 	if key == KEY_PitchUp then
@@ -108,15 +108,15 @@ function widget:KeyPress(key)
 	elseif key==KEY_Missile then
 		WG.controlstate.buttons[B_Missile]=1
 	elseif key==KEY_ChangeTarget then
-		local maxdist=40000 --200^2
+		local maxdist=500^2
 		local target=nil
 		for _,u in ipairs(Spring.GetVisibleUnits()) do
 			local team = Spring.GetUnitTeam(u)
 			if team~=Spring.GetMyTeamID() then
 				local ux,uy,uz=Spring.GetUnitPosition(u)
 				local sx,sy=Spring.WorldToScreenCoords(ux,uy,uz)
-				local dist = (sx-vsx/2)*(sx-vsx/2) + (sy-vsy/2)*(sy-vsy/2)
-                                local dist2 = Spring.GetUnitSeparation(WG.hasPlane,u)
+				local dist = (sx-vsx/2)^2 + (sy-vsy/2)^2
+                                local dist2 = Spring.GetUnitSeparation(WG.teamplane,u)
 				if dist < maxdist and dist2 < MAX_TARGET_RANGE then
 					maxdist=dist
 					target=u
@@ -137,7 +137,7 @@ function widget:KeyPress(key)
 end
 
 function widget:KeyRelease(key)
-	if not WG.hasPlane then
+	if not WG.teamplane then
 		return false
 	end
 	if (key == KEY_PitchUp) or (key == KEY_PitchDown) then
@@ -159,7 +159,7 @@ function widget:KeyRelease(key)
 end
 
 function widget:GameFrame(n)
-	if WG.hasPlane then
+	if WG.teamplane then
 		if rollState ~= 0 then
 			local roll = WG.controlstate.roll + roll_increment*rollState*sensitivityState
 			
