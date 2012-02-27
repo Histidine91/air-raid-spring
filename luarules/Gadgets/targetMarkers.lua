@@ -329,11 +329,11 @@ function gadget:DrawScreenEffects(vsx,vsy)
 				end
 			end
 		end
-		if p.wantedtarget and Spring.ValidUnitID(p.wantedtarget) then
+		if p.wantedtarget and Spring.ValidUnitID(p.wantedtarget) and Spring.IsUnitInView(p.wantedtarget) then
 			local dist = Spring.GetUnitSeparation(p.wantedtarget,p.unit)
 			local size = (baseDistance/(dist^0.5)) or 1			
 			local x,y,z = Spring.GetUnitPosition(p.wantedtarget)
-			local sx,sy=Spring.WorldToScreenCoords(x,y,z)
+			local sx,sy = Spring.WorldToScreenCoords(x,y,z)
 			if p.target == p.wantedtarget then
 				gl.Color(1,0,0,1)
 			end

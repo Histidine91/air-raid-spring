@@ -17,6 +17,10 @@ lua_MissileLaunch() {
 }
 
 Create() {
+	hide thrust1;
+	hide thrust2;
+	hide wingtip1;
+	hide wingtip2;
 	turn wingtip1 to y-axis <90> now;
 	turn wingtip2 to y-axis <90> now;
 	call-script lua_AddTrail(wingtip1,10,50,1);
