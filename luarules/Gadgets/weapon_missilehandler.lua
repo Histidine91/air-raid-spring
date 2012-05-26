@@ -39,7 +39,7 @@ function MissileLaunch(u, ud, team, target, weaponNum)
 end
 GG.MissileLaunch = MissileLaunch
 
-function gadget:ProjectileCreated(p,owner)
+function gadget:ProjectileCreated(p,owner,weaponDefID)
 	if toTrack[owner] then
 		SendToUnsynced("IncomingMissile",toTrack[owner],p)
 		--if Spring.GetUnitTeam(owner) ~= gaia then

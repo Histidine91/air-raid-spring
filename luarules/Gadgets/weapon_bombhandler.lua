@@ -80,7 +80,7 @@ local function ActivateSubmunitions(p, x, y, z)
 end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-function gadget:ProjectileCreated(p,owner)
+function gadget:ProjectileCreated(p,owner,weaponDefID)
 	if bombing[owner] then
 		local plane = GG.teamplane[bombing[owner].team]
 		local x1,y1,z1 = Spring.GetProjectileVelocity(p)
