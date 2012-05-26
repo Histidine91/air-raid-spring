@@ -8,19 +8,23 @@ You are assigned to intercept enemy logstics movements in the target area. Destr
 Air Raid can be played singleplayer or cooperatively (put all players on one alliance), while the option to play against other players exists it probably isn't very fun yet.
 
 ---------------------
-Default controls are:
+Common controls are:
+W and S: Throttle
+A and D: Rudder control
+C: Move camera - hold down and move mouse
+
+Mouse controls (requires one of the mouse control schemes)
 Mouse: Roll and pitch control
 Left Mouse button: Fire the main gun
 Middle Mouse Button: Select a new target for the missiles
 Right Mouse Button: Launch the selected missile (if a target is available)
 Mousewheel: Cycle through the missiles
-W and S: Throttle
-A and D: Rudder control
 
 Keyboard controls (requires the keyboard control scheme)
 Arrow keys: Roll and pitch
 Spacebar: Fire the main gun
 R: Select a new target for the missiles
+Left Mouse button: Select a new target for the missiles
 Left Ctrl: Launch the selected missile (if a target is available)
 Q and E: Cycle through the missiles
 Left Alt: Double sensitivity of roll/pitch controls (hold down)
@@ -32,11 +36,13 @@ Aircraft
 ------------------
 You will have a choice of three different aircraft. All of them possess a built-in ammunition teleporter that allows replenishing munitions in mid-flight without any need to link up with a supply plane, all weapons and fuel will be "beamed" directly from the base. This allows the aircraft to remain in combat for as long as the pilot deems necessary without being restricted by the available payload.
 
-F-81 Arrowhead: This multirole fighter is a rugged, well balanced design effective against both land and air targets with its cannon and payload of four multirole missiles and two air-to-air missiles.
+Different aircraft have access to different loadouts.
 
-F-37 Gyrfalcon: An air superiority fighter with a secondary ground attack role, the Gyrfalcon is faster and more agile than the Arrowhead at the expense of armor and cannon ammunition. It trades two of the F-81's multiroles for more air-to-air missiles.
+F-81 Arrowhead: This multirole fighter is a rugged, well balanced design effective against both land and air targets.
 
-F-41 Hawk-P: A variant of a fighter commonly used by the enemy forces, this interceptor carries four of the unique Longshot missile. It is the fastest but also the least durable of the available aircraft.
+F-37 Gyrfalcon: An air superiority fighter with a secondary ground attack role, the Gyrfalcon is faster and more agile than the Arrowhead at the expense of armor and cannon ammunition. 
+
+F-41 Hawk-P: A variant of a fighter commonly used by the enemy forces. It is the fastest but also the least durable of the available aircraft.
 
 ------------------
 Weapons
@@ -47,7 +53,11 @@ Multirole Missile - These missiles are designed to work against both air and gro
 
 Air to Air Missile - Significantly more agile than Multirole Missiles but sacrificing yield to gain this advantage. AAMs can be launched 4.5 km away from the target and are much more likely to score a hit in air to air combat. AAMs are usable against ground targets as well but their low yield makes this inadvisable against anything other than trucks.
 
+All Aspect Missile - This modified Air to Air missile sacrifices range (down to 2.5 km) for maneuverability, and is capable of hitting even a target directly behind the launching aircraft.
+
 Longshot Missile - A unique missile carried by the F-41 Hawk-P, the Longshot boasts an unparalleled 8 km range and 66% more damage than the Air to Air missile. However, its semi-active guidance system requires the launching aircraft to maintain its lock on the target; the missile will self-destruct if this lock is lost at any point.
+
+Fuel Air Bomb - Tossed in front of the launching aircraft, this bomb packs a massive punch capable of wiping out an entire convoy in one blow. It is obviously useless against enemy aircraft (other than gunships which happen to be sitting in the blast radius).
 
 ---------------------
 Likely enemy targets:
@@ -59,5 +69,3 @@ Condor Transport: Essentially a flying truck for the most part, moderately armor
 Python Gunship: Slow moving and easy to hit with missiles, but will rip you apart with its gatling gun if given the chance. The Python also carries the same missiles as the Wasp.
 Wasp Fighter: An old and weak plane, carries a limited number of moderately effective missiles and has to rely on its gun otherwise. The Wasp lacks maneuverability and is very common.
 Hawk Fighter: A modern combat jet that launches dangerous missiles at you and is highly maneuverable. Try not to engage them if you aren't certain that you can get a hit in quickly.
-Gunboat: A small combat vessel armed with machine guns and cannon. Its high armor makes it difficult to take down.
-Cruiser: This rare ship is extremely well-armed and armored, packing both flak and surface-to-air missiles. Best to steer clear of this one.
