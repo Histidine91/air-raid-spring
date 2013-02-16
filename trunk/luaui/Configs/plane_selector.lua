@@ -19,7 +19,7 @@ local color = {
 weaponPacks = {
 	JointStrike1 = {
 		name = "Joint Strike I",
-		image = nil,
+		image = "LuaUI/Images/selector/mragm.png",
 		tooltip = 	"A strong loadout capable of engaging both air and ground threats."..
 				"\nArmament:"..
 				"\n\t"..color.blue.."Air-to-Air Missile\008 x 2"..
@@ -27,7 +27,7 @@ weaponPacks = {
 	},
 	GroundSupport1 = {
 		name = "Close Support I",
-		image = nil,
+		image = "LuaUI/Images/selector/bomb.png",
 		tooltip = 	"This loadout sacrifices air-to-air capabilities for ground attack power. The Fuel Air Bomb is devastating against large formations."..
 				"\nArmament:"..
 				"\n\t"..color.blue.."Air-to-Air Missile\008 x 2"..
@@ -35,7 +35,7 @@ weaponPacks = {
 	},
 	AirDomination1 = {
 		name = "Air Domination I",
-		image = nil,
+		image = "LuaUI/Images/selector/mraam.png",
 		tooltip = 	"A loadout that focuses on air-to-air capability while retaining some ground combat ability."..
 				"\nArmament:"..
 				"\n\t"..color.blue.."Air-to-Air Missile\008 x 4"..
@@ -43,14 +43,14 @@ weaponPacks = {
 	},
 	LongRangeInterception1 = {
 		name = "Long Range Interception I",
-		image = nil,
+		image = "LuaUI/Images/selector/lraam.png",
 		tooltip = 	"The loadout of choice for long range kill ability."..
 				"\nArmament:"..
 				"\n\t"..color.blue.."Longshot Missile\008 x 4",
 	},
 	Dogfight1 = {
 		name = "Dogfight I",
-		image = nil,
+		image = "LuaUI/Images/selector/sraam.png",
 		tooltip = 	"This loadout is ideal for close in knife fights with highly maneuverable bandits."..
 				"\nArmament:"..
 				"\n\t"..color.blue.."Air-to-Air Missile\008 x 2"..
@@ -60,7 +60,7 @@ weaponPacks = {
 	
 	NuclearStrike1 = {
 		name = "Nuclear Strike I",
-		image = nil,
+		image = "LuaUI/Images/selector/bomb.png",
 		tooltip = 	"The preferred way to start world wars (it's the only way to be sure)."..
 				"\nArmament:"..
 				"\n\t"..color.orange.."Multirole Missile\008 x 8"..
@@ -103,7 +103,7 @@ optionData = {
 		img = "LuaUI/Images/selector/f81.png",
 		img2 = "LuaUI/Images/selector/background.png",
 		name = "F-81 Arrowhead",
-		tooltip =	"Multirole fighter with good performance."..
+		tooltip =	"Multirole fighter with good all-around performance."..
 				"\nCannon: 25mm Vulcan x 1500"..
 				"\nLoadouts:"..
 				"\n\t"..color.green.."Joint Strike I\008"..
@@ -129,7 +129,7 @@ optionData = {
 		img = "LuaUI/Images/selector/hawk.png",
 		img2 = "LuaUI/Images/selector/background.png",
 		name = "F-41 Hawk-P",
-		tooltip =	"Fast interceptor retrofitted with guns."..
+		tooltip =	"Fast, thinly armored interceptor retrofitted with guns."..
 					"\nCannon: 25mm Vulcan x 1200"..
 					"\nLoadouts:"..
 					"\n\t"..color.purple.."Long Range Interception I\008",

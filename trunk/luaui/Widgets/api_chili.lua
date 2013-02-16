@@ -4,15 +4,16 @@
 function widget:GetInfo()
   return {
     name      = "Chili Framework",
-    desc      = "Hot GUI Framework (DO NOT DISABLE)",
-    author    = "jK & quantum",
+    desc      = "Hot GUI Framework",
+    author    = "jK",
     date      = "WIP",
     license   = "GPLv2",
-    layer     = 0,
+    version   = "2.0",
+    layer     = -math.huge,
     enabled   = true,  --  loaded by default?
     handler   = true,
     api       = true,
-	alwaysStart = true,
+    alwaysStart = true,
   }
 end
 
@@ -24,16 +25,30 @@ local Chili
 local screen0
 local th
 local tk
+local tf
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Chili's location
+
+local function GetDirectory(filepath) 
+    return filepath and filepath:gsub("(.*/)(.*)", "%1") 
+end 
+
+local source = debug and debug.getinfo(1).source
+local DIR = GetDirectory(source) or (LUAUI_DIRNAME.."Widgets/")
+CHILI_DIRNAME = DIR .. "chili/"
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
-  Chili = VFS.Include(LUAUI_DIRNAME.."Widgets/chili/core.lua")
+  Chili = VFS.Include(CHILI_DIRNAME .. "core.lua", nil, VFS.RAW_FIRST)
 
   screen0 = Chili.Screen:New{}
   th = Chili.TextureHandler
   tk = Chili.TaskHandler
+  tf = Chili.FontHandler
 
   --// Export Widget Globals
   WG.Chili = Chili
@@ -83,6 +98,7 @@ end
 
 function widget:Update()
   tk.Update()
+  tf.Update()
 end
 
 
@@ -130,9 +146,22 @@ function widget:MouseWheel(up,value)
 end
 
 
+local keyPressed = true
+function widget:KeyPress(key, mods, isRepeat, label, unicode)
+  keyPressed = screen0:KeyPress(key, mods, isRepeat, label, unicode)
+  return keyPressed
+end
+
+
+function widget:KeyRelease()
+  local _keyPressed = keyPressed
+  keyPressed = false
+  return _keyPressed -- block engine actions when we processed it
+end
+
+
 function widget:ViewResize(vsx, vsy) 
-	screen0.width = vsx 
-	screen0.height= vsy
+	screen0:Resize(vsx, vsy)
 end 
 
 widget.TweakIsAbove      = widget.IsAbove

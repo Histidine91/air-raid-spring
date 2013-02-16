@@ -50,8 +50,7 @@ end
 
 function Image:DrawControl()
   if (not (self.file or self.file2)) then return end
-  local c = self.color
-  gl.Color(c[1],c[2],c[3],c[4])
+  gl.Color(self.color)
 
   if (self.keepAspect) then
     if (self.file2) then 
