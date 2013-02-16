@@ -9,10 +9,10 @@ Label = Control:Inherit{
   padding = {0,0,0,0},
 
   autosize = true,
-  autoObeyLineHeight = false, --// (needs autosize) if true, autosize will obey the lineHeight (-> texts with the same line count will have the same height) 
+  autoObeyLineHeight = true, --// (needs autosize) if true, autosize will obey the lineHeight (-> texts with the same line count will have the same height) 
 
   align    = "left",
-  valign   = "center",
+  valign   = "linecenter", --// usefull too "ascender"
   caption  = "no text",
 }
 
@@ -30,7 +30,7 @@ end
 --//=============================================================================
 
 function Label:SetCaption(newcaption)
-  if (self.caption == newcaption) then return end 
+  if (self.caption == newcaption) then return end
   self.caption = newcaption
   self:UpdateLayout()
   self:Invalidate()
@@ -45,6 +45,7 @@ function Label:UpdateLayout()
     local w = font:GetTextWidth(self.caption);
     local h, d, numLines = font:GetTextHeight(self.caption);
 
+    h = h + 1
     if (self.autoObeyLineHeight) then
       h = math.ceil(numLines * font:GetLineHeight())
     else
@@ -81,6 +82,15 @@ end
 function Label:DrawControl()
   local font = self.font
   font:DrawInBox(self._caption,self.x,self.y,self.width,self.height,self.align,self.valign)
+
+  if (self.debug) then
+    gl.Color(0,1,0,0.5)
+    gl.PolygonMode(GL.FRONT_AND_BACK,GL.LINE)
+    gl.LineWidth(2)
+    gl.Rect(self.x,self.y,self.x+self.width,self.y+self.height)
+    gl.LineWidth(1)
+    gl.PolygonMode(GL.FRONT_AND_BACK,GL.FILL)
+  end
 end
 
 --//=============================================================================

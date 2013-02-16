@@ -118,8 +118,9 @@ local function CreateLoadoutSelection(option)
 	}
 	stack =  StackPanel:New{
 		parent = window,
-		autosize = true,
+		--autosize = true,
 		resizeItems = false;
+		centerItems = false;
 		orientation   = "vertical";
 		height = postery,
 		width = 396,
@@ -133,7 +134,7 @@ local function CreateLoadoutSelection(option)
 		local button = Button:New {
 			parent = stack,
 			caption = pack.name,
-			tooltip = pack.tooltip, --added comm name under cursor on tooltip too, like for posters
+			tooltip = pack.tooltip,
 			width = "100%",
 			height = 40,
 			padding = {1,1,1,1},
@@ -150,7 +151,7 @@ local function CreateLoadoutSelection(option)
 				file = pack.image,
 				width = 32,
 				height = 32,
-				x = 0,
+				x = 8,
 				padding = {1,1,1,1},
 				y = 0,	
 			}

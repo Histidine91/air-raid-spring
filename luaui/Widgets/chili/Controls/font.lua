@@ -30,11 +30,11 @@ function Font:New(obj)
 end
 
 
-function Font:Dispose()
+function Font:Dispose(...)
   if (not self.disposed) then
     FontHandler.UnloadFont(self._font)  
   end
-  inherited.Dispose(self)
+  inherited.Dispose(self,...)
 end
 
 --//=============================================================================
@@ -48,6 +48,32 @@ function Font:_LoadFont()
 end
 
 --//=============================================================================
+
+local function NotEqual(v1, v2)
+	local t1 = type(v1)
+	local t2 = type(v2)
+
+	if (t1 ~= t2) then
+		return true
+	end
+
+	local isindexable = (t=="table")or(t=="metatable")or(t=="userdata")
+	if (not isindexable) then
+		return (t1 ~= t2)
+	end
+
+	for i,v in pairs(v1) do
+		if (v ~= v2[i]) then
+			return true
+		end
+	end
+	for i,v in pairs(v2) do
+		if (v ~= v1[i]) then
+			return true
+		end
+	end
+end
+
 
 do
   --// Create some Set... methods (e.g. SetColor, SetSize, SetFont, ...)
@@ -71,6 +97,8 @@ do
     Font[funcname] = function(self,value,...)
       local t = type(value)
 
+      local oldValue = self[param]
+
       if (t == "table") then
         self[param] = table.shallowcopy(value)
       else
@@ -92,7 +120,7 @@ do
           p:RequestRealign() 
         end
       else
-        if (p) then
+        if (p)and NotEqual(oldValue, self[param]) then
           p:Invalidate() 
         end
       end
@@ -114,7 +142,7 @@ function Font:GetAscenderHeight(size)
 end
 
 function Font:GetTextWidth(text, size)
-  return (self._font and (self._font):GetTextWidth(text) * (size or self.size)) or 0
+  return (self._font):GetTextWidth(text) * (size or self.size)
 end
 
 function Font:GetTextHeight(text, size)
@@ -133,7 +161,7 @@ end
 
 --//=============================================================================
 
-function Font.AdjustPosToAlignment(x, y, width, height, align, valign)
+function Font:AdjustPosToAlignment(x, y, width, height, align, valign)
   local extra = ''
 
   --// vertical alignment
@@ -145,11 +173,15 @@ function Font.AdjustPosToAlignment(x, y, width, height, align, valign)
   elseif valign == "bottom" then
     y     = y + height
     extra = 'b'
+  elseif valign == "linecenter" then
+    y     = y + (height / 2) + (1 + self._font.descender) * self.size / 2
+    extra = 'x'
   else
     --// ascender
     extra = 'a'
   end
-
+  --FIXME add baseline 'd'
+  
   --// horizontal alignment
   if align == "left" then
     --do nothing
@@ -163,8 +195,6 @@ function Font.AdjustPosToAlignment(x, y, width, height, align, valign)
 
   return x,y,extra
 end
-
-local AdjustPosToAlignment = Font.AdjustPosToAlignment
 
 local function _GetExtra(align, valign)
   local extra = ''
@@ -228,7 +258,7 @@ function Font:DrawInBox(text, x, y, w, h, align, valign)
 
   local font = self._font
 
-  local x,y,extra = AdjustPosToAlignment(x, y, w, h, align, valign)
+  local x,y,extra = self:AdjustPosToAlignment(x, y, w, h, align, valign)
   
   if self.outline then
 	extra = extra .. 'o'

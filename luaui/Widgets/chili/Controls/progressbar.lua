@@ -13,6 +13,7 @@ Progressbar = Control:Inherit{
   caption   = "",
 
   color     = {0,0,1,1},
+  backgroundColor = {1,1,1,1},
 
   OnChange  = {},
 }
@@ -58,6 +59,7 @@ function Progressbar:SetColor(...)
     self:Invalidate()
   end
 end
+
 
 function Progressbar:SetMinMax(min,max)
   self.min = tonumber(min) or 0
