@@ -31,12 +31,43 @@ if (gadgetHandler:IsSyncedCode()) then
 --------------------------------------------------------------------------------
 --SYNCED
 --------------------------------------------------------------------------------
+VFS.Include("LuaRules/Configs/weapons.lua")
 
 local planedata
 local teamplane
 
+local pieceMaps = {}
+
 local planeWeapons = {}
 GG.Weapon = {}
+
+
+local function SetupWeapons(planeID, planeDefID, team)
+	planeWeapons[planeID] = {}
+	local pw = planeWeapons[planeID]
+	
+	local pieceMap = Spring.GetUnitPieceMap(planeID)
+	pieceMaps[planeID] = pieceMap
+	local numHardpoints = 1
+	local planeDefName = UnitDefs[planeDefID].name
+	local ordnanceData = planeOrdnanceData[planeDefName]
+	
+	for i=1,#weaponPacks[packName] do
+		local weapon = weaponPacks[packName][i]
+		pw[i] = {}
+		for j=1,weapon.ammo do	-- create weapon units and specify attachment points
+			local piece = pieceMap[ordnanceData.points[numHardpoints]]
+			local x,y,z,dx,dy,dz = Spring.GetUnitPiecePosDir(planeID, piece)
+			
+			pw[i][j] = {unitID = unitID, piece = piece}
+			
+			numHardpoints = numHardpoints + 1
+			if numHardpoints > #ordnanceData.points then
+				numHardpoints = 1
+			end
+		end
+	end
+end
 
 function HasAmmo(u, ud, team, wep)
 	return teamplane[team].ammo[wep].ammo
@@ -76,8 +107,11 @@ function gadget:GameFrame(f)
 	end
 end
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 else
-
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 --UNSYNCED
 
 local bottomdist=70
@@ -126,6 +160,13 @@ function gadget:DrawScreen(vsx,vsy)
 		gl.Text("Gun "..math.floor(p.gunammo),leftdist,bottomdist+entrydist, textsize, "l")
 		gl.Color(1,1,1,1)
 	end
+end
+
+function gadget:DrawWorld()
+ 	local p=SYNCED.teamplane[Spring.GetMyTeamID()]
+	if p then
+		
+	end       
 end
 
 end

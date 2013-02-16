@@ -10,6 +10,8 @@ function gadget:GetInfo()
 	}
 end
 
+include("LuaRules/Configs/globalConstants.h.lua")
+
 if (gadgetHandler:IsSyncedCode()) then
 
 --SYNCED
@@ -33,7 +35,7 @@ local throttleY = 0.25
 
 local textsize = 16
 
-local scaleMult = 5	--elmos -> meter
+local scaleMult = ELMOS_PER_METER
 local mpsToKnots = 3600/1000/1.8
 
 function Rectangle(x1,y1,x2,y2)
